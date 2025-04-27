@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - Loans{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Loan Management</h2>
+    <a href="#" class="btn btn-success">
+        <i class="fas fa-plus me-1"></i> Apply for New Loan
+    </a>
+</div>
+
+<!-- Loan Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3 mb-md-0">
+        <div class="modern-card">
+            <h3 class="text-white mb-3">Active Loans</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">1</span>
+                <i class="fas fa-hand-holding-usd text-warning fa-2x"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3 mb-md-0">
+        <div class="modern-card">
+            <h3 class="text-white mb-3">Total Amount</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">$5,000</span>
+                <i class="fas fa-dollar-sign text-success fa-2x"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3 mb-md-0">
+        <div class="modern-card">
+            <h3 class="text-white mb-3">Next Payment</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">May 15</span>
+                <i class="fas fa-calendar-alt text-info fa-2x"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="modern-card">
+            <h3 class="text-white mb-3">Payment Due</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">$450</span>
+                <i class="fas fa-money-bill-wave text-primary fa-2x"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loans Section -->
+<div class="section-card mb-4">
+    <div class="section-header">
+        <h3>All Loans</h3>
+        <div class="d-flex">
+            <div class="dropdown me-2">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-filter me-1"></i> Filter
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                    <li><a class="dropdown-item" href="#">All Loans</a></li>
+                    <li><a class="dropdown-item" href="#">Active Loans</a></li>
+                    <li><a class="dropdown-item" href="#">Completed Loans</a></li>
+                    <li><a class="dropdown-item" href="#">Pending Loans</a></li>
+                </ul>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Search loans...">
+                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="section-content">
+        <div class="table-responsive">
+            <table class="table modern-table">
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Amount</th>
+                        <th>Interest</th>
+                        <th>Term</th>
+                        <th>Farm</th>
+                        <th>Status</th>
+                        <th>Application Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>L-2025-001</td>
+                        <td>$5,000</td>
+                        <td>12%</td>
+                        <td>12 months</td>
+                        <td>Riverside Farm</td>
+                        <td><span class="status-badge status-disbursed">Disbursed</span></td>
+                        <td>Apr 10, 2025</td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="#" class="action-button me-1" data-bs-toggle="tooltip" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="#" class="action-button me-1" data-bs-toggle="tooltip" title="Make Payment">
+                                    <i class="fas fa-money-bill"></i>
+                                </a>
+                                <a href="#" class="action-button" data-bs-toggle="tooltip" title="View Schedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Loan Products Section -->
+<div class="section-card">
+    <div class="section-header">
+        <h3>Available Loan Products</h3>
+    </div>
+    <div class="section-content">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="loan-product-card">
+                    <div class="loan-product-card-header">
+                        <h4>Seasonal Crop Loan</h4>
+                        <div class="loan-amount">Up to $10,000</div>
+                    </div>
+                    <div class="loan-product-card-body">
+                        <p>Short-term financing for seasonal crop production needs including seeds, fertilizers, and labor.</p>
+                        <div class="loan-product-details">
+                            <div class="loan-detail-item">
+                                <i class="fas fa-percentage"></i>
+                                <span>12% Interest Rate</span>
+                            </div>
+                            <div class="loan-detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>6-12 Months</span>
+                            </div>
+                            <div class="loan-detail-item">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Min. $1,000</span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-success">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="loan-product-card">
+                    <div class="loan-product-card-header">
+                        <h4>Farm Equipment Loan</h4>
+                        <div class="loan-amount">Up to $25,000</div>
+                    </div>
+                    <div class="loan-product-card-body">
+                        <p>Medium-term financing for purchasing farm equipment and machinery.</p>
+                        <div class="loan-product-details">
+                            <div class="loan-detail-item">
+                                <i class="fas fa-percentage"></i>
+                                <span>15% Interest Rate</span>
+                            </div>
+                            <div class="loan-detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>24-36 Months</span>
+                            </div>
+                            <div class="loan-detail-item">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Min. $5,000</span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-success">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Modern card styling for loan stats */
+    .modern-card {
+        background: linear-gradient(145deg, rgba(40, 44, 52, 0.7) 0%, rgba(25, 28, 36, 0.9) 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 20px;
+        height: 100%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Section Card Styling */
+    .section-card {
+        background-color: rgba(30, 33, 43, 0.6);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+    
+    .section-header {
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .section-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    
+    .section-content {
+        padding: 20px;
+    }
+    
+    /* Modern Table */
+    .modern-table {
+        width: 100%;
+        color: var(--bs-light);
+    }
+    
+    .modern-table thead th {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: none;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .modern-table tbody td {
+        border-color: rgba(255, 255, 255, 0.05);
+        padding: 12px 15px;
+    }
+    
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .status-pending {
+        background-color: rgba(108, 117, 125, 0.2);
+        color: #adb5bd;
+    }
+    
+    .status-approved {
+        background-color: rgba(139, 195, 74, 0.2);
+        color: #8bc34a;
+    }
+    
+    .status-disbursed {
+        background-color: rgba(33, 150, 243, 0.2);
+        color: #42a5f5;
+    }
+    
+    .status-repaying {
+        background-color: rgba(156, 39, 176, 0.2);
+        color: #ab47bc;
+    }
+    
+    .status-completed {
+        background-color: rgba(76, 175, 80, 0.2);
+        color: #66bb6a;
+    }
+    
+    .status-defaulted {
+        background-color: rgba(244, 67, 54, 0.2);
+        color: #ef5350;
+    }
+    
+    /* Action buttons */
+    .action-button {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--bs-light);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+    
+    .action-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+    
+    /* Loan Product Card */
+    .loan-product-card {
+        background-color: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        height: 100%;
+    }
+    
+    .loan-product-card-header {
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .loan-product-card-header h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    
+    .loan-amount {
+        background-color: rgba(76, 175, 80, 0.2);
+        color: #66bb6a;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+    
+    .loan-product-card-body {
+        padding: 20px;
+    }
+    
+    .loan-product-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    
+    .loan-detail-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+    }
+    
+    .loan-detail-item i {
+        color: var(--bs-info);
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
+{% endblock %}
