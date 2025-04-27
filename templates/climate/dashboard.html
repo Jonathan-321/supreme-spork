@@ -4,266 +4,834 @@
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">Climate Dashboard</h2>
-    <div>
-        <span class="badge bg-info me-2">
-            <i class="fas fa-map-marker-alt me-1"></i> {{ region.name }}, {{ region.country }}
-        </span>
+    <h2 class="mb-0">Climate Risk Dashboard</h2>
+    <div class="d-flex">
+        <div class="dropdown me-2">
+            <button class="btn btn-outline-light dropdown-toggle" type="button" id="timeframeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Last 30 Days
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="timeframeDropdown">
+                <li><a class="dropdown-item" href="#">Last 7 Days</a></li>
+                <li><a class="dropdown-item" href="#">Last 30 Days</a></li>
+                <li><a class="dropdown-item" href="#">Last 90 Days</a></li>
+                <li><a class="dropdown-item" href="#">Last 12 Months</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
-{% if error %}
-<div class="alert alert-danger" role="alert">
-    <i class="fas fa-exclamation-triangle me-2"></i> {{ error }}
-</div>
-{% else %}
-
-<!-- Climate Risk Overview -->
+<!-- Risk Summary -->
 <div class="row mb-4">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Climate Risk Assessment</h5>
+    <div class="col-md-4 mb-4 mb-md-0">
+        <div class="risk-summary-card">
+            <h3>Current Risk Level</h3>
+            <div class="risk-indicator medium">
+                <div class="risk-level">Medium</div>
+                <div class="risk-type">DROUGHT</div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    {% for risk in climate_risks %}
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100 {% if risk.risk_level == 'LOW' %}border-success{% elif risk.risk_level == 'MEDIUM' %}border-warning{% elif risk.risk_level == 'HIGH' or risk.risk_level == 'EXTREME' %}border-danger{% else %}border-info{% endif %}">
-                            <div class="card-header{% if risk.risk_level == 'LOW' %} bg-success bg-opacity-25{% elif risk.risk_level == 'MEDIUM' %} bg-warning bg-opacity-25{% elif risk.risk_level == 'HIGH' or risk.risk_level == 'EXTREME' %} bg-danger bg-opacity-25{% else %} bg-info bg-opacity-25{% endif %}">
-                                <h6 class="mb-0">{{ risk.risk_type }}</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4>Risk Level:</h4>
-                                    <span class="badge {% if risk.risk_level == 'LOW' %}bg-success{% elif risk.risk_level == 'MEDIUM' %}bg-warning text-dark{% elif risk.risk_level == 'HIGH' %}bg-danger{% elif risk.risk_level == 'EXTREME' %}bg-danger{% else %}bg-info{% endif %} p-2">{{ risk.risk_level }}</span>
-                                </div>
-                                <div class="mb-3">
-                                    <h6>Probability: {{ risk.probability }}%</h6>
-                                    <div class="progress">
-                                        <div class="progress-bar {% if risk.risk_level == 'LOW' %}bg-success{% elif risk.risk_level == 'MEDIUM' %}bg-warning{% else %}bg-danger{% endif %}" role="progressbar" style="width: {{ risk.probability }}%" aria-valuenow="{{ risk.probability }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <p class="mb-0 small text-muted">Valid until: {{ risk.valid_until|date:"M d, Y" }}</p>
-                            </div>
+            <div class="risk-assessment">
+                <p>Potential yield reduction of 20-30% if drought conditions persist.</p>
+                <p class="mb-0 small text-muted">Valid until: {{ risk.valid_until|date }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="climate-metric-card temperature">
+                    <div class="metric-icon">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h4>Temperature</h4>
+                        <div class="metric-value">24°C</div>
+                        <div class="metric-trend up">
+                            <i class="fas fa-arrow-up"></i> 2°C above avg
                         </div>
                     </div>
-                    {% empty %}
-                    <div class="col-12">
-                        <div class="alert alert-info" role="alert">
-                            <i class="fas fa-info-circle me-2"></i> No climate risk assessments available for this region.
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="climate-metric-card precipitation">
+                    <div class="metric-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h4>Precipitation</h4>
+                        <div class="metric-value">12mm</div>
+                        <div class="metric-trend down">
+                            <i class="fas fa-arrow-down"></i> 30% below avg
                         </div>
                     </div>
-                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="climate-metric-card ndvi">
+                    <div class="metric-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h4>Avg. NDVI</h4>
+                        <div class="metric-value">0.65</div>
+                        <div class="metric-trend stable">
+                            <i class="fas fa-equals"></i> Stable
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Weather Data -->
-<div class="row mb-4">
-    <div class="col-md-8 mb-4 mb-md-0">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Historical Weather Data</h5>
-            </div>
-            <div class="card-body">
-                <canvas id="weatherChart" height="250"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Weather Forecast</h5>
-            </div>
-            <div class="card-body p-0">
-                <div class="list-group list-group-flush">
-                    {% for forecast in weather_forecast %}
-                    <div class="list-group-item">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h6 class="mb-0">{{ forecast.prediction_date|date:"D, M d" }}</h6>
-                            <span>{{ forecast.temperature_max }}°C / {{ forecast.temperature_min }}°C</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Precipitation: {{ forecast.precipitation_probability }}%</small>
-                            <small>
-                                {% if forecast.temperature_max > 30 %}
-                                <i class="fas fa-sun text-warning"></i>
-                                {% elif forecast.precipitation_probability > 50 %}
-                                <i class="fas fa-cloud-rain text-primary"></i>
-                                {% else %}
-                                <i class="fas fa-cloud-sun text-info"></i>
-                                {% endif %}
-                            </small>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <div class="list-group-item py-4 text-center">
-                        <i class="fas fa-cloud fa-2x text-muted mb-3"></i>
-                        <p class="mb-0">No forecast data available.</p>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- NDVI Data -->
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Farm Vegetation Health (NDVI)</h5>
-            </div>
-            <div class="card-body">
-                {% if farm_ndvi_data %}
-                <canvas id="ndviChart" height="250"></canvas>
-                {% else %}
-                <div class="text-center py-4">
-                    <i class="fas fa-seedling fa-3x text-muted mb-3"></i>
-                    <p class="mb-0">No NDVI data available for your farms.</p>
+    <!-- Weather Trend Chart -->
+    <div class="col-lg-8 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h3>Weather Trends</h3>
+                <div class="card-actions">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="btn btn-outline-secondary active">Temperature</button>
+                        <button type="button" class="btn btn-outline-secondary">Precipitation</button>
+                        <button type="button" class="btn btn-outline-secondary">NDVI</button>
+                    </div>
                 </div>
-                {% endif %}
+            </div>
+            <div class="dashboard-card-body">
+                <div class="chart-container">
+                    <canvas id="weatherTrendChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Risk Assessments -->
+    <div class="col-lg-4 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h3>Risk Assessment</h3>
+            </div>
+            <div class="dashboard-card-body p-0">
+                <div class="risk-list">
+                    <div class="risk-item medium">
+                        <div class="risk-item-header">
+                            <div class="risk-name">Drought</div>
+                            <div class="risk-probability">45%</div>
+                        </div>
+                        <div class="risk-item-body">
+                            <div class="risk-description">
+                                <p>Extended period with below-average rainfall affecting crop growth.</p>
+                            </div>
+                            <div class="risk-impact">
+                                <div class="impact-label">Impact:</div>
+                                <div class="impact-value">Medium</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="risk-item low">
+                        <div class="risk-item-header">
+                            <div class="risk-name">Heat Stress</div>
+                            <div class="risk-probability">30%</div>
+                        </div>
+                        <div class="risk-item-body">
+                            <div class="risk-description">
+                                <p>Temperatures exceeding optimal range for crop growth.</p>
+                            </div>
+                            <div class="risk-impact">
+                                <div class="impact-label">Impact:</div>
+                                <div class="impact-value">Low</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="risk-item minimal">
+                        <div class="risk-item-header">
+                            <div class="risk-name">Pests</div>
+                            <div class="risk-probability">15%</div>
+                        </div>
+                        <div class="risk-item-body">
+                            <div class="risk-description">
+                                <p>Increased pest activity due to changing weather patterns.</p>
+                            </div>
+                            <div class="risk-impact">
+                                <div class="impact-label">Impact:</div>
+                                <div class="impact-value">Minimal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-{% endif %}
+<div class="row">
+    <!-- Farm NDVI Map -->
+    <div class="col-lg-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h3>Farm NDVI Map</h3>
+                <div class="card-actions">
+                    <select class="form-select form-select-sm">
+                        <option>Riverside Farm</option>
+                        <option>Hilltop Farm</option>
+                    </select>
+                </div>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="farm-map-placeholder">
+                    <div class="placeholder-content">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                        <p>NDVI satellite imagery would be displayed here</p>
+                        <div class="ndvi-scale">
+                            <div class="scale-item" style="background-color: #d73027;"></div>
+                            <div class="scale-item" style="background-color: #f46d43;"></div>
+                            <div class="scale-item" style="background-color: #fdae61;"></div>
+                            <div class="scale-item" style="background-color: #fee08b;"></div>
+                            <div class="scale-item" style="background-color: #d9ef8b;"></div>
+                            <div class="scale-item" style="background-color: #a6d96a;"></div>
+                            <div class="scale-item" style="background-color: #66bd63;"></div>
+                            <div class="scale-item" style="background-color: #1a9850;"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Low (0.1)</span>
+                            <span>High (0.9)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Weather Forecast -->
+    <div class="col-lg-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h3>7-Day Forecast</h3>
+            </div>
+            <div class="dashboard-card-body p-0">
+                <div class="forecast-list">
+                    <div class="forecast-item">
+                        <div class="forecast-day">Mon</div>
+                        <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">32°C</span>
+                            <span class="temp-low">23°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 10%
+                        </div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">Tue</div>
+                        <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">33°C</span>
+                            <span class="temp-low">24°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 5%
+                        </div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">Wed</div>
+                        <div class="forecast-icon"><i class="fas fa-cloud-sun"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">31°C</span>
+                            <span class="temp-low">23°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 20%
+                        </div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">Thu</div>
+                        <div class="forecast-icon"><i class="fas fa-cloud"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">29°C</span>
+                            <span class="temp-low">22°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 40%
+                        </div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">Fri</div>
+                        <div class="forecast-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">28°C</span>
+                            <span class="temp-low">21°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 60%
+                        </div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">Sat</div>
+                        <div class="forecast-icon"><i class="fas fa-cloud-sun"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">30°C</span>
+                            <span class="temp-low">22°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 25%
+                        </div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">Sun</div>
+                        <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                        <div class="forecast-temp">
+                            <span class="temp-high">31°C</span>
+                            <span class="temp-low">23°C</span>
+                        </div>
+                        <div class="forecast-precip">
+                            <i class="fas fa-tint"></i> 10%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mitigation Recommendations -->
+<div class="row">
+    <div class="col-12">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h3>Mitigation Recommendations</h3>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="mitigation-recommendations">
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="recommendation-content">
+                            <h4>Irrigation Management</h4>
+                            <p>Implement efficient irrigation scheduling to conserve water while maintaining adequate soil moisture. Consider drip irrigation for water conservation.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="recommendation-content">
+                            <h4>Drought Resistant Varieties</h4>
+                            <p>Consider planting drought-resistant crop varieties that can better withstand extended dry periods with minimal yield reduction.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="recommendation-content">
+                            <h4>Soil Moisture Conservation</h4>
+                            <p>Apply mulch to reduce soil evaporation and maintain moisture. Implement conservation tillage practices to improve soil moisture retention.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Dashboard Cards */
+    .dashboard-card {
+        background-color: rgba(30, 33, 43, 0.6);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+    
+    .dashboard-card-header {
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .dashboard-card-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    
+    .dashboard-card-body {
+        padding: 20px;
+    }
+    
+    /* Risk Summary Card */
+    .risk-summary-card {
+        background: linear-gradient(145deg, rgba(30, 33, 43, 0.8) 0%, rgba(25, 28, 36, 0.9) 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 20px;
+        height: 100%;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .risk-summary-card h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    .risk-indicator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .risk-indicator.minimal {
+        background-color: rgba(25, 135, 84, 0.1);
+        border: 1px solid rgba(25, 135, 84, 0.2);
+    }
+    
+    .risk-indicator.low {
+        background-color: rgba(32, 201, 151, 0.1);
+        border: 1px solid rgba(32, 201, 151, 0.2);
+    }
+    
+    .risk-indicator.medium {
+        background-color: rgba(255, 193, 7, 0.1);
+        border: 1px solid rgba(255, 193, 7, 0.2);
+    }
+    
+    .risk-indicator.high {
+        background-color: rgba(253, 126, 20, 0.1);
+        border: 1px solid rgba(253, 126, 20, 0.2);
+    }
+    
+    .risk-indicator.extreme {
+        background-color: rgba(220, 53, 69, 0.1);
+        border: 1px solid rgba(220, 53, 69, 0.2);
+    }
+    
+    .risk-level {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    
+    .risk-type {
+        font-size: 14px;
+        opacity: 0.7;
+    }
+    
+    .risk-assessment {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+    }
+    
+    /* Climate Metric Cards */
+    .climate-metric-card {
+        background: linear-gradient(145deg, rgba(30, 33, 43, 0.8) 0%, rgba(25, 28, 36, 0.9) 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .metric-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    
+    .climate-metric-card.temperature .metric-icon {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: #ef5350;
+    }
+    
+    .climate-metric-card.precipitation .metric-icon {
+        background-color: rgba(33, 150, 243, 0.1);
+        color: #42a5f5;
+    }
+    
+    .climate-metric-card.ndvi .metric-icon {
+        background-color: rgba(76, 175, 80, 0.1);
+        color: #66bb6a;
+    }
+    
+    .metric-content {
+        flex-grow: 1;
+    }
+    
+    .metric-content h4 {
+        font-size: 14px;
+        margin: 0 0 5px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .metric-value {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    
+    .metric-trend {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .metric-trend.up {
+        color: #ef5350;
+    }
+    
+    .metric-trend.down {
+        color: #42a5f5;
+    }
+    
+    .metric-trend.stable {
+        color: #66bb6a;
+    }
+    
+    /* Chart Container */
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+    
+    /* Risk List */
+    .risk-list {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .risk-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 15px 20px;
+    }
+    
+    .risk-item:last-child {
+        border-bottom: none;
+    }
+    
+    .risk-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .risk-name {
+        font-weight: 600;
+        font-size: 16px;
+    }
+    
+    .risk-probability {
+        font-size: 14px;
+        padding: 2px 8px;
+        border-radius: 20px;
+    }
+    
+    .risk-item.minimal .risk-probability {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #198754;
+    }
+    
+    .risk-item.low .risk-probability {
+        background-color: rgba(32, 201, 151, 0.1);
+        color: #20c997;
+    }
+    
+    .risk-item.medium .risk-probability {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+    
+    .risk-item.high .risk-probability {
+        background-color: rgba(253, 126, 20, 0.1);
+        color: #fd7e14;
+    }
+    
+    .risk-item.extreme .risk-probability {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+    }
+    
+    .risk-description {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 10px;
+    }
+    
+    .risk-description p {
+        margin: 0;
+    }
+    
+    .risk-impact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+    }
+    
+    .impact-label {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .impact-value {
+        font-weight: 500;
+    }
+    
+    /* Farm Map Placeholder */
+    .farm-map-placeholder {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .placeholder-content {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+    }
+    
+    .ndvi-scale {
+        display: flex;
+        width: 200px;
+        height: 10px;
+        margin: 15px auto 5px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    
+    .scale-item {
+        flex-grow: 1;
+        height: 100%;
+    }
+    
+    .scale-labels {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+        margin: 0 auto;
+        font-size: 12px;
+    }
+    
+    /* Weather Forecast */
+    .forecast-list {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    
+    .forecast-item {
+        flex: 0 0 auto;
+        width: calc(100% / 7);
+        min-width: 100px;
+        text-align: center;
+        padding: 15px 10px;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .forecast-item:last-child {
+        border-right: none;
+    }
+    
+    .forecast-day {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .forecast-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #ffc107;
+    }
+    
+    .forecast-temp {
+        margin-bottom: 10px;
+    }
+    
+    .temp-high {
+        font-weight: 600;
+        margin-right: 5px;
+    }
+    
+    .temp-low {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .forecast-precip {
+        font-size: 13px;
+        color: #42a5f5;
+    }
+    
+    /* Mitigation Recommendations */
+    .mitigation-recommendations {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .recommendation-item {
+        flex: 1 0 calc(33.333% - 20px);
+        min-width: 280px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .recommendation-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(33, 150, 243, 0.1);
+        color: #42a5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    
+    .recommendation-content h4 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .recommendation-content p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+    }
+</style>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Weather Chart
-    var weatherCtx = document.getElementById('weatherChart').getContext('2d');
-    var weatherDates = {{ weather_dates|safe }};
-    var temperatures = {{ weather_temperatures|safe }};
-    var precipitation = {{ weather_precipitation|safe }};
-    
-    var weatherChart = new Chart(weatherCtx, {
-        type: 'line',
-        data: {
-            labels: weatherDates,
-            datasets: [{
-                label: 'Temperature (°C)',
-                data: temperatures,
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                yAxisID: 'y',
-                tension: 0.4
-            }, {
-                label: 'Precipitation (mm)',
-                data: precipitation,
-                borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                yAxisID: 'y1',
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    title: {
-                        display: true,
-                        text: 'Temperature (°C)'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: {
-                        display: true,
-                        text: 'Precipitation (mm)'
-                    },
-                    grid: {
-                        drawOnChartArea: false
-                    }
-                }
-            }
-        }
-    });
-    
-    // NDVI Chart
-    var ndviData = {{ farm_ndvi_data|safe }};
-    if (ndviData && Object.keys(ndviData).length > 0) {
-        var ndviCtx = document.getElementById('ndviChart').getContext('2d');
-        var ndviDatasets = [];
+    document.addEventListener('DOMContentLoaded', function() {
+        // Weather Trend Chart
+        const ctx = document.getElementById('weatherTrendChart').getContext('2d');
         
-        var colors = [
-            'rgba(75, 192, 192, 1)',
-            'rgba(255, 159, 64, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)'
-        ];
+        // Sample data
+        const dates = ['Apr 1', 'Apr 5', 'Apr 10', 'Apr 15', 'Apr 20', 'Apr 25', 'Apr 27'];
+        const temperatures = [25, 26, 27, 28, 27, 29, 30];
+        const precipitations = [8, 5, 3, 0, 0, 0, 0];
+        const ndviValues = [0.63, 0.64, 0.65, 0.66, 0.65, 0.64, 0.63];
         
-        var i = 0;
-        for (var farmId in ndviData) {
-            var farm = ndviData[farmId];
-            ndviDatasets.push({
-                label: farm.name,
-                data: farm.values,
-                borderColor: colors[i % colors.length],
-                backgroundColor: colors[i % colors.length].replace('1)', '0.1)'),
-                borderWidth: 2,
-                fill: false,
-                tension: 0.4
-            });
-            i++;
-        }
-        
-        var ndviChart = new Chart(ndviCtx, {
+        // Chart configuration
+        const weatherChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ndviData[Object.keys(ndviData)[0]].dates,
-                datasets: ndviDatasets
+                labels: dates,
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: temperatures,
+                    borderColor: '#ef5350',
+                    backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }]
             },
             options: {
                 responsive: true,
-                scales: {
-                    y: {
-                        min: -0.2,
-                        max: 1.0,
-                        title: {
-                            display: true,
-                            text: 'NDVI Value'
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: 'rgba(255, 255, 255, 0.7)'
                         }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
                     }
                 },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                var label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += parseFloat(context.raw).toFixed(2);
-                                return label;
-                            }
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
                         }
                     }
                 }
             }
         });
-    }
-});
+        
+        // Button handlers for chart data toggle
+        const chartButtons = document.querySelectorAll('.btn-group button');
+        chartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                chartButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Update chart data based on button text
+                const buttonText = this.textContent.trim();
+                
+                if (buttonText === 'Temperature') {
+                    weatherChart.data.datasets = [{
+                        label: 'Temperature (°C)',
+                        data: temperatures,
+                        borderColor: '#ef5350',
+                        backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }];
+                } else if (buttonText === 'Precipitation') {
+                    weatherChart.data.datasets = [{
+                        label: 'Precipitation (mm)',
+                        data: precipitations,
+                        borderColor: '#42a5f5',
+                        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }];
+                } else if (buttonText === 'NDVI') {
+                    weatherChart.data.datasets = [{
+                        label: 'NDVI Value',
+                        data: ndviValues,
+                        borderColor: '#66bb6a',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }];
+                }
+                
+                weatherChart.update();
+            });
+        });
+    });
 </script>
 {% endblock %}
