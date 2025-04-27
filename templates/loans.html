@@ -5,9 +5,187 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Loan Management</h2>
-    <a href="#" class="btn btn-success">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#applyLoanModal">
         <i class="fas fa-plus me-1"></i> Apply for New Loan
-    </a>
+    </button>
+</div>
+
+<!-- Loan Application Modal -->
+<div class="modal fade" id="applyLoanModal" tabindex="-1" aria-labelledby="applyLoanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="applyLoanModalLabel">Apply for a New Loan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="loanApplicationForm">
+                    <!-- Loan Product Selection -->
+                    <div class="mb-4">
+                        <label class="form-label">Select Loan Product</label>
+                        <div class="row" id="loanProductSelector">
+                            <div class="col-md-6 mb-3">
+                                <div class="card loan-product-option h-100">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="loanProduct" id="seasonalLoan" value="seasonal" checked>
+                                            <label class="form-check-label w-100" for="seasonalLoan">
+                                                <h5>Seasonal Crop Loan</h5>
+                                                <p class="text-muted small">Short-term financing for crop production needs</p>
+                                                <div class="d-flex justify-content-between small">
+                                                    <span>6-12 months</span>
+                                                    <span class="text-success">12% interest</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card loan-product-option h-100">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="loanProduct" id="equipmentLoan" value="equipment">
+                                            <label class="form-check-label w-100" for="equipmentLoan">
+                                                <h5>Farm Equipment Loan</h5>
+                                                <p class="text-muted small">Medium-term financing for equipment and machinery</p>
+                                                <div class="d-flex justify-content-between small">
+                                                    <span>24-36 months</span>
+                                                    <span class="text-success">15% interest</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Farm Selection -->
+                        <div class="col-md-6 mb-3">
+                            <label for="farmSelect" class="form-label">Select Farm</label>
+                            <select class="form-select" id="farmSelect" required>
+                                <option value="">Choose a farm...</option>
+                                <option value="1">Riverside Farm (5.2 ha) - Maize</option>
+                                <option value="2">Hilltop Farm (3.8 ha) - Cassava</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Loan Amount -->
+                        <div class="col-md-6 mb-3">
+                            <label for="loanAmount" class="form-label">Loan Amount ($)</label>
+                            <input type="number" class="form-control" id="loanAmount" min="1000" max="25000" required>
+                            <div class="form-text" id="amountRange">$1,000 - $10,000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Loan Term -->
+                        <div class="col-md-6 mb-3">
+                            <label for="loanTerm" class="form-label">Loan Term (months)</label>
+                            <select class="form-select" id="loanTerm" required>
+                                <option value="">Choose term...</option>
+                                <option value="6">6 months</option>
+                                <option value="12">12 months</option>
+                                <option value="24">24 months</option>
+                                <option value="36">36 months</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Expected Harvest Date -->
+                        <div class="col-md-6 mb-3">
+                            <label for="harvestDate" class="form-label">Expected Harvest Date</label>
+                            <input type="date" class="form-control" id="harvestDate">
+                        </div>
+                    </div>
+                    
+                    <!-- Loan Purpose -->
+                    <div class="mb-3">
+                        <label for="loanPurpose" class="form-label">Loan Purpose</label>
+                        <textarea class="form-control" id="loanPurpose" rows="3" required placeholder="Describe how you plan to use this loan..."></textarea>
+                    </div>
+                    
+                    <!-- Credit Score Integration -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="form-label mb-0">Your Credit Score</label>
+                            <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="tooltip" title="Your credit score affects loan approval odds and interest rates">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                        <div class="card bg-dark">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="score-circle small" style="--score: 75;">
+                                    <span>75</span>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="progress" style="height: 8px; width: 150px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <span class="small">0</span>
+                                        <span class="small">50</span>
+                                        <span class="small">100</span>
+                                    </div>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">Good</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Climate Risk Assessment -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="form-label mb-0">Climate Risk Assessment</label>
+                            <span class="badge bg-warning text-dark">Medium Risk</span>
+                        </div>
+                        <div class="card bg-dark">
+                            <div class="card-body">
+                                <p class="mb-2 small">Based on current climate data for your farm location:</p>
+                                <ul class="small mb-0">
+                                    <li>Drought probability: <span class="text-warning">45%</span></li>
+                                    <li>Potential yield impact: <span class="text-warning">20-30% reduction</span></li>
+                                    <li class="mt-2 text-info"><i class="fas fa-info-circle me-1"></i> Loan terms may be adjusted based on climate risk factors</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <div>
+                        <span class="fw-bold me-2">Estimated Payment:</span>
+                        <span class="text-success" id="estimatedPayment">$450/month</span>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" id="submitLoanApplication">Submit Application</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Success Modal -->
+<div class="modal fade" id="applicationSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <div class="mb-3">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                </div>
+                <h4 class="mb-3">Application Submitted Successfully!</h4>
+                <p>Your loan application has been submitted for review. We'll notify you once it's been processed.</p>
+                <p class="small text-muted mb-4">Application ID: <span id="applicationId">L-2025-002</span></p>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Loan Statistics Cards -->
@@ -364,7 +542,166 @@
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        });
+        
+        // Loan application form interactivity
+        const loanProductRadios = document.querySelectorAll('input[name="loanProduct"]');
+        const loanAmountInput = document.getElementById('loanAmount');
+        const loanTermSelect = document.getElementById('loanTerm');
+        const amountRangeInfo = document.getElementById('amountRange');
+        const estimatedPaymentEl = document.getElementById('estimatedPayment');
+        const submitLoanBtn = document.getElementById('submitLoanApplication');
+        
+        // Update available terms and amount range based on selected loan product
+        loanProductRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateLoanFormBasedOnProduct(this.value);
+            });
+        });
+        
+        // Calculate payment when amount or term changes
+        loanAmountInput.addEventListener('input', calculateEstimatedPayment);
+        loanTermSelect.addEventListener('change', calculateEstimatedPayment);
+        
+        // Initialize with default product (seasonal)
+        updateLoanFormBasedOnProduct('seasonal');
+        
+        // Submit loan application
+        submitLoanBtn.addEventListener('click', function() {
+            // Simple form validation
+            const form = document.getElementById('loanApplicationForm');
+            if (validateForm(form)) {
+                // Show success modal
+                const successModal = new bootstrap.Modal(document.getElementById('applicationSuccessModal'));
+                
+                // Hide application modal
+                const applicationModal = bootstrap.Modal.getInstance(document.getElementById('applyLoanModal'));
+                applicationModal.hide();
+                
+                // Generate a random application ID
+                document.getElementById('applicationId').textContent = 'L-2025-' + Math.floor(1000 + Math.random() * 9000);
+                
+                // Show success modal
+                successModal.show();
+                
+                // Reset form
+                form.reset();
+                updateLoanFormBasedOnProduct('seasonal');
+            }
+        });
+        
+        // Function to update form based on loan product
+        function updateLoanFormBasedOnProduct(productType) {
+            // Clear existing term options
+            loanTermSelect.innerHTML = '<option value="">Choose term...</option>';
+            
+            if (productType === 'seasonal') {
+                // Update amount range
+                loanAmountInput.setAttribute('min', '1000');
+                loanAmountInput.setAttribute('max', '10000');
+                amountRangeInfo.textContent = '$1,000 - $10,000';
+                
+                // Add appropriate term options
+                addTermOption(6, '6 months');
+                addTermOption(12, '12 months');
+                
+                // Update term select if needed
+                if (parseInt(loanTermSelect.value) > 12) {
+                    loanTermSelect.value = "";
+                }
+            } else {
+                // Equipment loan
+                loanAmountInput.setAttribute('min', '5000');
+                loanAmountInput.setAttribute('max', '25000');
+                amountRangeInfo.textContent = '$5,000 - $25,000';
+                
+                // Add appropriate term options
+                addTermOption(24, '24 months');
+                addTermOption(36, '36 months');
+                
+                // Update term select if needed
+                if (parseInt(loanTermSelect.value) < 24) {
+                    loanTermSelect.value = "";
+                }
+            }
+            
+            // Recalculate payment estimate
+            calculateEstimatedPayment();
+        }
+        
+        // Helper function to add term options
+        function addTermOption(value, text) {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = text;
+            loanTermSelect.appendChild(option);
+        }
+        
+        // Calculate estimated payment
+        function calculateEstimatedPayment() {
+            const amount = parseFloat(loanAmountInput.value) || 0;
+            const term = parseInt(loanTermSelect.value) || 0;
+            let interestRate;
+            
+            // Get selected product type
+            const selectedProduct = document.querySelector('input[name="loanProduct"]:checked').value;
+            
+            // Set interest rate based on product
+            if (selectedProduct === 'seasonal') {
+                interestRate = 0.12; // 12%
+            } else {
+                interestRate = 0.15; // 15%
+            }
+            
+            if (amount > 0 && term > 0) {
+                // Simple monthly payment calculation: Principal * (1 + total interest) / term
+                const monthlyInterest = interestRate / 12;
+                const totalInterest = monthlyInterest * term;
+                const payment = amount * (1 + totalInterest) / term;
+                
+                // Display estimated payment
+                estimatedPaymentEl.textContent = '$' + payment.toFixed(2) + '/month';
+            } else {
+                estimatedPaymentEl.textContent = 'Enter amount and term';
+            }
+        }
+        
+        // Simple form validation
+        function validateForm(form) {
+            let isValid = true;
+            
+            // Check required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.classList.add('is-invalid');
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+            
+            return isValid;
+        }
+        
+        // Add styling for loan product selection
+        document.querySelectorAll('.loan-product-option').forEach(card => {
+            card.addEventListener('click', function() {
+                // Find the radio input inside this card and check it
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                
+                // Trigger the change event
+                const event = new Event('change');
+                radio.dispatchEvent(event);
+                
+                // Update visual selection
+                document.querySelectorAll('.loan-product-option').forEach(c => {
+                    c.classList.remove('border-primary');
+                });
+                this.classList.add('border-primary');
+            });
+        });
     });
 </script>
 {% endblock %}

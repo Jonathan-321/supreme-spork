@@ -223,23 +223,78 @@
     </div>
 </div>
 
-<!-- Climate Risk Advisory Section -->
+<!-- Interactive Climate Risk Advisory Section -->
 <div class="section-card">
     <div class="section-header">
         <h3>Climate Risk Advisory</h3>
+        <div class="d-flex align-items-center">
+            <select class="form-select form-select-sm me-2" id="farmSelector">
+                <option value="all">All Farms</option>
+                <option value="1">Riverside Farm</option>
+                <option value="2">Hilltop Farm</option>
+            </select>
+            <button class="btn btn-sm btn-outline-info" id="refreshClimateData">
+                <i class="fas fa-sync-alt me-1"></i> Refresh
+            </button>
+        </div>
     </div>
     <div class="section-content">
         <div class="climate-risk-alert risk-level-medium">
-            <div class="risk-header">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                DROUGHT Risk: Medium
-            </div>
-            <div class="risk-details mt-2">
-                <p>Potential yield reduction of 20-30% if drought conditions persist.</p>
-                <div class="mitigation-measures">
-                    <strong>Recommended actions:</strong>
-                    <p>Implement irrigation where available, consider drought-resistant crop varieties.</p>
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="risk-header">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span id="riskType">DROUGHT</span> Risk: <span id="riskLevel">Medium</span>
+                    </div>
+                    <div class="risk-details mt-2">
+                        <p id="riskImpact">Potential yield reduction of 20-30% if drought conditions persist.</p>
+                    </div>
                 </div>
+                <div class="risk-gauge">
+                    <div class="risk-probability">
+                        <svg width="80" height="80" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#2a2a2a" stroke-width="10" />
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#ffc107" stroke-width="10" 
+                                stroke-dasharray="282.7" stroke-dashoffset="155.5" transform="rotate(-90 50 50)" />
+                            <text x="50" y="55" text-anchor="middle" fill="#fff" font-size="20">45%</text>
+                        </svg>
+                    </div>
+                    <div class="small text-center mt-1">Probability</div>
+                </div>
+            </div>
+            <div class="mitigation-measures mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong>Recommended Actions:</strong>
+                    <span class="badge bg-primary">AI Recommended</span>
+                </div>
+                <ul class="action-list mb-0" id="mitigationMeasuresList">
+                    <li class="action-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <span>Implement irrigation where available</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <span>Consider drought-resistant crop varieties</span>
+                    </li>
+                    <li class="action-item">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <span>Apply mulch to reduce soil evaporation</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Interactive Risk Timeline -->
+        <div class="risk-timeline mt-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Risk Trend (6 Months)</h5>
+                <div class="timeline-controls">
+                    <button class="btn btn-sm btn-outline-secondary" id="viewHistorical">Historical</button>
+                    <button class="btn btn-sm btn-outline-primary active" id="viewForecast">Forecast</button>
+                </div>
+            </div>
+            <div class="timeline-chart-container">
+                <canvas id="riskTimelineChart" height="120"></canvas>
             </div>
         </div>
         
@@ -250,8 +305,14 @@
                         <i class="fas fa-temperature-high"></i>
                     </div>
                     <h5>Temperature Trend</h5>
-                    <p class="text-muted">Temperatures trending 2°C above seasonal average.</p>
-                    <div class="climate-trend">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted mb-0">Trending 2°C above average</p>
+                        <span class="temp-value">24°C</span>
+                    </div>
+                    <div class="temp-chart mt-2">
+                        <canvas id="temperatureChart" height="60"></canvas>
+                    </div>
+                    <div class="climate-trend mt-2">
                         <i class="fas fa-arrow-up text-danger me-1"></i> Rising
                     </div>
                 </div>
@@ -262,23 +323,164 @@
                         <i class="fas fa-cloud-rain"></i>
                     </div>
                     <h5>Precipitation Trend</h5>
-                    <p class="text-muted">Precipitation 30% below normal for this season.</p>
-                    <div class="climate-trend">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted mb-0">30% below normal</p>
+                        <span class="precip-value">12mm</span>
+                    </div>
+                    <div class="precip-chart mt-2">
+                        <canvas id="precipitationChart" height="60"></canvas>
+                    </div>
+                    <div class="climate-trend mt-2">
                         <i class="fas fa-arrow-down text-warning me-1"></i> Declining
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="climate-data-card">
-                    <div class="climate-icon forecast-icon">
-                        <i class="fas fa-calendar-alt"></i>
+                    <div class="climate-icon ndvi-icon">
+                        <i class="fas fa-leaf"></i>
                     </div>
-                    <h5>30-Day Forecast</h5>
-                    <p class="text-muted">Continued dry conditions with occasional light showers.</p>
-                    <div class="climate-trend">
-                        <i class="fas fa-exclamation-circle text-warning me-1"></i> Monitor Closely
+                    <h5>NDVI Vegetation Health</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="text-muted mb-0">Moderate health</p>
+                        <span class="ndvi-value">0.65</span>
+                    </div>
+                    <div class="ndvi-chart mt-2">
+                        <canvas id="ndviChart" height="60"></canvas>
+                    </div>
+                    <div class="climate-trend mt-2">
+                        <i class="fas fa-minus text-info me-1"></i> Stable
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Action Button -->
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" id="getClimateReport">
+                <i class="fas fa-file-alt me-2"></i> Generate Full Climate Assessment Report
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Climate Report Modal -->
+<div class="modal fade" id="climateReportModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Climate Risk Assessment Report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="report-loading text-center p-5" id="reportLoading">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Generating comprehensive climate assessment...</p>
+                </div>
+                
+                <div class="report-content" id="reportContent" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4>Climate Risk Analysis</h4>
+                        <div class="report-meta">
+                            <div>Report Date: April 27, 2025</div>
+                            <div>Reference ID: CR-78942</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Medium Risk Alert:</strong> Current climate conditions indicate a medium risk level for the Eastern Region of Ghana.
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Key Findings</h5>
+                            <ul>
+                                <li>Precipitation levels are 30% below seasonal average</li>
+                                <li>Temperature is trending 2°C above normal</li>
+                                <li>Moderate drought conditions expected to persist</li>
+                                <li>Current NDVI readings indicate adequate but stressed vegetation health</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Projected Impact</h5>
+                            <ul>
+                                <li>20-30% potential reduction in crop yields if no action taken</li>
+                                <li>Increased irrigation needs for optimal growth</li>
+                                <li>Extended growing season due to higher temperatures</li>
+                                <li>Possible increase in certain pest activities</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h5>Recommended Mitigation Strategies</h5>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Strategy</th>
+                                    <th>Impact</th>
+                                    <th>Cost</th>
+                                    <th>Implementation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Implement irrigation</td>
+                                    <td>High</td>
+                                    <td>Medium-High</td>
+                                    <td>Immediate</td>
+                                </tr>
+                                <tr>
+                                    <td>Use drought-resistant varieties</td>
+                                    <td>Medium-High</td>
+                                    <td>Medium</td>
+                                    <td>Next planting season</td>
+                                </tr>
+                                <tr>
+                                    <td>Apply mulch for moisture retention</td>
+                                    <td>Medium</td>
+                                    <td>Low</td>
+                                    <td>Immediate</td>
+                                </tr>
+                                <tr>
+                                    <td>Adjust planting schedule</td>
+                                    <td>Medium</td>
+                                    <td>Low</td>
+                                    <td>Next planting season</td>
+                                </tr>
+                                <tr>
+                                    <td>Implement intercropping</td>
+                                    <td>Medium-Low</td>
+                                    <td>Low</td>
+                                    <td>Next planting season</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h5>Financial Implications</h5>
+                    <p>Based on current climate conditions and projected trends, we recommend:</p>
+                    <ul>
+                        <li>Consider climate risk insurance coverage</li>
+                        <li>Apply for climate-adaptive financing options</li>
+                        <li>Budget for additional irrigation costs of approximately $200-300 per hectare</li>
+                        <li>Adjust revenue projections to account for potential yield decreases</li>
+                    </ul>
+                    
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        This assessment is based on current satellite data, weather station readings, and AI-powered climate modeling. Conditions may change and we recommend checking for updates regularly.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="downloadReport" style="display: none;">
+                    <i class="fas fa-download me-1"></i> Download Report
+                </button>
             </div>
         </div>
     </div>
@@ -522,7 +724,382 @@
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        });
+        
+        // Climate Data Visualization
+        initializeClimateCharts();
+        
+        // Farm selector interactivity
+        const farmSelector = document.getElementById('farmSelector');
+        if (farmSelector) {
+            farmSelector.addEventListener('change', function() {
+                updateClimateData(this.value);
+            });
+        }
+        
+        // Refresh climate data
+        const refreshButton = document.getElementById('refreshClimateData');
+        if (refreshButton) {
+            refreshButton.addEventListener('click', function() {
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+                
+                // Simulate data refresh with delay
+                setTimeout(() => {
+                    updateClimateData(farmSelector.value);
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-sync-alt me-1"></i> Refresh';
+                }, 1500);
+            });
+        }
+        
+        // Risk timeline view toggle
+        const historicalBtn = document.getElementById('viewHistorical');
+        const forecastBtn = document.getElementById('viewForecast');
+        
+        if (historicalBtn && forecastBtn) {
+            historicalBtn.addEventListener('click', function() {
+                this.classList.add('active');
+                forecastBtn.classList.remove('active');
+                updateRiskTimeline('historical');
+            });
+            
+            forecastBtn.addEventListener('click', function() {
+                this.classList.add('active');
+                historicalBtn.classList.remove('active');
+                updateRiskTimeline('forecast');
+            });
+        }
+        
+        // Generate climate report
+        const reportBtn = document.getElementById('getClimateReport');
+        if (reportBtn) {
+            reportBtn.addEventListener('click', function() {
+                const reportModal = new bootstrap.Modal(document.getElementById('climateReportModal'));
+                reportModal.show();
+                
+                // Show loading spinner
+                document.getElementById('reportLoading').style.display = 'block';
+                document.getElementById('reportContent').style.display = 'none';
+                document.getElementById('downloadReport').style.display = 'none';
+                
+                // Simulate report generation
+                setTimeout(() => {
+                    document.getElementById('reportLoading').style.display = 'none';
+                    document.getElementById('reportContent').style.display = 'block';
+                    document.getElementById('downloadReport').style.display = 'inline-block';
+                }, 2500);
+            });
+        }
+        
+        // Download report button
+        const downloadBtn = document.getElementById('downloadReport');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function() {
+                alert('Report download started. The PDF will be available in your downloads folder.');
+            });
+        }
+        
+        // Initialize climate charts
+        function initializeClimateCharts() {
+            // Risk Timeline Chart
+            const riskCtx = document.getElementById('riskTimelineChart');
+            if (riskCtx) {
+                const riskLabels = ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Oct'];
+                const riskData = [0.15, 0.25, 0.35, 0.40, 0.45, 0.45, 0.40, 0.30, 0.20, 0.15];
+                
+                const riskChart = new Chart(riskCtx, {
+                    type: 'line',
+                    data: {
+                        labels: riskLabels,
+                        datasets: [{
+                            label: 'Risk Probability',
+                            data: riskData,
+                            borderColor: '#ffc107',
+                            backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 3,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                max: 1,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)',
+                                    callback: function(value) {
+                                        return (value * 100) + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // Store chart reference for updates
+                window.riskChart = riskChart;
+            }
+            
+            // Temperature mini chart
+            const tempCtx = document.getElementById('temperatureChart');
+            if (tempCtx) {
+                const tempChart = new Chart(tempCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['', '', '', '', '', '', ''],
+                        datasets: [{
+                            data: [22, 23, 24, 24, 25, 26, 24],
+                            borderColor: '#ef5350',
+                            backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+                
+                window.tempChart = tempChart;
+            }
+            
+            // Precipitation mini chart
+            const precipCtx = document.getElementById('precipitationChart');
+            if (precipCtx) {
+                const precipChart = new Chart(precipCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['', '', '', '', '', '', ''],
+                        datasets: [{
+                            data: [18, 15, 12, 10, 8, 12, 9],
+                            backgroundColor: 'rgba(33, 150, 243, 0.5)',
+                            borderRadius: 4,
+                            barThickness: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+                
+                window.precipChart = precipChart;
+            }
+            
+            // NDVI mini chart
+            const ndviCtx = document.getElementById('ndviChart');
+            if (ndviCtx) {
+                const ndviChart = new Chart(ndviCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['', '', '', '', '', '', ''],
+                        datasets: [{
+                            data: [0.60, 0.63, 0.65, 0.64, 0.65, 0.68, 0.65],
+                            borderColor: '#66bb6a',
+                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+                
+                window.ndviChart = ndviChart;
+            }
+        }
+        
+        // Update climate data based on selected farm
+        function updateClimateData(farmId) {
+            console.log('Updating climate data for farm:', farmId);
+            
+            // Simulate data fetching and updating UI elements
+            
+            let riskType, riskLevel, riskImpact, probabilityText, riskColor, strokeDashArray;
+            let temperatureData, precipitationData, ndviData;
+            
+            // Set data based on farm selection
+            if (farmId === '1') {  // Riverside Farm (Maize)
+                riskType = 'DROUGHT';
+                riskLevel = 'Medium';
+                riskImpact = 'Potential yield reduction of 20-30% if drought conditions persist.';
+                probabilityText = '45%';
+                riskColor = '#ffc107';  // warning color
+                strokeDashArray = 282.7;  // Full circle circumference
+                strokeDashOffset = 155.5;  // (1 - 0.45) * 282.7
+                
+                temperatureData = [22, 23, 24, 24, 25, 26, 24];
+                precipitationData = [18, 15, 12, 10, 8, 12, 9];
+                ndviData = [0.60, 0.63, 0.65, 0.64, 0.65, 0.68, 0.65];
+            } 
+            else if (farmId === '2') {  // Hilltop Farm (Cassava)
+                riskType = 'DROUGHT';
+                riskLevel = 'Low';
+                riskImpact = 'Cassava is drought-tolerant. Expected yield reduction of 10-15% if conditions persist.';
+                probabilityText = '30%';
+                riskColor = '#20c997';  // info/teal color
+                strokeDashArray = 282.7;
+                strokeDashOffset = 197.9;  // (1 - 0.30) * 282.7
+                
+                temperatureData = [21, 22, 23, 22, 24, 25, 23];
+                precipitationData = [20, 18, 15, 12, 10, 14, 12];
+                ndviData = [0.65, 0.67, 0.68, 0.67, 0.66, 0.70, 0.68];
+            }
+            else {  // All farms or default
+                riskType = 'DROUGHT';
+                riskLevel = 'Medium';
+                riskImpact = 'Potential yield reduction of 20-30% if drought conditions persist across the region.';
+                probabilityText = '45%';
+                riskColor = '#ffc107';
+                strokeDashArray = 282.7;
+                strokeDashOffset = 155.5;  // (1 - 0.45) * 282.7
+                
+                temperatureData = [22, 23, 24, 24, 25, 26, 24];
+                precipitationData = [18, 15, 12, 10, 8, 12, 9];
+                ndviData = [0.62, 0.64, 0.66, 0.65, 0.65, 0.68, 0.66];
+            }
+            
+            // Update risk information
+            document.getElementById('riskType').textContent = riskType;
+            document.getElementById('riskLevel').textContent = riskLevel;
+            document.getElementById('riskImpact').textContent = riskImpact;
+            
+            // Update risk gauge
+            const gaugeCircle = document.querySelector('.risk-probability svg circle:nth-child(2)');
+            const gaugeText = document.querySelector('.risk-probability svg text');
+            
+            if (gaugeCircle && gaugeText) {
+                gaugeCircle.setAttribute('stroke', riskColor);
+                gaugeCircle.setAttribute('stroke-dashoffset', strokeDashOffset);
+                gaugeText.textContent = probabilityText;
+            }
+            
+            // Update risk alert class
+            const riskAlert = document.querySelector('.climate-risk-alert');
+            if (riskAlert) {
+                riskAlert.className = 'climate-risk-alert risk-level-' + riskLevel.toLowerCase();
+            }
+            
+            // Update chart data
+            if (window.tempChart) {
+                window.tempChart.data.datasets[0].data = temperatureData;
+                window.tempChart.update();
+            }
+            
+            if (window.precipChart) {
+                window.precipChart.data.datasets[0].data = precipitationData;
+                window.precipChart.update();
+            }
+            
+            if (window.ndviChart) {
+                window.ndviChart.data.datasets[0].data = ndviData;
+                window.ndviChart.update();
+            }
+            
+            // Update displayed values
+            const tempValue = document.querySelector('.temp-value');
+            const precipValue = document.querySelector('.precip-value');
+            const ndviValue = document.querySelector('.ndvi-value');
+            
+            if (tempValue) tempValue.textContent = temperatureData[temperatureData.length - 1] + '°C';
+            if (precipValue) precipValue.textContent = precipitationData[precipitationData.length - 1] + 'mm';
+            if (ndviValue) ndviValue.textContent = ndviData[ndviData.length - 1].toFixed(2);
+        }
+        
+        // Update risk timeline based on view (historical or forecast)
+        function updateRiskTimeline(view) {
+            if (!window.riskChart) return;
+            
+            let labels, data;
+            
+            if (view === 'historical') {
+                labels = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
+                data = [0.10, 0.15, 0.25, 0.35, 0.40, 0.45, 0.45];
+            } else {
+                labels = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+                data = [0.45, 0.40, 0.30, 0.20, 0.15, 0.10, 0.15];
+            }
+            
+            window.riskChart.data.labels = labels;
+            window.riskChart.data.datasets[0].data = data;
+            window.riskChart.update();
+        }
     });
 </script>
 {% endblock %}
