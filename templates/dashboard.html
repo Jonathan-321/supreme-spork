@@ -6,6 +6,7 @@
 <div class="dashboard-header mb-4">
     <div class="d-flex justify-content-between align-items-center">
         <h2 class="mb-0">Farmer Dashboard</h2>
+        {% if farmer %}
         <div>
             <span class="badge rounded-pill user-badge">
                 <i class="fas fa-user me-1"></i> {{ farmer.user.first_name }} {{ farmer.user.last_name }}
@@ -14,8 +15,32 @@
                 <i class="fas fa-map-marker-alt me-1"></i> {{ farmer.region.name }}, {{ farmer.region.country }}
             </span>
         </div>
+        {% else %}
+        <div>
+            <span class="badge rounded-pill user-badge">
+                <i class="fas fa-user me-1"></i> Demo User
+            </span>
+            <span class="badge rounded-pill location-badge">
+                <i class="fas fa-map-marker-alt me-1"></i> Eastern Region, Ghana
+            </span>
+        </div>
+        {% endif %}
     </div>
 </div>
+
+{% if error %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Database Connection Issue:</strong> The system is currently operating in demo mode due to a connection error.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+{% if demo_mode %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Demo Mode:</strong> You're viewing sample data. In the full version, this dashboard would display your actual farm and loan information.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 
 <!-- Modern Overview Cards -->
 <div class="row mb-5">

@@ -16,6 +16,15 @@ if not app.config["SQLALCHEMY_DATABASE_URI"]:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///agrifinance.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+# Configure SQLAlchemy connection pool settings
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_recycle": 300,  # Recycle connections after 5 minutes
+    "pool_pre_ping": True,  # Check connection validity before using it
+    "connect_args": {
+        "sslmode": "require"  # Use SSL but don't verify certificate
+    }
+}
+
 # Initialize database
 db = SQLAlchemy(app)
 
@@ -629,24 +638,56 @@ def home():
 
 @app.route('/dashboard')
 def dashboard():
-    # Get the demo farmer for our demo
-    farmer = Farmer.query.first()
-    
-    if not farmer:
-        # If no farmer exists, redirect to home
-        return redirect(url_for('home'))
-    
-    # Get farmer's active loans
-    active_loans = Loan.query.filter(
-        Loan.farmer_id == farmer.id,
-        Loan.status.in_([LoanStatus.APPROVED, LoanStatus.DISBURSED, LoanStatus.REPAYING])
-    ).all()
-    
-    # Get farmer's farms
-    farms = Farm.query.filter_by(farmer_id=farmer.id).all()
-    
-    # Get eligible loan products
-    loan_products = LoanProduct.query.filter_by(is_active=True).all()
+    try:
+        # Get the demo farmer for our demo
+        farmer = Farmer.query.first()
+        
+        if not farmer:
+            # For demo purposes, create a placeholder farmer
+            return render_template(
+                'dashboard.html', 
+                farmer=None, 
+                active_loans=[],
+                farms=[],
+                loan_products=[],
+                credit_score={"score": 75, "level": "Good"},
+                climate_risks=[],
+                weather_data={},
+                recent_payments=[],
+                upcoming_payment=None,
+                demo_mode=True
+            )
+        
+        # Get farmer's active loans
+        active_loans = Loan.query.filter(
+            Loan.farmer_id == farmer.id,
+            Loan.status.in_([LoanStatus.APPROVED, LoanStatus.DISBURSED, LoanStatus.REPAYING])
+        ).all()
+        
+        # Get farmer's farms
+        farms = Farm.query.filter_by(farmer_id=farmer.id).all()
+        
+        # Get eligible loan products
+        loan_products = LoanProduct.query.filter_by(is_active=True).all()
+    except Exception as e:
+        # Log the error
+        app.logger.error(f"Database error: {str(e)}")
+        
+        # Return a demo view for the dashboard
+        return render_template(
+            'dashboard.html', 
+            error=str(e),
+            farmer=None, 
+            active_loans=[],
+            farms=[],
+            loan_products=[],
+            credit_score={"score": 75, "level": "Good"},
+            climate_risks=[],
+            weather_data={},
+            recent_payments=[],
+            upcoming_payment=None,
+            demo_mode=True
+        )
     
     # Get latest weather data for the region
     weather_data = WeatherData.query.filter_by(region_id=farmer.region_id).order_by(WeatherData.date.desc()).first()
