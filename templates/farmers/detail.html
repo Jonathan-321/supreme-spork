@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - Farmer Profile{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Farmer Profile</h2>
+    <div>
+        <span class="badge bg-info me-2">
+            <i class="fas fa-user me-1"></i> ID: {{ farmer.farmer_id }}
+        </span>
+        <span class="badge bg-secondary">
+            <i class="fas fa-calendar-alt me-1"></i> Member since {{ farmer.registration_date|date:"M d, Y" }}
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Farmer Information -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary bg-opacity-25">
+                <h5 class="mb-0">Personal Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <div class="avatar-circle mx-auto mb-3 d-flex justify-content-center align-items-center">
+                        <i class="fas fa-user fa-3x text-primary"></i>
+                    </div>
+                    <h4>{{ farmer.user.get_full_name }}</h4>
+                    <p class="text-muted mb-0">{{ farmer.type }}</p>
+                </div>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-envelope me-2 text-muted"></i> Email</span>
+                        <span>{{ farmer.user.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-phone me-2 text-muted"></i> Phone</span>
+                        <span>{{ farmer.phone_number }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-map-marker-alt me-2 text-muted"></i> Region</span>
+                        <span>{{ farmer.region.name }}, {{ farmer.region.country }}</span>
+                    </li>
+                    {% if farmer.date_of_birth %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-birthday-cake me-2 text-muted"></i> Date of Birth</span>
+                        <span>{{ farmer.date_of_birth|date:"M d, Y" }}</span>
+                    </li>
+                    {% endif %}
+                    {% if farmer.national_id %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-id-card me-2 text-muted"></i> National ID</span>
+                        <span>{{ farmer.national_id }}</span>
+                    </li>
+                    {% endif %}
+                </ul>
+                
+                <div class="d-grid mt-3">
+                    <button class="btn btn-primary" disabled>Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Farms Information -->
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <div class="card-header bg-success bg-opacity-25">
+                <h5 class="mb-0">Farms</h5>
+            </div>
+            <div class="card-body">
+                {% if farms %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Area (ha)</th>
+                                <th>Main Crop</th>
+                                <th>Secondary Crops</th>
+                                <th>Irrigation</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for farm in farms %}
+                            <tr>
+                                <td>{{ farm.name }}</td>
+                                <td>{{ farm.area }}</td>
+                                <td>{{ farm.main_crop }}</td>
+                                <td>{{ farm.secondary_crops|default:"None" }}</td>
+                                <td>
+                                    {% if farm.irrigation %}
+                                    <span class="badge bg-success">Yes</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">No</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{% url 'farm_climate_data' farm.id %}" class="btn btn-outline-info" title="Climate Data">
+                                            <i class="fas fa-cloud-sun-rain"></i>
+                                        </a>
+                                        <button class="btn btn-outline-secondary" title="Edit" disabled>
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-tractor fa-3x text-muted mb-3"></i>
+                    <p class="mb-0">No farms registered yet.</p>
+                </div>
+                {% endif %}
+                
+                <div class="d-grid mt-3">
+                    <button class="btn btn-success" disabled>Add New Farm</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Harvests -->
+        <div class="card mt-4">
+            <div class="card-header bg-info bg-opacity-25">
+                <h5 class="mb-0">Recent Harvests</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="placeholder-glow p-4 text-center">
+                    <i class="fas fa-seedling fa-3x text-muted mb-3"></i>
+                    <p class="mb-2">Harvest data will be displayed here</p>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .avatar-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        border: 2px solid var(--bs-primary);
+    }
+</style>
+{% endblock %}

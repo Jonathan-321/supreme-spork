@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - My Loans{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">My Loans</h2>
+    <div>
+        <span class="badge bg-info me-2">
+            <i class="fas fa-user me-1"></i> ID: {{ farmer.farmer_id }}
+        </span>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header bg-light">
+        <ul class="nav nav-tabs card-header-tabs" id="loanTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab" aria-controls="active" aria-selected="true">
+                    <i class="fas fa-sync-alt me-1"></i> Active
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab" aria-controls="completed" aria-selected="false">
+                    <i class="fas fa-check-circle me-1"></i> Completed
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="false">
+                    <i class="fas fa-list me-1"></i> All Loans
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body p-0">
+        <div class="tab-content" id="loanTabsContent">
+            <!-- Active Loans Tab -->
+            <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Loan ID</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Disbursement Date</th>
+                                <th>Term</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for loan in loans %}
+                                {% if loan.status in 'APPROVED,DISBURSED,REPAYING' %}
+                                <tr>
+                                    <td>{{ loan.loan_id }}</td>
+                                    <td>{{ loan.product.name }}</td>
+                                    <td>{{ loan.amount }}</td>
+                                    <td>
+                                        {% if loan.status == 'APPROVED' %}
+                                        <span class="badge bg-info">Approved</span>
+                                        {% elif loan.status == 'DISBURSED' %}
+                                        <span class="badge bg-primary">Disbursed</span>
+                                        {% elif loan.status == 'REPAYING' %}
+                                        <span class="badge bg-success">Repaying</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ loan.disbursement_date|default:"Pending" }}</td>
+                                    <td>{{ loan.term_months }} months</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{% url 'loan_detail' loan.loan_id %}" class="btn btn-outline-primary" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{% url 'loan_climate_risk' loan.loan_id %}" class="btn btn-outline-info" title="Climate Risk">
+                                                <i class="fas fa-cloud-sun-rain"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% empty %}
+                                <tr>
+                                    <td colspan="7" class="text-center py-4">
+                                        <i class="fas fa-hand-holding-usd fa-3x text-muted mb-3"></i>
+                                        <p class="mb-0">No active loans found.</p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Completed Loans Tab -->
+            <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Loan ID</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                                <th>Disbursement Date</th>
+                                <th>Completion Date</th>
+                                <th>Term</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for loan in loans %}
+                                {% if loan.status == 'COMPLETED' %}
+                                <tr>
+                                    <td>{{ loan.loan_id }}</td>
+                                    <td>{{ loan.product.name }}</td>
+                                    <td>{{ loan.amount }}</td>
+                                    <td>{{ loan.disbursement_date|date:"M d, Y" }}</td>
+                                    <td>{{ loan.actual_completion_date|date:"M d, Y" }}</td>
+                                    <td>{{ loan.term_months }} months</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{% url 'loan_detail' loan.loan_id %}" class="btn btn-outline-primary" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% empty %}
+                                <tr>
+                                    <td colspan="7" class="text-center py-4">
+                                        <i class="fas fa-check-circle fa-3x text-muted mb-3"></i>
+                                        <p class="mb-0">No completed loans found.</p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- All Loans Tab -->
+            <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Loan ID</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Application Date</th>
+                                <th>Term</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for loan in loans %}
+                            <tr>
+                                <td>{{ loan.loan_id }}</td>
+                                <td>{{ loan.product.name }}</td>
+                                <td>{{ loan.amount }}</td>
+                                <td>
+                                    {% if loan.status == 'PENDING' %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    {% elif loan.status == 'APPROVED' %}
+                                    <span class="badge bg-info">Approved</span>
+                                    {% elif loan.status == 'DISBURSED' %}
+                                    <span class="badge bg-primary">Disbursed</span>
+                                    {% elif loan.status == 'REPAYING' %}
+                                    <span class="badge bg-success">Repaying</span>
+                                    {% elif loan.status == 'COMPLETED' %}
+                                    <span class="badge bg-success">Completed</span>
+                                    {% elif loan.status == 'DEFAULTED' %}
+                                    <span class="badge bg-danger">Defaulted</span>
+                                    {% elif loan.status == 'RESTRUCTURED' %}
+                                    <span class="badge bg-secondary">Restructured</span>
+                                    {% elif loan.status == 'REJECTED' %}
+                                    <span class="badge bg-danger">Rejected</span>
+                                    {% elif loan.status == 'CANCELLED' %}
+                                    <span class="badge bg-secondary">Cancelled</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ loan.application_date|date:"M d, Y" }}</td>
+                                <td>{{ loan.term_months }} months</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{% url 'loan_detail' loan.loan_id %}" class="btn btn-outline-primary" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {% if loan.status in 'APPROVED,DISBURSED,REPAYING' %}
+                                        <a href="{% url 'loan_climate_risk' loan.loan_id %}" class="btn btn-outline-info" title="Climate Risk">
+                                            <i class="fas fa-cloud-sun-rain"></i>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center py-4">
+                                    <i class="fas fa-file-invoice-dollar fa-3x text-muted mb-3"></i>
+                                    <p class="mb-0">No loans found.</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Apply for a New Loan</h5>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info" role="alert">
+            <i class="fas fa-info-circle me-2"></i>
+            To apply for a new loan, please visit your <a href="{% url 'dashboard' %}" class="alert-link">dashboard</a> to view eligible loan products based on your credit score.
+        </div>
+        
+        <div class="text-center mt-3">
+            <a href="{% url 'credit_dashboard' %}" class="btn btn-primary me-2">
+                <i class="fas fa-chart-line me-1"></i> Check Credit Score
+            </a>
+            <a href="{% url 'dashboard' %}" class="btn btn-success">
+                <i class="fas fa-hand-holding-usd me-1"></i> View Eligible Products
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

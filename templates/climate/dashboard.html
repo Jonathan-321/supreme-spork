@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - Climate Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Climate Dashboard</h2>
+    <div>
+        <span class="badge bg-info me-2">
+            <i class="fas fa-map-marker-alt me-1"></i> {{ region.name }}, {{ region.country }}
+        </span>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    <i class="fas fa-exclamation-triangle me-2"></i> {{ error }}
+</div>
+{% else %}
+
+<!-- Climate Risk Overview -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Climate Risk Assessment</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for risk in climate_risks %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 {% if risk.risk_level == 'LOW' %}border-success{% elif risk.risk_level == 'MEDIUM' %}border-warning{% elif risk.risk_level == 'HIGH' or risk.risk_level == 'EXTREME' %}border-danger{% else %}border-info{% endif %}">
+                            <div class="card-header{% if risk.risk_level == 'LOW' %} bg-success bg-opacity-25{% elif risk.risk_level == 'MEDIUM' %} bg-warning bg-opacity-25{% elif risk.risk_level == 'HIGH' or risk.risk_level == 'EXTREME' %} bg-danger bg-opacity-25{% else %} bg-info bg-opacity-25{% endif %}">
+                                <h6 class="mb-0">{{ risk.risk_type }}</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4>Risk Level:</h4>
+                                    <span class="badge {% if risk.risk_level == 'LOW' %}bg-success{% elif risk.risk_level == 'MEDIUM' %}bg-warning text-dark{% elif risk.risk_level == 'HIGH' %}bg-danger{% elif risk.risk_level == 'EXTREME' %}bg-danger{% else %}bg-info{% endif %} p-2">{{ risk.risk_level }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <h6>Probability: {{ risk.probability }}%</h6>
+                                    <div class="progress">
+                                        <div class="progress-bar {% if risk.risk_level == 'LOW' %}bg-success{% elif risk.risk_level == 'MEDIUM' %}bg-warning{% else %}bg-danger{% endif %}" role="progressbar" style="width: {{ risk.probability }}%" aria-valuenow="{{ risk.probability }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <p class="mb-0 small text-muted">Valid until: {{ risk.valid_until|date:"M d, Y" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle me-2"></i> No climate risk assessments available for this region.
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Weather Data -->
+<div class="row mb-4">
+    <div class="col-md-8 mb-4 mb-md-0">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Historical Weather Data</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="weatherChart" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Weather Forecast</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    {% for forecast in weather_forecast %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">{{ forecast.prediction_date|date:"D, M d" }}</h6>
+                            <span>{{ forecast.temperature_max }}°C / {{ forecast.temperature_min }}°C</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Precipitation: {{ forecast.precipitation_probability }}%</small>
+                            <small>
+                                {% if forecast.temperature_max > 30 %}
+                                <i class="fas fa-sun text-warning"></i>
+                                {% elif forecast.precipitation_probability > 50 %}
+                                <i class="fas fa-cloud-rain text-primary"></i>
+                                {% else %}
+                                <i class="fas fa-cloud-sun text-info"></i>
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="list-group-item py-4 text-center">
+                        <i class="fas fa-cloud fa-2x text-muted mb-3"></i>
+                        <p class="mb-0">No forecast data available.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NDVI Data -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Farm Vegetation Health (NDVI)</h5>
+            </div>
+            <div class="card-body">
+                {% if farm_ndvi_data %}
+                <canvas id="ndviChart" height="250"></canvas>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-seedling fa-3x text-muted mb-3"></i>
+                    <p class="mb-0">No NDVI data available for your farms.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Weather Chart
+    var weatherCtx = document.getElementById('weatherChart').getContext('2d');
+    var weatherDates = {{ weather_dates|safe }};
+    var temperatures = {{ weather_temperatures|safe }};
+    var precipitation = {{ weather_precipitation|safe }};
+    
+    var weatherChart = new Chart(weatherCtx, {
+        type: 'line',
+        data: {
+            labels: weatherDates,
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: temperatures,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                yAxisID: 'y',
+                tension: 0.4
+            }, {
+                label: 'Precipitation (mm)',
+                data: precipitation,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                yAxisID: 'y1',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Temperature (°C)'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Precipitation (mm)'
+                    },
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                }
+            }
+        }
+    });
+    
+    // NDVI Chart
+    var ndviData = {{ farm_ndvi_data|safe }};
+    if (ndviData && Object.keys(ndviData).length > 0) {
+        var ndviCtx = document.getElementById('ndviChart').getContext('2d');
+        var ndviDatasets = [];
+        
+        var colors = [
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)'
+        ];
+        
+        var i = 0;
+        for (var farmId in ndviData) {
+            var farm = ndviData[farmId];
+            ndviDatasets.push({
+                label: farm.name,
+                data: farm.values,
+                borderColor: colors[i % colors.length],
+                backgroundColor: colors[i % colors.length].replace('1)', '0.1)'),
+                borderWidth: 2,
+                fill: false,
+                tension: 0.4
+            });
+            i++;
+        }
+        
+        var ndviChart = new Chart(ndviCtx, {
+            type: 'line',
+            data: {
+                labels: ndviData[Object.keys(ndviData)[0]].dates,
+                datasets: ndviDatasets
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        min: -0.2,
+                        max: 1.0,
+                        title: {
+                            display: true,
+                            text: 'NDVI Value'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += parseFloat(context.raw).toFixed(2);
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

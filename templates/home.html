@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - Home{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="p-5 mb-4 bg-dark rounded-3 text-center">
+            <div class="container py-5">
+                <h1 class="display-5 fw-bold">
+                    <i class="fas fa-leaf text-success me-3"></i>AgriFinance
+                </h1>
+                <p class="fs-4">Empowering African farmers with innovative financial solutions.</p>
+                <a href="/dashboard" class="btn btn-success btn-lg px-4 me-2">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a href="/loans" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fas fa-hand-holding-usd me-2"></i>View Loans
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4 mb-4 mb-md-0">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-chart-line text-primary fa-3x mb-3"></i>
+                <h4 class="card-title">Credit Scoring</h4>
+                <p class="card-text">Dynamic credit scoring that adapts to your farming practices, climate conditions, and financial history.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4 mb-md-0">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-cloud-sun-rain text-info fa-3x mb-3"></i>
+                <h4 class="card-title">Climate Integration</h4>
+                <p class="card-text">Real-time climate data and risk assessment to adjust loans during adverse weather conditions.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-hand-holding-usd text-success fa-3x mb-3"></i>
+                <h4 class="card-title">Flexible Loans</h4>
+                <p class="card-text">Customized agricultural loans that fit your farming cycle and adapt to changing environmental conditions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4 mb-md-0">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">How It Works</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex mb-3">
+                    <div class="flex-shrink-0">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                            <span class="text-white fw-bold">1</span>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h5>Register Your Farm</h5>
+                        <p class="text-muted">Add your farm details and location to start monitoring climate conditions.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <div class="flex-shrink-0">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                            <span class="text-white fw-bold">2</span>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h5>Get Your Credit Score</h5>
+                        <p class="text-muted">Our algorithm analyzes your farming data and financial history.</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                            <span class="text-white fw-bold">3</span>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h5>Apply for Loans</h5>
+                        <p class="text-muted">Access customized loans based on your farming needs and credit profile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Benefits for Farmers</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex">
+                        <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                        <div>
+                            <strong>Weather-Adjusted Loans</strong>
+                            <p class="mb-0 text-muted">Loan terms that adapt to droughts, floods, and other climate events.</p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                        <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                        <div>
+                            <strong>Satellite Monitoring</strong>
+                            <p class="mb-0 text-muted">NDVI data helps track your farm's health and productivity.</p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                        <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                        <div>
+                            <strong>Fair Credit Assessment</strong>
+                            <p class="mb-0 text-muted">Credit scoring that considers the unique challenges of farming.</p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex">
+                        <i class="fas fa-check-circle text-success me-2 mt-1"></i>
+                        <div>
+                            <strong>Digital Financial Management</strong>
+                            <p class="mb-0 text-muted">Easy online tools to manage your loans and payments.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
