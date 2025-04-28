@@ -1,10 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-from sqlalchemy import Enum
+"""
+Database models for the AgriFinance platform.
+"""
 import enum
+from datetime import datetime
+from app import db
 
-db = SQLAlchemy()
-
+# Define enums
 class FarmerType(enum.Enum):
     INDIVIDUAL = "Individual"
     COOPERATIVE = "Cooperative"
@@ -26,6 +27,7 @@ class RiskLevel(enum.Enum):
     HIGH = "High"
     EXTREME = "Extreme"
 
+# Define models
 class Region(db.Model):
     """Represents a geographical region"""
     id = db.Column(db.Integer, primary_key=True)
@@ -40,6 +42,23 @@ class Region(db.Model):
 
     def __repr__(self):
         return f"<Region {self.name}, {self.country}>"
+
+class User(db.Model):
+    """Represents a user account"""
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+    first_name = db.Column(db.String(100))
+    last_name = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_admin = db.Column(db.Boolean, default=False)
+    
+    # Relationships
+    farmer = db.relationship('Farmer', back_populates='user', uselist=False)
+
+    def __repr__(self):
+        return f"<User {self.username}>"
 
 class Farmer(db.Model):
     """Represents a farmer or farming entity"""
@@ -64,23 +83,6 @@ class Farmer(db.Model):
 
     def __repr__(self):
         return f"<Farmer {self.farmer_id}>"
-
-class User(db.Model):
-    """Represents a user account"""
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    first_name = db.Column(db.String(100))
-    last_name = db.Column(db.String(100))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    is_admin = db.Column(db.Boolean, default=False)
-    
-    # Relationships
-    farmer = db.relationship('Farmer', back_populates='user', uselist=False)
-
-    def __repr__(self):
-        return f"<User {self.username}>"
 
 class Farm(db.Model):
     """Represents a farm belonging to a farmer"""
@@ -141,7 +143,13 @@ class Harvest(db.Model):
     crop = db.relationship('Crop', back_populates='harvests')
 
     def __repr__(self):
-        return f"<Harvest {self.farm.name} - {self.crop.name} - {self.harvest_date}>"
+        return f"<Harvest {self.harvest_date}>"
+
+# Association table for LoanProduct to Crop (many-to-many)
+loan_product_crop = db.Table('loan_product_crop',
+    db.Column('loan_product_id', db.Integer, db.ForeignKey('loan_product.id')),
+    db.Column('crop_id', db.Integer, db.ForeignKey('crop.id'))
+)
 
 class LoanProduct(db.Model):
     """Represents a loan product offered by the platform"""
@@ -158,17 +166,11 @@ class LoanProduct(db.Model):
     loans = db.relationship('Loan', back_populates='product')
     
     # Many-to-many relationship with Crop
-    allowed_crops = db.relationship('Crop', secondary='loan_product_crop',
+    allowed_crops = db.relationship('Crop', secondary=loan_product_crop,
                                    backref=db.backref('loan_products', lazy='dynamic'))
 
     def __repr__(self):
         return f"<LoanProduct {self.name}>"
-
-# Association table for LoanProduct to Crop (many-to-many)
-loan_product_crop = db.Table('loan_product_crop',
-    db.Column('loan_product_id', db.Integer, db.ForeignKey('loan_product.id')),
-    db.Column('crop_id', db.Integer, db.ForeignKey('crop.id'))
-)
 
 class Loan(db.Model):
     """Represents a loan issued to a farmer"""
@@ -219,9 +221,7 @@ class Payment(db.Model):
     loan = db.relationship('Loan', back_populates='payments')
 
     def __repr__(self):
-        return f"<Payment {self.amount} for {self.loan.loan_id}>"
-
-# Climate Data Models
+        return f"<Payment {self.amount} for Loan {self.loan_id}>"
 
 class WeatherStation(db.Model):
     """Represents a weather station"""
@@ -261,7 +261,7 @@ class WeatherData(db.Model):
     region = db.relationship('Region', back_populates='weather_data')
 
     def __repr__(self):
-        return f"<WeatherData {self.region.name} - {self.date}>"
+        return f"<WeatherData {self.date}>"
 
 class WeatherForecast(db.Model):
     """Stores weather forecast data"""
@@ -281,7 +281,7 @@ class WeatherForecast(db.Model):
     region = db.relationship('Region', back_populates='weather_forecasts')
 
     def __repr__(self):
-        return f"<WeatherForecast {self.region.name} - {self.prediction_date}>"
+        return f"<WeatherForecast {self.prediction_date}>"
 
 class SatelliteImagery(db.Model):
     """Stores metadata for satellite imagery"""
@@ -300,7 +300,7 @@ class SatelliteImagery(db.Model):
     ndvi_data = db.relationship('NDVIData', back_populates='imagery')
 
     def __repr__(self):
-        return f"<SatelliteImagery {self.satellite} - {self.date}>"
+        return f"<SatelliteImagery {self.date}>"
 
 class NDVIData(db.Model):
     """Stores NDVI data for farms"""
@@ -320,7 +320,7 @@ class NDVIData(db.Model):
     imagery = db.relationship('SatelliteImagery', back_populates='ndvi_data')
 
     def __repr__(self):
-        return f"<NDVIData {self.farm.name} - {self.date}>"
+        return f"<NDVIData {self.date}>"
 
 class ClimateRisk(db.Model):
     """Stores climate risk assessments for regions"""
@@ -340,7 +340,7 @@ class ClimateRisk(db.Model):
     region = db.relationship('Region', back_populates='climate_risks')
 
     def __repr__(self):
-        return f"<ClimateRisk {self.risk_type} - {self.region.name} - {self.risk_level.value}>"
+        return f"<ClimateRisk {self.risk_type} - {self.risk_level.value}>"
 
 class LoanClimateAdjustment(db.Model):
     """Tracks adjustments made to loans based on climate risk factors"""
@@ -360,9 +360,7 @@ class LoanClimateAdjustment(db.Model):
     loan = db.relationship('Loan', back_populates='climate_adjustments')
 
     def __repr__(self):
-        return f"<LoanClimateAdjustment {self.adjustment_type} - {self.loan.loan_id}>"
-
-# Credit Scoring Models
+        return f"<LoanClimateAdjustment {self.adjustment_type} - {self.adjustment_date}>"
 
 class CreditScoreConfiguration(db.Model):
     """Configuration for credit scoring algorithm"""
@@ -373,7 +371,7 @@ class CreditScoreConfiguration(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     is_active = db.Column(db.Boolean, default=True)
     
-    # Weights for different components (0-1)
+    # Parameter weights (must sum to 1.0)
     repayment_history_weight = db.Column(db.Float, default=0.3)
     farm_productivity_weight = db.Column(db.Float, default=0.2)
     market_conditions_weight = db.Column(db.Float, default=0.1)
@@ -381,7 +379,7 @@ class CreditScoreConfiguration(db.Model):
     climate_risk_weight = db.Column(db.Float, default=0.3)
 
     def __repr__(self):
-        return f"<CreditScoreConfiguration {self.name} - v{self.version}>"
+        return f"<CreditScoreConfiguration {self.name} v{self.version}>"
 
 class CreditScore(db.Model):
     """Represents a credit score for a farmer"""
@@ -399,7 +397,7 @@ class CreditScore(db.Model):
     components = db.relationship('CreditScoreComponent', back_populates='credit_score')
 
     def __repr__(self):
-        return f"<CreditScore {self.farmer.farmer_id} - {self.score}>"
+        return f"<CreditScore {self.score} for Farmer {self.farmer_id}>"
 
 class CreditScoreComponent(db.Model):
     """Represents a component of a credit score"""
@@ -416,7 +414,7 @@ class CreditScoreComponent(db.Model):
     credit_score = db.relationship('CreditScore', back_populates='components')
 
     def __repr__(self):
-        return f"<CreditScoreComponent {self.component_name} - {self.component_value}>"
+        return f"<CreditScoreComponent {self.component_name}>"
 
 class CreditHistory(db.Model):
     """Tracks credit history events for farmers"""
@@ -436,4 +434,4 @@ class CreditHistory(db.Model):
     loan = db.relationship('Loan', back_populates='credit_history_events')
 
     def __repr__(self):
-        return f"<CreditHistory {self.farmer.farmer_id} - {self.event_type}>"
+        return f"<CreditHistory {self.event_type} - {self.event_date}>"
