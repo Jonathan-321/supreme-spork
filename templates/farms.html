@@ -5,9 +5,125 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Farm Management</h2>
-    <a href="#" class="btn btn-success">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerFarmModal">
         <i class="fas fa-plus me-1"></i> Register New Farm
-    </a>
+    </button>
+</div>
+
+<!-- Farm Registration Modal -->
+<div class="modal fade" id="registerFarmModal" tabindex="-1" aria-labelledby="registerFarmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerFarmModalLabel">Register New Farm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="farmRegistrationForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="farmName" class="form-label">Farm Name</label>
+                            <input type="text" class="form-control" id="farmName" name="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="farmArea" class="form-label">Farm Area (hectares)</label>
+                            <input type="number" class="form-control" id="farmArea" name="area" step="0.1" min="0.1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="farmLocation" class="form-label">Location</label>
+                            <select class="form-select" id="farmLocation" name="region_id" required>
+                                <option value="">Select region...</option>
+                                <option value="1">Eastern Region, Ghana</option>
+                                <option value="2">Ashanti Region, Ghana</option>
+                                <option value="3">Western Region, Ghana</option>
+                                <option value="4">Central Region, Ghana</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="soilType" class="form-label">Soil Type</label>
+                            <select class="form-select" id="soilType" name="soil_type">
+                                <option value="">Select soil type...</option>
+                                <option value="Clay">Clay</option>
+                                <option value="Sandy">Sandy</option>
+                                <option value="Loamy">Loamy</option>
+                                <option value="Silt">Silt</option>
+                                <option value="Rocky">Rocky</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="mainCrop" class="form-label">Main Crop</label>
+                            <select class="form-select" id="mainCrop" name="main_crop" required>
+                                <option value="">Select main crop...</option>
+                                <option value="Maize">Maize</option>
+                                <option value="Cassava">Cassava</option>
+                                <option value="Rice">Rice</option>
+                                <option value="Cocoa">Cocoa</option>
+                                <option value="Coffee">Coffee</option>
+                                <option value="Sorghum">Sorghum</option>
+                                <option value="Millet">Millet</option>
+                                <option value="Tomatoes">Tomatoes</option>
+                                <option value="Peppers">Peppers</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="secondaryCrops" class="form-label">Secondary Crops</label>
+                            <input type="text" class="form-control" id="secondaryCrops" name="secondary_crops" placeholder="E.g., Beans, Peppers, Tomatoes">
+                            <div class="form-text">Separate multiple crops with commas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="irrigationSwitch" name="irrigation">
+                                <label class="form-check-label" for="irrigationSwitch">Farm has irrigation system</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="farmPhoto" class="form-label">Farm Photo (optional)</label>
+                            <input type="file" class="form-control" id="farmPhoto" name="photo">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="farmDescription" class="form-label">Additional Notes</label>
+                        <textarea class="form-control" id="farmDescription" name="description" rows="3" placeholder="Any additional details about your farm..."></textarea>
+                    </div>
+                    
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle me-2"></i> Adding a farm will allow you to monitor climate conditions specific to your farm's location and receive personalized recommendations.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="submitFarmRegistration">Register Farm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Farm Registration Success Modal -->
+<div class="modal fade" id="farmSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <div class="mb-3">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                </div>
+                <h4 class="mb-3">Farm Successfully Registered!</h4>
+                <p>Your farm has been added to your account. You can now monitor climate conditions and apply for crop-specific loans.</p>
+                <p class="small text-muted mb-4">Farm ID: <span id="newFarmId">F-2025-1234</span></p>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Farm Statistics Cards -->
@@ -729,7 +845,94 @@
         // Climate Data Visualization
         initializeClimateCharts();
         
-        // Farm selector interactivity
+        // Farm Registration Form
+        const farmRegistrationForm = document.getElementById('farmRegistrationForm');
+        const submitFarmButton = document.getElementById('submitFarmRegistration');
+        
+        if (submitFarmButton && farmRegistrationForm) {
+            submitFarmButton.addEventListener('click', function() {
+                // Validate form
+                if (validateFarmForm(farmRegistrationForm)) {
+                    // Show success modal after simulating submission
+                    submitFarmButton.disabled = true;
+                    submitFarmButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Registering...';
+                    
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        // Generate a random farm ID
+                        const farmId = 'F-2025-' + Math.floor(1000 + Math.random() * 9000);
+                        document.getElementById('newFarmId').textContent = farmId;
+                        
+                        // Hide farm registration modal
+                        const farmModal = bootstrap.Modal.getInstance(document.getElementById('registerFarmModal'));
+                        farmModal.hide();
+                        
+                        // Show success modal
+                        const successModal = new bootstrap.Modal(document.getElementById('farmSuccessModal'));
+                        successModal.show();
+                        
+                        // Reset form and button
+                        farmRegistrationForm.reset();
+                        submitFarmButton.disabled = false;
+                        submitFarmButton.innerHTML = 'Register Farm';
+                    }, 1500);
+                }
+            });
+        }
+        
+        // Farm area validation
+        const farmAreaInput = document.getElementById('farmArea');
+        if (farmAreaInput) {
+            farmAreaInput.addEventListener('input', function() {
+                // Add visual feedback
+                if (this.value && parseFloat(this.value) > 0) {
+                    this.classList.add('is-valid');
+                    this.classList.remove('is-invalid');
+                } else {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                }
+            });
+        }
+        
+        // Main crop and secondary crop relationship
+        const mainCropSelect = document.getElementById('mainCrop');
+        const secondaryCropsInput = document.getElementById('secondaryCrops');
+        
+        if (mainCropSelect && secondaryCropsInput) {
+            mainCropSelect.addEventListener('change', function() {
+                // Suggest complementary crops based on main crop selection
+                const mainCrop = this.value;
+                let suggestedCrops = '';
+                
+                switch(mainCrop) {
+                    case 'Maize':
+                        suggestedCrops = 'Beans, Groundnuts, Pumpkins';
+                        break;
+                    case 'Cassava':
+                        suggestedCrops = 'Groundnuts, Maize, Vegetables';
+                        break;
+                    case 'Rice':
+                        suggestedCrops = 'Azolla, Fish (in paddy)';
+                        break;
+                    case 'Cocoa':
+                        suggestedCrops = 'Plantain, Banana, Cassava';
+                        break;
+                    case 'Tomatoes':
+                        suggestedCrops = 'Onions, Peppers, Basil';
+                        break;
+                    default:
+                        suggestedCrops = '';
+                }
+                
+                if (suggestedCrops && !secondaryCropsInput.value) {
+                    secondaryCropsInput.value = suggestedCrops;
+                    secondaryCropsInput.setAttribute('placeholder', 'e.g., ' + suggestedCrops);
+                }
+            });
+        }
+        
+        // Farm selector interactivity for climate data
         const farmSelector = document.getElementById('farmSelector');
         if (farmSelector) {
             farmSelector.addEventListener('change', function() {
@@ -798,6 +1001,34 @@
             downloadBtn.addEventListener('click', function() {
                 alert('Report download started. The PDF will be available in your downloads folder.');
             });
+        }
+        
+        // Validate farm registration form
+        function validateFarmForm(form) {
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            // Clear previous validation
+            form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+            
+            // Check required fields
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.add('is-valid');
+                }
+            });
+            
+            // Special validation for numeric fields
+            const farmArea = form.querySelector('#farmArea');
+            if (farmArea && (!farmArea.value || parseFloat(farmArea.value) <= 0)) {
+                farmArea.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            return isValid;
         }
         
         // Initialize climate charts
