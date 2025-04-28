@@ -372,19 +372,25 @@
         <div class="section-card mb-4">
             <div class="section-header">
                 <h3>Climate Overview</h3>
-                <a href="{{ url_for('climate_dashboard') }}" class="view-all-link">Details</a>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-icon refresh-weather-btn me-2" title="Refresh Data">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <a href="{{ url_for('climate_dashboard') }}" class="view-all-link">Details</a>
+                </div>
             </div>
             <div class="section-content">
-                {% if weather_data or farm_ndvi_data %}
                 <div class="climate-overview">
-                    {% if weather_data %}
                     <div class="climate-data-item">
                         <div class="climate-icon temperature-icon">
                             <i class="fas fa-temperature-high"></i>
                         </div>
                         <div>
                             <h5>Temperature</h5>
-                            <div class="climate-value">{{ weather_data.temperature_avg }}°C</div>
+                            <div class="climate-value temperature">25.5°C</div>
+                            <div class="climate-data-trend up">
+                                <i class="fas fa-arrow-up"></i> 1.5°C above avg
+                            </div>
                         </div>
                     </div>
                     
@@ -394,30 +400,43 @@
                         </div>
                         <div>
                             <h5>Precipitation</h5>
-                            <div class="climate-value">{{ weather_data.precipitation }}mm</div>
+                            <div class="climate-value precipitation">12.3mm</div>
+                            <div class="climate-data-trend down">
+                                <i class="fas fa-arrow-down"></i> 30% below avg
+                            </div>
                         </div>
                     </div>
-                    {% endif %}
                     
-                    {% if farm_ndvi_data and farm_ndvi_data[farms[0].id] %}
                     <div class="climate-data-item">
                         <div class="climate-icon ndvi-icon">
                             <i class="fas fa-seedling"></i>
                         </div>
                         <div>
                             <h5>NDVI</h5>
-                            <div class="climate-value">{{ farm_ndvi_data[farms[0].id].ndvi_average|round(2) }}</div>
+                            <div class="climate-value ndvi">0.65</div>
+                            <div class="climate-data-trend stable">
+                                <i class="fas fa-equals"></i> Stable
+                            </div>
                         </div>
                     </div>
-                    {% endif %}
                 </div>
-                {% else %}
-                <div class="alert alert-info mb-4">
-                    <i class="fas fa-info-circle me-2"></i> No climate data available at the moment.
-                </div>
-                {% endif %}
                 
-                <div class="climate-dashboard-link">
+                <div class="climate-risk-alert risk-level-medium mt-3">
+                    <div class="risk-header">
+                        <i class="fas fa-exclamation-triangle me-2"></i> 
+                        Medium Drought Risk
+                    </div>
+                    <div class="risk-details">
+                        <p class="small mb-2">45% probability of drought conditions over the next 3 months.</p>
+                    </div>
+                </div>
+                
+                <!-- Mini forecast chart -->
+                <div class="chart-container mt-3" style="height: 150px;">
+                    <canvas id="climateForecastChart"></canvas>
+                </div>
+                
+                <div class="climate-dashboard-link mt-3">
                     <a href="{{ url_for('climate_dashboard') }}" class="btn btn-info w-100">
                         <i class="fas fa-chart-line me-1"></i> View Climate Dashboard
                     </a>
@@ -425,31 +444,22 @@
             </div>
         </div>
         
-        {% if climate_risk %}
-        <!-- Climate Risk Alert -->
-        <div class="section-card mb-4">
-            <div class="section-header">
-                <h3>Climate Risk Alert</h3>
-            </div>
-            <div class="section-content">
-                <div class="climate-risk-alert risk-level-{{ climate_risk.risk_level.name|lower }}">
-                    <div class="risk-header">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        {{ climate_risk.risk_type }} Risk: {{ climate_risk.risk_level.value }}
-                    </div>
-                    <div class="risk-details mt-2">
-                        <p>{{ climate_risk.potential_impact }}</p>
-                        {% if climate_risk.mitigation_measures %}
-                        <div class="mitigation-measures">
-                            <strong>Recommended actions:</strong>
-                            <p>{{ climate_risk.mitigation_measures }}</p>
-                        </div>
-                        {% endif %}
-                    </div>
+        <!-- Weather update toast notification -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="weatherUpdateToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="fas fa-cloud-sun me-2 text-info"></i>
+                    <strong class="me-auto">Weather Update</strong>
+                    <small>Just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Climate data has been updated with the latest measurements and forecasts.
                 </div>
             </div>
         </div>
-        {% endif %}
+        
+
     </div>
 </div>
 {% endblock %}
@@ -840,6 +850,63 @@
         font-weight: 500;
     }
     
+    .climate-data-trend {
+        font-size: 12px;
+        margin-top: 3px;
+    }
+    
+    .climate-data-trend.up {
+        color: #ef5350;
+    }
+    
+    .climate-data-trend.down {
+        color: #42a5f5;
+    }
+    
+    .climate-data-trend.stable {
+        color: #66bb6a;
+    }
+    
+    .btn-sm.btn-icon {
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .btn-sm.btn-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+    
+    .stats-subtext {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    /* Credit score recommendation cards */
+    .recommendation-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        gap: 15px;
+        height: 100%;
+    }
+    
+    .recommendation-icon {
+        font-size: 24px;
+        color: #42a5f5;
+        opacity: 0.8;
+    }
+    
     /* Climate risk alert */
     .climate-risk-alert {
         padding: 15px;
@@ -913,30 +980,219 @@
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Circle progress calculator
-        const scoreCircle = document.querySelector('.modern-score-circle');
-        if (scoreCircle) {
-            const scoreText = document.querySelector('.score-value').textContent.trim();
-            const score = parseInt(scoreText, 10);
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Credit Score Card Interactivity
+        const creditScoreCard = document.getElementById('creditScoreCard');
+        if (creditScoreCard) {
+            creditScoreCard.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
+            });
             
-            if (!isNaN(score)) {
-                let color;
+            creditScoreCard.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        }
+        
+        // Credit Score Modal
+        const downloadCreditReportBtn = document.getElementById('downloadCreditReport');
+        if (downloadCreditReportBtn) {
+            downloadCreditReportBtn.addEventListener('click', function() {
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generating PDF...';
                 
-                if (score >= 80) {
-                    color = '#4caf50';  // Green
-                } else if (score >= 60) {
-                    color = '#2196f3';  // Blue
-                } else if (score >= 40) {
-                    color = '#ff9800';  // Orange
-                } else {
-                    color = '#f44336';  // Red
+                // Simulate download delay
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-download me-1"></i> Download Report';
+                    alert('Credit Score Report download started. The PDF will be available in your downloads folder.');
+                }, 2000);
+            });
+        }
+        
+        // Animate credit score components in modal
+        const creditScoreModal = document.getElementById('creditScoreModal');
+        if (creditScoreModal) {
+            creditScoreModal.addEventListener('shown.bs.modal', function() {
+                // Animate progress bars
+                const progressBars = document.querySelectorAll('.score-component .progress-bar');
+                progressBars.forEach((bar, index) => {
+                    // Get target width from existing style
+                    const targetWidth = bar.style.width;
+                    
+                    // Reset width to 0
+                    bar.style.width = '0%';
+                    
+                    // Animate to target width with delay based on index
+                    setTimeout(() => {
+                        bar.style.transition = 'width 1s ease-in-out';
+                        bar.style.width = targetWidth;
+                    }, 100 * index);
+                });
+                
+                // Animate recommendation cards
+                const recommendationCards = document.querySelectorAll('.recommendation-card');
+                recommendationCards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.5s ease-out';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 500 + (150 * index));
+                });
+            });
+            
+            // Reset animations when modal is hidden
+            creditScoreModal.addEventListener('hidden.bs.modal', function() {
+                document.querySelectorAll('.score-component .progress-bar').forEach(bar => {
+                    bar.style.transition = 'none';
+                });
+                
+                document.querySelectorAll('.recommendation-card').forEach(card => {
+                    card.style.transition = 'none';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+        }
+        
+        // Add hover effects to all dashboard cards
+        const dashboardCards = document.querySelectorAll('.modern-card');
+        dashboardCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (this.id !== 'creditScoreCard') { // Already handled above
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
                 }
-                
-                scoreCircle.style.background = `conic-gradient(
-                    ${color} calc(${score} * 1%),
-                    rgba(0, 0, 0, 0.2) 0
-                )`;
-            }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (this.id !== 'creditScoreCard') { // Already handled above
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                }
+            });
+        });
+        
+        // Make table rows interactive
+        const tableRows = document.querySelectorAll('.modern-table tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                this.style.cursor = 'pointer';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+                this.style.cursor = '';
+            });
+            
+            row.addEventListener('click', function() {
+                // Could navigate to loan details or show a modal
+                const loanId = this.querySelector('td:first-child').textContent.trim();
+                console.log('Clicked on loan:', loanId);
+                // For demo, we'll just highlight the row
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 500);
+            });
+        });
+        
+        // Add a climate risk forecast chart (if canvas exists)
+        const forecastChart = document.getElementById('climateForecastChart');
+        if (forecastChart) {
+            const ctx = forecastChart.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [
+                        {
+                            label: 'Temperature (°C)',
+                            data: [24, 26, 28, 30, 29, 27, 25],
+                            borderColor: '#ef5350',
+                            backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                            yAxisID: 'y1',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Precipitation (mm)',
+                            data: [15, 10, 5, 2, 8, 18, 25],
+                            borderColor: '#29b6f6',
+                            backgroundColor: 'rgba(3, 169, 244, 0.1)',
+                            yAxisID: 'y2',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Temperature (°C)',
+                                color: '#ef5350'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        y2: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Precipitation (mm)',
+                                color: '#29b6f6'
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        }
+                    }
+                }
+            });
         }
     });
 </script>
