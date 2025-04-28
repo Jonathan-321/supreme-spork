@@ -1,0 +1,866 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - Real-time Weather Alerts{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Real-time Weather Alerts</h2>
+    <div class="d-flex align-items-center">
+        <div class="form-check form-switch me-3">
+            <input class="form-check-input" type="checkbox" id="enablePushNotifications">
+            <label class="form-check-label" for="enablePushNotifications">Enable Push Notifications</label>
+        </div>
+        <button class="btn btn-primary" id="refreshAlerts">
+            <i class="fas fa-sync-alt me-1"></i> Refresh
+        </button>
+    </div>
+</div>
+
+<!-- Alert Configuration -->
+<div class="row mb-4">
+    <div class="col-lg-4 mb-4">
+        <div class="section-card h-100">
+            <div class="section-header">
+                <h3>Alert Configuration</h3>
+                <button class="btn btn-sm btn-primary" id="savePreferences">Save Preferences</button>
+            </div>
+            <div class="section-content">
+                <form id="alertPreferencesForm">
+                    <div class="mb-3">
+                        <label class="form-label">Alert Threshold</label>
+                        <div class="alert-threshold-slider">
+                            <input type="range" class="form-range" min="1" max="5" step="1" id="alertThreshold" value="3">
+                            <div class="threshold-labels">
+                                <span>Low</span>
+                                <span>Medium</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Alert Types</label>
+                        <div class="alert-type-checks">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="droughtAlerts" checked>
+                                <label class="form-check-label" for="droughtAlerts">Drought</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="floodAlerts" checked>
+                                <label class="form-check-label" for="floodAlerts">Flood</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="heatAlerts" checked>
+                                <label class="form-check-label" for="heatAlerts">Extreme Heat</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pestAlerts">
+                                <label class="form-check-label" for="pestAlerts">Pest Outbreak</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="diseaseAlerts">
+                                <label class="form-check-label" for="diseaseAlerts">Disease Spread</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="marketAlerts">
+                                <label class="form-check-label" for="marketAlerts">Market Changes</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Notification Method</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                            <label class="form-check-label" for="emailNotifications">Email</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="smsNotifications" checked>
+                            <label class="form-check-label" for="smsNotifications">SMS</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="appNotifications">
+                            <label class="form-check-label" for="appNotifications">Mobile App</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Alert Frequency</label>
+                        <select class="form-select" id="alertFrequency">
+                            <option value="realtime">Real-time (As they happen)</option>
+                            <option value="daily" selected>Daily Digest</option>
+                            <option value="weekly">Weekly Summary</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <!-- Active Alerts -->
+        <div class="section-card mb-4">
+            <div class="section-header">
+                <h3>Active Alerts</h3>
+                <span class="badge bg-danger px-3 py-2">2 High Priority</span>
+            </div>
+            <div class="section-content p-0">
+                <div class="active-alerts-list">
+                    <div class="alert-item high-priority">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-header">
+                                <h5>Drought Warning</h5>
+                                <span class="alert-time">Now</span>
+                            </div>
+                            <p>Severe drought conditions expected to continue for the next 14 days. Precipitation levels are 65% below average for this time of year.</p>
+                            <div class="alert-actions">
+                                <div class="alert-severity">
+                                    <span class="severity-indicator high"></span>
+                                    High Severity
+                                </div>
+                                <div class="alert-buttons">
+                                    <button class="btn btn-sm btn-outline-light me-2">View Details</button>
+                                    <button class="btn btn-sm btn-outline-success">Recommendations</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item high-priority">
+                        <div class="alert-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-header">
+                                <h5>Heat Wave Alert</h5>
+                                <span class="alert-time">2 hours ago</span>
+                            </div>
+                            <p>Temperatures expected to reach 38-40°C over the next 5 days, significantly above seasonal averages. Risk of heat stress to crops and livestock.</p>
+                            <div class="alert-actions">
+                                <div class="alert-severity">
+                                    <span class="severity-indicator high"></span>
+                                    High Severity
+                                </div>
+                                <div class="alert-buttons">
+                                    <button class="btn btn-sm btn-outline-light me-2">View Details</button>
+                                    <button class="btn btn-sm btn-outline-success">Recommendations</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item medium-priority">
+                        <div class="alert-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-header">
+                                <h5>Pest Risk Increased</h5>
+                                <span class="alert-time">1 day ago</span>
+                            </div>
+                            <p>Conditions are favorable for increased pest activity, particularly armyworm and aphids. Consider preventative treatments within the next 7 days.</p>
+                            <div class="alert-actions">
+                                <div class="alert-severity">
+                                    <span class="severity-indicator medium"></span>
+                                    Medium Severity
+                                </div>
+                                <div class="alert-buttons">
+                                    <button class="btn btn-sm btn-outline-light me-2">View Details</button>
+                                    <button class="btn btn-sm btn-outline-success">Recommendations</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Forecast and Recommendations -->
+        <div class="section-card">
+            <div class="section-header">
+                <h3>Forecasts & Recommendations</h3>
+                <div class="d-flex align-items-center">
+                    <span class="me-2 text-muted small">Last updated 2h ago</span>
+                    <button class="btn btn-sm btn-icon refresh-forecast-btn" data-bs-toggle="tooltip" title="Refresh Forecast">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="weather-forecast-container mb-4">
+                            <h5>7-Day Precipitation Forecast</h5>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="precipitationForecastChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="weather-forecast-container mb-4">
+                            <h5>7-Day Temperature Forecast</h5>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="temperatureForecastChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <h5>Recommended Actions</h5>
+                        <div class="recommendations-list">
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h6>Implement Water Conservation Measures</h6>
+                                    <p>Current drought conditions require immediate water conservation. Consider mulching around plants, utilizing drip irrigation, and watering during early morning or evening hours to minimize evaporation.</p>
+                                    <button class="btn btn-sm btn-outline-info">Learn More</button>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-cloud-sun-rain"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h6>Apply Heat-Stress Mitigation</h6>
+                                    <p>With temperatures exceeding 38°C forecasted, deploy shade cloth for sensitive crops and increase irrigation frequency. Consider foliar sprays in the early morning to reduce heat stress impact.</p>
+                                    <button class="btn btn-sm btn-outline-info">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alert History -->
+<div class="section-card mb-4">
+    <div class="section-header">
+        <h3>Alert History</h3>
+        <div class="d-flex">
+            <select class="form-select form-select-sm me-2" id="historyTimeRange">
+                <option value="7d" selected>Last 7 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+                <option value="all">All time</option>
+            </select>
+        </div>
+    </div>
+    <div class="section-content p-0">
+        <div class="table-responsive">
+            <table class="table modern-table alert-history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Alert Type</th>
+                        <th>Severity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Apr 28, 2025</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-exclamation-circle text-danger me-2"></i>
+                                Drought Warning
+                            </div>
+                        </td>
+                        <td><span class="severity high">High</span></td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-icon action-button me-1" data-bs-toggle="tooltip" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon action-button" data-bs-toggle="tooltip" title="Dismiss">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apr 28, 2025</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-temperature-high text-danger me-2"></i>
+                                Heat Wave Alert
+                            </div>
+                        </td>
+                        <td><span class="severity high">High</span></td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-icon action-button me-1" data-bs-toggle="tooltip" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon action-button" data-bs-toggle="tooltip" title="Dismiss">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apr 27, 2025</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bug text-warning me-2"></i>
+                                Pest Risk Increased
+                            </div>
+                        </td>
+                        <td><span class="severity medium">Medium</span></td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-icon action-button me-1" data-bs-toggle="tooltip" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon action-button" data-bs-toggle="tooltip" title="Dismiss">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apr 25, 2025</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-virus text-warning me-2"></i>
+                                Disease Risk Alert
+                            </div>
+                        </td>
+                        <td><span class="severity medium">Medium</span></td>
+                        <td><span class="status-badge status-resolved">Resolved</span></td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-icon action-button me-1" data-bs-toggle="tooltip" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Apr 22, 2025</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-cloud-showers-heavy text-info me-2"></i>
+                                Heavy Rain Warning
+                            </div>
+                        </td>
+                        <td><span class="severity low">Low</span></td>
+                        <td><span class="status-badge status-resolved">Resolved</span></td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-icon action-button me-1" data-bs-toggle="tooltip" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Push Notification Modal -->
+<div class="modal fade" id="enableNotificationsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Enable Push Notifications</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-bell fa-4x text-primary mb-3"></i>
+                    <h4>Stay Updated with Critical Alerts</h4>
+                    <p class="mb-0">Receive timely notifications about weather events, pest outbreaks, and market changes that could impact your farm operations.</p>
+                </div>
+                
+                <div class="notification-permissions-info p-3 border rounded mb-3">
+                    <h6><i class="fas fa-info-circle me-2"></i> Browser Permissions Required</h6>
+                    <p class="small mb-0">For push notifications to work, you'll need to allow this site to send notifications. You can change this setting at any time in your browser preferences.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Not Now</button>
+                <button type="button" class="btn btn-primary" id="allowNotificationsBtn">
+                    <i class="fas fa-bell me-1"></i> Allow Notifications
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Alert Threshold Slider */
+    .alert-threshold-slider {
+        padding: 10px 0;
+    }
+    
+    .threshold-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .alert-type-checks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    /* Active Alerts List */
+    .active-alerts-list {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .alert-item {
+        display: flex;
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .alert-item:last-child {
+        border-bottom: none;
+    }
+    
+    .alert-item.high-priority {
+        background-color: rgba(220, 53, 69, 0.1);
+        border-left: 4px solid #dc3545;
+    }
+    
+    .alert-item.medium-priority {
+        background-color: rgba(255, 193, 7, 0.1);
+        border-left: 4px solid #ffc107;
+    }
+    
+    .alert-item.low-priority {
+        background-color: rgba(13, 202, 240, 0.1);
+        border-left: 4px solid #0dcaf0;
+    }
+    
+    .alert-icon {
+        font-size: 24px;
+        margin-right: 20px;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .alert-icon i {
+        opacity: 0.9;
+    }
+    
+    .alert-content {
+        flex: 1;
+    }
+    
+    .alert-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .alert-header h5 {
+        margin: 0;
+    }
+    
+    .alert-time {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .alert-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+    }
+    
+    .alert-severity {
+        display: flex;
+        align-items: center;
+    }
+    
+    .severity-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+    
+    .severity-indicator.high {
+        background-color: #dc3545;
+    }
+    
+    .severity-indicator.medium {
+        background-color: #ffc107;
+    }
+    
+    .severity-indicator.low {
+        background-color: #0dcaf0;
+    }
+    
+    /* Alert History Table */
+    .severity {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .severity.high {
+        background-color: rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+    }
+    
+    .severity.medium {
+        background-color: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+    }
+    
+    .severity.low {
+        background-color: rgba(13, 202, 240, 0.2);
+        color: #0dcaf0;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .status-active {
+        background-color: rgba(25, 135, 84, 0.2);
+        color: #198754;
+    }
+    
+    .status-resolved {
+        background-color: rgba(108, 117, 125, 0.2);
+        color: #6c757d;
+    }
+    
+    /* Recommendations */
+    .recommendations-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .recommendation-item {
+        background-color: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        gap: 15px;
+    }
+    
+    .recommendation-icon {
+        font-size: 24px;
+        color: #0dcaf0;
+    }
+    
+    .recommendation-content h6 {
+        margin-bottom: 10px;
+    }
+    
+    .recommendation-content p {
+        margin-bottom: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+    }
+    
+    /* Button icon */
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Push notification toggle
+        const enablePushNotifications = document.getElementById('enablePushNotifications');
+        if (enablePushNotifications) {
+            enablePushNotifications.addEventListener('change', function() {
+                if (this.checked) {
+                    // Show push notification modal
+                    const notificationsModal = new bootstrap.Modal(document.getElementById('enableNotificationsModal'));
+                    notificationsModal.show();
+                }
+            });
+        }
+        
+        // Allow notifications button
+        const allowNotificationsBtn = document.getElementById('allowNotificationsBtn');
+        if (allowNotificationsBtn) {
+            allowNotificationsBtn.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+                this.disabled = true;
+                
+                // Simulate notification permission request
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check me-1"></i> Notifications Enabled';
+                    
+                    // Close modal after a short delay
+                    setTimeout(() => {
+                        bootstrap.Modal.getInstance(document.getElementById('enableNotificationsModal')).hide();
+                    }, 1500);
+                }, 2000);
+            });
+        }
+        
+        // Save alert preferences
+        const savePreferencesBtn = document.getElementById('savePreferences');
+        if (savePreferencesBtn) {
+            savePreferencesBtn.addEventListener('click', function() {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving...';
+                this.disabled = true;
+                
+                // Simulate saving preferences
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check me-1"></i> Saved!';
+                    
+                    // Reset button after a short delay
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }, 1500);
+                }, 1000);
+            });
+        }
+        
+        // Refresh alerts button
+        const refreshAlertsBtn = document.getElementById('refreshAlerts');
+        if (refreshAlertsBtn) {
+            refreshAlertsBtn.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Refreshing...';
+                this.disabled = true;
+                
+                // Simulate refreshing alerts
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync-alt me-1"></i> Refresh';
+                    this.disabled = false;
+                    
+                    // Show toast or notification that alerts have been refreshed
+                    alert('Weather alerts have been refreshed with the latest data.');
+                }, 2000);
+            });
+        }
+        
+        // History time range change
+        const historyTimeRange = document.getElementById('historyTimeRange');
+        if (historyTimeRange) {
+            historyTimeRange.addEventListener('change', function() {
+                // Simulate loading different time range data
+                const rows = document.querySelectorAll('.alert-history-table tbody tr');
+                
+                // Hide all rows temporarily
+                rows.forEach(row => {
+                    row.style.opacity = '0.3';
+                });
+                
+                // Simulate data loading
+                setTimeout(() => {
+                    rows.forEach(row => {
+                        row.style.opacity = '1';
+                    });
+                }, 500);
+            });
+        }
+        
+        // Dismiss alert buttons
+        const dismissButtons = document.querySelectorAll('.action-button [title="Dismiss"]');
+        dismissButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                
+                // Update the status badge
+                const statusBadge = row.querySelector('.status-badge');
+                statusBadge.className = 'status-badge status-resolved';
+                statusBadge.textContent = 'Resolved';
+                
+                // Remove the dismiss button
+                this.parentElement.removeChild(this);
+                
+                // Optional: fade out the row slightly
+                row.style.opacity = '0.7';
+            });
+        });
+        
+        // Initialize precipitation forecast chart
+        const precipCtx = document.getElementById('precipitationForecastChart').getContext('2d');
+        
+        const precipData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Precipitation (mm)',
+                data: [2, 1, 0, 4, 15, 8, 3],
+                backgroundColor: 'rgba(13, 110, 253, 0.2)',
+                borderColor: 'rgba(13, 110, 253, 1)',
+                borderWidth: 2,
+                tension: 0.4
+            }]
+        };
+        
+        const precipChart = new Chart(precipCtx, {
+            type: 'bar',
+            data: precipData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // Initialize temperature forecast chart
+        const tempCtx = document.getElementById('temperatureForecastChart').getContext('2d');
+        
+        const tempData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [
+                {
+                    label: 'Max Temp (°C)',
+                    data: [37, 38, 40, 39, 36, 35, 34],
+                    borderColor: 'rgba(220, 53, 69, 1)',
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderWidth: 2,
+                    tension: 0.4
+                },
+                {
+                    label: 'Min Temp (°C)',
+                    data: [23, 24, 24, 25, 23, 22, 21],
+                    borderColor: 'rgba(13, 202, 240, 1)',
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    borderWidth: 2,
+                    tension: 0.4
+                }
+            ]
+        };
+        
+        const tempChart = new Chart(tempCtx, {
+            type: 'line',
+            data: tempData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'rgba(255, 255, 255, 0.8)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Refresh forecast button
+        const refreshForecastBtn = document.querySelector('.refresh-forecast-btn');
+        if (refreshForecastBtn) {
+            refreshForecastBtn.addEventListener('click', function() {
+                this.disabled = true;
+                this.querySelector('i').className = 'fas fa-spinner fa-spin';
+                
+                // Simulate refreshing data
+                setTimeout(() => {
+                    // Update precipitation chart with new random data
+                    const newPrecipData = precipChart.data.datasets[0].data.map(() => 
+                        Math.floor(Math.random() * 20)
+                    );
+                    precipChart.data.datasets[0].data = newPrecipData;
+                    precipChart.update();
+                    
+                    // Update temperature chart with new random data
+                    const newMaxTempData = tempChart.data.datasets[0].data.map(() => 
+                        Math.floor(Math.random() * 10) + 32
+                    );
+                    const newMinTempData = tempChart.data.datasets[1].data.map(() => 
+                        Math.floor(Math.random() * 5) + 20
+                    );
+                    tempChart.data.datasets[0].data = newMaxTempData;
+                    tempChart.data.datasets[1].data = newMinTempData;
+                    tempChart.update();
+                    
+                    // Re-enable button
+                    this.disabled = false;
+                    this.querySelector('i').className = 'fas fa-sync-alt';
+                }, 1000);
+            });
+        }
+    });
+</script>
+{% endblock %}

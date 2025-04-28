@@ -1,0 +1,777 @@
+{% extends 'base.html' %}
+
+{% block title %}AgriFinance - Credit Prediction{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Credit Prediction Model</h2>
+</div>
+
+<div class="row mb-4">
+    <!-- ML Model Overview -->
+    <div class="col-lg-4 mb-4">
+        <div class="section-card h-100">
+            <div class="section-header">
+                <h3>Prediction Model</h3>
+                <span class="badge bg-success">Active</span>
+            </div>
+            <div class="section-content">
+                <div class="model-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Model Type</div>
+                        <div class="stat-value">Random Forest</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Accuracy</div>
+                        <div class="stat-value">87.5%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Precision</div>
+                        <div class="stat-value">85.2%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Recall</div>
+                        <div class="stat-value">83.7%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">F1 Score</div>
+                        <div class="stat-value">84.4%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Last Updated</div>
+                        <div class="stat-value">April 25, 2025</div>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <h5>Key Features</h5>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-name">Repayment History</span>
+                            <span class="feature-importance">28.4%</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Farm Productivity</span>
+                            <span class="feature-importance">19.7%</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Climate Risk</span>
+                            <span class="feature-importance">18.5%</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Years Active</span>
+                            <span class="feature-importance">15.3%</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Crop Diversity</span>
+                            <span class="feature-importance">11.8%</span>
+                        </li>
+                        <li>
+                            <span class="feature-name">Other Factors</span>
+                            <span class="feature-importance">6.3%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Credit Score Prediction Tool -->
+    <div class="col-lg-8 mb-4">
+        <div class="section-card h-100">
+            <div class="section-header">
+                <h3>Credit Score Predictor</h3>
+                <button class="btn btn-primary btn-sm" id="runPredictionBtn">Run Simulation</button>
+            </div>
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-3">Input Parameters</h5>
+                        
+                        <form id="predictionForm">
+                            <div class="mb-3">
+                                <label class="form-label">Repayment History</label>
+                                <select class="form-select" id="repaymentHistory">
+                                    <option value="excellent">Excellent - No missed payments</option>
+                                    <option value="good" selected>Good - Occasional late payments</option>
+                                    <option value="fair">Fair - Some missed payments</option>
+                                    <option value="poor">Poor - Multiple defaults</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Farm Productivity (Yield)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="productivity" value="75">
+                                    <span class="input-group-text">% of regional average</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Climate Risk Level</label>
+                                <select class="form-select" id="climateRisk">
+                                    <option value="minimal">Minimal Risk</option>
+                                    <option value="low">Low Risk</option>
+                                    <option value="medium" selected>Medium Risk</option>
+                                    <option value="high">High Risk</option>
+                                    <option value="extreme">Extreme Risk</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Years Active as Farmer</label>
+                                <input type="number" class="form-control" id="yearsActive" value="5">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Number of Crop Types</label>
+                                <input type="number" class="form-control" id="cropDiversity" value="2">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Irrigation System</label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="hasIrrigation" checked>
+                                    <label class="form-check-label" for="hasIrrigation">Farm has irrigation</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5 class="mb-3">Prediction Results</h5>
+                        
+                        <div id="predictionLoading" style="display: none;">
+                            <div class="d-flex justify-content-center my-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <p class="text-center">Analyzing data and generating prediction...</p>
+                        </div>
+                        
+                        <div id="predictionResults">
+                            <div class="score-prediction mb-4">
+                                <div class="prediction-circle">
+                                    <svg width="150" height="150" viewBox="0 0 150 150">
+                                        <circle cx="75" cy="75" r="65" fill="none" stroke="#2a2a2a" stroke-width="12" />
+                                        <circle cx="75" cy="75" r="65" fill="none" stroke="#198754" stroke-width="12" 
+                                            stroke-dasharray="408.4" stroke-dashoffset="112.3" transform="rotate(-90 75 75)" />
+                                        <text x="75" y="85" text-anchor="middle" fill="#fff" font-size="36" id="predictedScore">72</text>
+                                    </svg>
+                                </div>
+                                <div class="prediction-label text-center mt-2">
+                                    <span class="score-range">0-100 scale</span>
+                                    <span class="score-rating badge bg-success">Good</span>
+                                </div>
+                            </div>
+                            
+                            <div class="loan-eligibility p-3 mb-3 border rounded">
+                                <h6>Loan Eligibility</h6>
+                                <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i> Eligible for standard farm loans up to $5,000</p>
+                                <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i> Eligible for equipment financing up to $3,000</p>
+                                <p class="mb-0"><i class="fas fa-times-circle text-danger me-2"></i> Not eligible for premium loans over $10,000</p>
+                            </div>
+                            
+                            <div class="improvement-suggestions p-3 border rounded">
+                                <h6>Suggestions to Improve Score</h6>
+                                <p class="mb-1 small"><i class="fas fa-arrow-up text-success me-2"></i> <strong>+5 points</strong> by improving repayment consistency</p>
+                                <p class="mb-1 small"><i class="fas fa-arrow-up text-success me-2"></i> <strong>+8 points</strong> by increasing crop diversity to 4+ crops</p>
+                                <p class="mb-0 small"><i class="fas fa-arrow-up text-success me-2"></i> <strong>+3 points</strong> by implementing climate mitigation measures</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Correlation Analysis -->
+    <div class="col-lg-6 mb-4">
+        <div class="section-card h-100">
+            <div class="section-header">
+                <h3>Feature Correlation</h3>
+                <div class="d-flex">
+                    <select class="form-select form-select-sm me-2" id="correlationTimeRange">
+                        <option value="6m">Last 6 months</option>
+                        <option value="1y" selected>Last year</option>
+                        <option value="3y">Last 3 years</option>
+                        <option value="all">All time</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="chart-container" style="height: 340px;">
+                    <canvas id="correlationChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Default Probability -->
+    <div class="col-lg-6 mb-4">
+        <div class="section-card h-100">
+            <div class="section-header">
+                <h3>Default Probability Analysis</h3>
+                <div class="d-flex align-items-center">
+                    <div class="form-check form-switch me-2">
+                        <input class="form-check-input" type="checkbox" id="includeClimateData" checked>
+                        <label class="form-check-label small" for="includeClimateData">Include Climate</label>
+                    </div>
+                    <button class="btn btn-sm btn-icon refresh-btn" title="Refresh Data">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="chart-container" style="height: 340px;">
+                    <canvas id="defaultProbabilityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Explanation Modal -->
+<div class="modal fade" id="explanationModal" tabindex="-1" aria-labelledby="explanationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="explanationModalLabel">Credit Prediction Explanation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>How the prediction works</h5>
+                <p>Our credit prediction model uses machine learning algorithms to analyze multiple factors and predict credit scores. The model has been trained on historical data from thousands of farmers across different regions and crop types.</p>
+                
+                <div class="my-4">
+                    <h6>Key factors influencing this prediction:</h6>
+                    <div class="factor-explanation">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="factor-bar-container me-3">
+                                <div class="factor-bar" style="width: 85%;"></div>
+                            </div>
+                            <span>Repayment History (85% influence)</span>
+                        </div>
+                        <p class="small ms-4">Your repayment history shows occasional late payments, which slightly reduces your overall score.</p>
+                    </div>
+                    
+                    <div class="factor-explanation">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="factor-bar-container me-3">
+                                <div class="factor-bar" style="width: 65%;"></div>
+                            </div>
+                            <span>Farm Productivity (65% influence)</span>
+                        </div>
+                        <p class="small ms-4">Your farm yields are 75% of regional average, showing room for improvement.</p>
+                    </div>
+                    
+                    <div class="factor-explanation">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="factor-bar-container me-3">
+                                <div class="factor-bar negative" style="width: 55%;"></div>
+                            </div>
+                            <span>Climate Risk (55% negative influence)</span>
+                        </div>
+                        <p class="small ms-4">Medium climate risk in your region raises concerns about future yields.</p>
+                    </div>
+                    
+                    <div class="factor-explanation">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="factor-bar-container me-3">
+                                <div class="factor-bar" style="width: 40%;"></div>
+                            </div>
+                            <span>Crop Diversity (40% influence)</span>
+                        </div>
+                        <p class="small ms-4">Growing only 2 crop types increases vulnerability to market and climate issues.</p>
+                    </div>
+                </div>
+                
+                <h5 class="mt-4">Recommendations</h5>
+                <p>Based on the analysis, here are specific recommendations to improve your credit score:</p>
+                <ul>
+                    <li><strong>Diversify your crops:</strong> Increase from 2 to 4+ different crops to reduce climate and market risks.</li>
+                    <li><strong>Improve farm productivity:</strong> Consider soil testing and targeted fertilizer use to boost yields.</li>
+                    <li><strong>Climate adaptation:</strong> Implement water conservation and drought-resistant crop varieties.</li>
+                    <li><strong>Payment consistency:</strong> Ensure all future loan payments are made on schedule.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="generateReportBtn">
+                    <i class="fas fa-download me-1"></i> Generate Full Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ML Model Stats */
+    .model-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .stat-item {
+        background-color: rgba(255, 255, 255, 0.03);
+        border-radius: 6px;
+        padding: 10px;
+        width: calc(50% - 8px);
+    }
+    
+    .stat-label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 5px;
+    }
+    
+    .stat-value {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    /* Feature List */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .feature-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .feature-list li:last-child {
+        border-bottom: none;
+    }
+    
+    .feature-importance {
+        font-weight: 500;
+        color: #29b6f6;
+    }
+    
+    /* Prediction Circle */
+    .prediction-circle {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    
+    /* Explanation factors */
+    .factor-explanation {
+        margin-bottom: 15px;
+    }
+    
+    .factor-bar-container {
+        width: 100px;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    
+    .factor-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #198754, #20c997);
+        border-radius: 5px;
+    }
+    
+    .factor-bar.negative {
+        background: linear-gradient(90deg, #fd7e14, #ffc107);
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Run Prediction Button
+        const runPredictionBtn = document.getElementById('runPredictionBtn');
+        if (runPredictionBtn) {
+            runPredictionBtn.addEventListener('click', function() {
+                // Show loading
+                document.getElementById('predictionLoading').style.display = 'block';
+                document.getElementById('predictionResults').style.display = 'none';
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    runCreditPrediction();
+                    
+                    // Hide loading, show results
+                    document.getElementById('predictionLoading').style.display = 'none';
+                    document.getElementById('predictionResults').style.display = 'block';
+                    
+                    // Open explanation modal
+                    setTimeout(() => {
+                        const explanationModal = new bootstrap.Modal(document.getElementById('explanationModal'));
+                        explanationModal.show();
+                    }, 500);
+                }, 2000);
+            });
+        }
+        
+        // Generate Report Button
+        const generateReportBtn = document.getElementById('generateReportBtn');
+        if (generateReportBtn) {
+            generateReportBtn.addEventListener('click', function() {
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generating...';
+                
+                // Simulate report generation
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-download me-1"></i> Generate Full Report';
+                    alert('Credit prediction report has been generated and is available for download.');
+                }, 2500);
+            });
+        }
+        
+        // Initialize Charts
+        initializeCorrelationChart();
+        initializeDefaultProbabilityChart();
+        
+        // Correlation Time Range Change
+        const correlationTimeRange = document.getElementById('correlationTimeRange');
+        if (correlationTimeRange) {
+            correlationTimeRange.addEventListener('change', function() {
+                updateCorrelationChart(this.value);
+            });
+        }
+        
+        // Include Climate Data Toggle
+        const includeClimateData = document.getElementById('includeClimateData');
+        if (includeClimateData) {
+            includeClimateData.addEventListener('change', function() {
+                updateDefaultProbabilityChart(this.checked);
+            });
+        }
+        
+        // Refresh button
+        const refreshBtn = document.querySelector('.refresh-btn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', function() {
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-sync-alt"></i>';
+                    
+                    // Refresh chart with slightly different data
+                    updateDefaultProbabilityChart(includeClimateData.checked, true);
+                }, 1500);
+            });
+        }
+        
+        // Run credit prediction based on form inputs
+        function runCreditPrediction() {
+            // Get form values
+            const repaymentHistory = document.getElementById('repaymentHistory').value;
+            const productivity = parseFloat(document.getElementById('productivity').value);
+            const climateRisk = document.getElementById('climateRisk').value;
+            const yearsActive = parseInt(document.getElementById('yearsActive').value);
+            const cropDiversity = parseInt(document.getElementById('cropDiversity').value);
+            const hasIrrigation = document.getElementById('hasIrrigation').checked;
+            
+            // Calculate score (simplified version)
+            let score = 0;
+            
+            // Repayment history (0-30 points)
+            switch (repaymentHistory) {
+                case 'excellent': score += 30; break;
+                case 'good': score += 24; break;
+                case 'fair': score += 15; break;
+                case 'poor': score += 5; break;
+            }
+            
+            // Productivity (0-20 points)
+            score += (productivity / 100) * 20;
+            
+            // Climate risk (0-15 points)
+            switch (climateRisk) {
+                case 'minimal': score += 15; break;
+                case 'low': score += 12; break;
+                case 'medium': score += 8; break;
+                case 'high': score += 4; break;
+                case 'extreme': score += 1; break;
+            }
+            
+            // Years active (0-15 points)
+            score += Math.min(yearsActive, 15);
+            
+            // Crop diversity (0-15 points)
+            score += Math.min(cropDiversity * 3, 15);
+            
+            // Irrigation (0-5 points)
+            if (hasIrrigation) {
+                score += 5;
+            }
+            
+            // Set score and update visual
+            const finalScore = Math.round(score);
+            document.getElementById('predictedScore').textContent = finalScore;
+            
+            // Update score circle
+            const scoreCircle = document.querySelector('.prediction-circle svg circle:nth-child(2)');
+            const circumference = 2 * Math.PI * 65; // r = 65
+            const dashOffset = circumference * (1 - finalScore / 100);
+            scoreCircle.setAttribute('stroke-dashoffset', dashOffset);
+            
+            // Update score color and badge
+            let scoreColor, scoreRating;
+            if (finalScore >= 80) {
+                scoreColor = '#198754';  // Green
+                scoreRating = 'Excellent';
+                scoreCircle.setAttribute('stroke', scoreColor);
+                document.querySelector('.score-rating').className = 'score-rating badge bg-success';
+            } else if (finalScore >= 70) {
+                scoreColor = '#20c997';  // Teal
+                scoreRating = 'Good';
+                scoreCircle.setAttribute('stroke', scoreColor);
+                document.querySelector('.score-rating').className = 'score-rating badge bg-info';
+            } else if (finalScore >= 60) {
+                scoreColor = '#0dcaf0';  // Info
+                scoreRating = 'Fair';
+                scoreCircle.setAttribute('stroke', scoreColor);
+                document.querySelector('.score-rating').className = 'score-rating badge bg-info';
+            } else if (finalScore >= 50) {
+                scoreColor = '#ffc107';  // Warning
+                scoreRating = 'Moderate';
+                scoreCircle.setAttribute('stroke', scoreColor);
+                document.querySelector('.score-rating').className = 'score-rating badge bg-warning';
+            } else {
+                scoreColor = '#dc3545';  // Danger
+                scoreRating = 'Poor';
+                scoreCircle.setAttribute('stroke', scoreColor);
+                document.querySelector('.score-rating').className = 'score-rating badge bg-danger';
+            }
+            
+            document.querySelector('.score-rating').textContent = scoreRating;
+        }
+        
+        // Initialize Feature Correlation Chart
+        function initializeCorrelationChart() {
+            const ctx = document.getElementById('correlationChart').getContext('2d');
+            
+            const correlationData = {
+                labels: ['Repayment History', 'Farm Productivity', 'Climate Risk', 'Years Active', 'Crop Diversity', 'Irrigation'],
+                datasets: [{
+                    label: 'Correlation with Credit Score',
+                    data: [0.85, 0.72, -0.68, 0.55, 0.48, 0.35],
+                    backgroundColor: [
+                        'rgba(25, 135, 84, 0.7)',
+                        'rgba(32, 201, 151, 0.7)',
+                        'rgba(220, 53, 69, 0.7)',
+                        'rgba(13, 110, 253, 0.7)',
+                        'rgba(102, 16, 242, 0.7)',
+                        'rgba(255, 193, 7, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(25, 135, 84, 1)',
+                        'rgba(32, 201, 151, 1)',
+                        'rgba(220, 53, 69, 1)',
+                        'rgba(13, 110, 253, 1)',
+                        'rgba(102, 16, 242, 1)',
+                        'rgba(255, 193, 7, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            
+            window.correlationChart = new Chart(ctx, {
+                type: 'bar',
+                data: correlationData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: -1,
+                            max: 1,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    return `Correlation: ${value.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update Correlation Chart based on time range
+        function updateCorrelationChart(timeRange) {
+            // Different correlation values based on time range
+            let data;
+            switch(timeRange) {
+                case '6m':
+                    data = [0.88, 0.76, -0.65, 0.52, 0.44, 0.38];
+                    break;
+                case '1y':
+                    data = [0.85, 0.72, -0.68, 0.55, 0.48, 0.35];
+                    break;
+                case '3y':
+                    data = [0.82, 0.70, -0.72, 0.58, 0.52, 0.33];
+                    break;
+                case 'all':
+                    data = [0.80, 0.68, -0.75, 0.62, 0.55, 0.30];
+                    break;
+            }
+            
+            window.correlationChart.data.datasets[0].data = data;
+            window.correlationChart.update();
+        }
+        
+        // Initialize Default Probability Chart
+        function initializeDefaultProbabilityChart() {
+            const ctx = document.getElementById('defaultProbabilityChart').getContext('2d');
+            
+            const defaultProbData = {
+                labels: ['<40', '40-50', '50-60', '60-70', '70-80', '80-90', '90+'],
+                datasets: [
+                    {
+                        label: 'Default Probability',
+                        data: [65, 48, 31, 18, 9, 4, 1],
+                        borderColor: 'rgb(220, 53, 69)',
+                        backgroundColor: 'rgba(220, 53, 69, 0.5)',
+                        tension: 0.3,
+                        yAxisID: 'y1'
+                    },
+                    {
+                        label: 'Number of Farmers',
+                        data: [52, 105, 180, 310, 285, 195, 73],
+                        borderColor: 'rgb(13, 110, 253)',
+                        backgroundColor: 'rgba(13, 110, 253, 0.5)',
+                        type: 'bar',
+                        yAxisID: 'y2'
+                    }
+                ]
+            };
+            
+            window.defaultProbChart = new Chart(ctx, {
+                type: 'line',
+                data: defaultProbData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Default Probability (%)',
+                                color: 'rgb(220, 53, 69)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        y2: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Number of Farmers',
+                                color: 'rgb(13, 110, 253)'
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Credit Score Range',
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.8)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update Default Probability Chart based on climate inclusion
+        function updateDefaultProbabilityChart(includeClimate, refresh = false) {
+            let defaultData, farmerData;
+            
+            if (includeClimate) {
+                defaultData = [65, 48, 31, 18, 9, 4, 1];
+                farmerData = [52, 105, 180, 310, 285, 195, 73];
+            } else {
+                defaultData = [45, 39, 28, 22, 16, 11, 7];
+                farmerData = [38, 92, 155, 270, 305, 225, 115];
+            }
+            
+            // If it's a refresh (not just a toggle), add some randomness
+            if (refresh) {
+                defaultData = defaultData.map(val => val + (Math.random() * 8 - 4));
+                farmerData = farmerData.map(val => val + (Math.random() * 30 - 15));
+            }
+            
+            window.defaultProbChart.data.datasets[0].data = defaultData;
+            window.defaultProbChart.data.datasets[1].data = farmerData;
+            window.defaultProbChart.update();
+        }
+    });
+</script>
+{% endblock %}

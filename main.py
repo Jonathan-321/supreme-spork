@@ -725,6 +725,18 @@ def farms():
 def climate_dashboard():
     return render_template('climate/dashboard.html')
 
+@app.route('/climate/alerts')
+def climate_alerts():
+    return render_template('climate/alerts.html')
+    
+@app.route('/credit/prediction')
+def credit_prediction():
+    return render_template('credit/prediction_dashboard.html')
+    
+@app.route('/mobile/app')
+def mobile_app_demo():
+    return render_template('mobile/app_demo.html')
+
 @app.route('/api/credit-score/<farmer_id>')
 def get_credit_score(farmer_id):
     # This would normally calculate or fetch the credit score
