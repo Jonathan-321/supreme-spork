@@ -1,0 +1,1634 @@
+{
+  "Eastern Region, Ghana": [
+    {
+      "date": "2025-04-28",
+      "temperature_max": 31.3,
+      "temperature_min": 24.8,
+      "temperature_avg": 28.1,
+      "precipitation": 22.2,
+      "humidity": 95,
+      "wind_speed": 7.7
+    },
+    {
+      "date": "2025-04-27",
+      "temperature_max": 28.6,
+      "temperature_min": 22.8,
+      "temperature_avg": 25.7,
+      "precipitation": 14.0,
+      "humidity": 95,
+      "wind_speed": 7.1
+    },
+    {
+      "date": "2025-04-26",
+      "temperature_max": 30.5,
+      "temperature_min": 24.7,
+      "temperature_avg": 27.6,
+      "precipitation": 20.7,
+      "humidity": 95,
+      "wind_speed": 8.2
+    },
+    {
+      "date": "2025-04-25",
+      "temperature_max": 29.2,
+      "temperature_min": 24.5,
+      "temperature_avg": 26.8,
+      "precipitation": 17.0,
+      "humidity": 89.7,
+      "wind_speed": 13.8
+    },
+    {
+      "date": "2025-04-24",
+      "temperature_max": 29.7,
+      "temperature_min": 25.1,
+      "temperature_avg": 27.4,
+      "precipitation": 25.7,
+      "humidity": 95,
+      "wind_speed": 4.9
+    },
+    {
+      "date": "2025-04-23",
+      "temperature_max": 28.6,
+      "temperature_min": 24.3,
+      "temperature_avg": 26.5,
+      "precipitation": 23.5,
+      "humidity": 95,
+      "wind_speed": 11.6
+    },
+    {
+      "date": "2025-04-22",
+      "temperature_max": 29.9,
+      "temperature_min": 23.8,
+      "temperature_avg": 26.9,
+      "precipitation": 25.4,
+      "humidity": 95,
+      "wind_speed": 9.3
+    },
+    {
+      "date": "2025-04-21",
+      "temperature_max": 30.2,
+      "temperature_min": 25.9,
+      "temperature_avg": 28.1,
+      "precipitation": 19.0,
+      "humidity": 95,
+      "wind_speed": 13.5
+    },
+    {
+      "date": "2025-04-20",
+      "temperature_max": 29.9,
+      "temperature_min": 25.6,
+      "temperature_avg": 27.8,
+      "precipitation": 25.1,
+      "humidity": 95,
+      "wind_speed": 3.6
+    },
+    {
+      "date": "2025-04-19",
+      "temperature_max": 34.0,
+      "temperature_min": 28.5,
+      "temperature_avg": 31.2,
+      "precipitation": 24.8,
+      "humidity": 95,
+      "wind_speed": 7.5
+    },
+    {
+      "date": "2025-04-18",
+      "temperature_max": 31.4,
+      "temperature_min": 27.1,
+      "temperature_avg": 29.2,
+      "precipitation": 14.5,
+      "humidity": 89.8,
+      "wind_speed": 3.8
+    },
+    {
+      "date": "2025-04-17",
+      "temperature_max": 30.1,
+      "temperature_min": 24.5,
+      "temperature_avg": 27.3,
+      "precipitation": 24.9,
+      "humidity": 95,
+      "wind_speed": 14.2
+    },
+    {
+      "date": "2025-04-16",
+      "temperature_max": 33.1,
+      "temperature_min": 27.5,
+      "temperature_avg": 30.3,
+      "precipitation": 18.5,
+      "humidity": 95,
+      "wind_speed": 10.4
+    },
+    {
+      "date": "2025-04-15",
+      "temperature_max": 31.9,
+      "temperature_min": 27.5,
+      "temperature_avg": 29.7,
+      "precipitation": 25.2,
+      "humidity": 95,
+      "wind_speed": 2.7
+    },
+    {
+      "date": "2025-04-14",
+      "temperature_max": 27.7,
+      "temperature_min": 22.2,
+      "temperature_avg": 24.9,
+      "precipitation": 25.1,
+      "humidity": 95,
+      "wind_speed": 2.0
+    },
+    {
+      "date": "2025-04-13",
+      "temperature_max": 32.2,
+      "temperature_min": 27.6,
+      "temperature_avg": 29.9,
+      "precipitation": 14.8,
+      "humidity": 95,
+      "wind_speed": 9.6
+    },
+    {
+      "date": "2025-04-12",
+      "temperature_max": 33.5,
+      "temperature_min": 28.5,
+      "temperature_avg": 31.0,
+      "precipitation": 23.5,
+      "humidity": 95,
+      "wind_speed": 2.9
+    },
+    {
+      "date": "2025-04-11",
+      "temperature_max": 29.5,
+      "temperature_min": 23.6,
+      "temperature_avg": 26.5,
+      "precipitation": 15.1,
+      "humidity": 95,
+      "wind_speed": 5.2
+    },
+    {
+      "date": "2025-04-10",
+      "temperature_max": 33.3,
+      "temperature_min": 27.6,
+      "temperature_avg": 30.4,
+      "precipitation": 16.7,
+      "humidity": 95,
+      "wind_speed": 5.1
+    },
+    {
+      "date": "2025-04-09",
+      "temperature_max": 31.2,
+      "temperature_min": 28.1,
+      "temperature_avg": 29.6,
+      "precipitation": 21.6,
+      "humidity": 95,
+      "wind_speed": 2.3
+    },
+    {
+      "date": "2025-04-08",
+      "temperature_max": 32.9,
+      "temperature_min": 28.8,
+      "temperature_avg": 30.9,
+      "precipitation": 23.9,
+      "humidity": 95,
+      "wind_speed": 9.1
+    },
+    {
+      "date": "2025-04-07",
+      "temperature_max": 29.6,
+      "temperature_min": 25.0,
+      "temperature_avg": 27.3,
+      "precipitation": 23.3,
+      "humidity": 95,
+      "wind_speed": 4.5
+    },
+    {
+      "date": "2025-04-06",
+      "temperature_max": 28.0,
+      "temperature_min": 23.0,
+      "temperature_avg": 25.5,
+      "precipitation": 21.5,
+      "humidity": 95,
+      "wind_speed": 2.6
+    },
+    {
+      "date": "2025-04-05",
+      "temperature_max": 28.9,
+      "temperature_min": 23.8,
+      "temperature_avg": 26.4,
+      "precipitation": 26.0,
+      "humidity": 95,
+      "wind_speed": 8.9
+    },
+    {
+      "date": "2025-04-04",
+      "temperature_max": 29.2,
+      "temperature_min": 24.1,
+      "temperature_avg": 26.7,
+      "precipitation": 21.0,
+      "humidity": 95,
+      "wind_speed": 13.3
+    },
+    {
+      "date": "2025-04-03",
+      "temperature_max": 30.0,
+      "temperature_min": 26.1,
+      "temperature_avg": 28.0,
+      "precipitation": 25.7,
+      "humidity": 95,
+      "wind_speed": 10.1
+    },
+    {
+      "date": "2025-04-02",
+      "temperature_max": 32.9,
+      "temperature_min": 29.1,
+      "temperature_avg": 31.0,
+      "precipitation": 19.9,
+      "humidity": 95,
+      "wind_speed": 5.6
+    },
+    {
+      "date": "2025-04-01",
+      "temperature_max": 27.4,
+      "temperature_min": 22.4,
+      "temperature_avg": 24.9,
+      "precipitation": 21.1,
+      "humidity": 95,
+      "wind_speed": 13.3
+    },
+    {
+      "date": "2025-03-31",
+      "temperature_max": 33.6,
+      "temperature_min": 28.5,
+      "temperature_avg": 31.1,
+      "precipitation": 22.2,
+      "humidity": 95,
+      "wind_speed": 2.3
+    },
+    {
+      "date": "2025-03-30",
+      "temperature_max": 29.3,
+      "temperature_min": 23.9,
+      "temperature_avg": 26.6,
+      "precipitation": 17.2,
+      "humidity": 94.5,
+      "wind_speed": 2.1
+    }
+  ],
+  "Ashanti Region, Ghana": [
+    {
+      "date": "2025-04-28",
+      "temperature_max": 28.1,
+      "temperature_min": 23.4,
+      "temperature_avg": 25.8,
+      "precipitation": 25.9,
+      "humidity": 95,
+      "wind_speed": 9.7
+    },
+    {
+      "date": "2025-04-27",
+      "temperature_max": 25.6,
+      "temperature_min": 22.3,
+      "temperature_avg": 24.0,
+      "precipitation": 16.0,
+      "humidity": 90.1,
+      "wind_speed": 10.2
+    },
+    {
+      "date": "2025-04-26",
+      "temperature_max": 25.8,
+      "temperature_min": 21.4,
+      "temperature_avg": 23.6,
+      "precipitation": 17.1,
+      "humidity": 95,
+      "wind_speed": 10.3
+    },
+    {
+      "date": "2025-04-25",
+      "temperature_max": 30.3,
+      "temperature_min": 24.1,
+      "temperature_avg": 27.2,
+      "precipitation": 19.4,
+      "humidity": 94.5,
+      "wind_speed": 9.1
+    },
+    {
+      "date": "2025-04-24",
+      "temperature_max": 27.2,
+      "temperature_min": 21.6,
+      "temperature_avg": 24.4,
+      "precipitation": 17.2,
+      "humidity": 95,
+      "wind_speed": 8.3
+    },
+    {
+      "date": "2025-04-23",
+      "temperature_max": 27.0,
+      "temperature_min": 20.8,
+      "temperature_avg": 23.9,
+      "precipitation": 21.9,
+      "humidity": 95,
+      "wind_speed": 10.1
+    },
+    {
+      "date": "2025-04-22",
+      "temperature_max": 30.1,
+      "temperature_min": 26.6,
+      "temperature_avg": 28.4,
+      "precipitation": 26.0,
+      "humidity": 95,
+      "wind_speed": 11.2
+    },
+    {
+      "date": "2025-04-21",
+      "temperature_max": 30.4,
+      "temperature_min": 25.2,
+      "temperature_avg": 27.8,
+      "precipitation": 18.0,
+      "humidity": 95,
+      "wind_speed": 14.0
+    },
+    {
+      "date": "2025-04-20",
+      "temperature_max": 29.1,
+      "temperature_min": 23.8,
+      "temperature_avg": 26.5,
+      "precipitation": 25.8,
+      "humidity": 95,
+      "wind_speed": 14.9
+    },
+    {
+      "date": "2025-04-19",
+      "temperature_max": 27.2,
+      "temperature_min": 22.3,
+      "temperature_avg": 24.7,
+      "precipitation": 20.0,
+      "humidity": 95,
+      "wind_speed": 10.9
+    },
+    {
+      "date": "2025-04-18",
+      "temperature_max": 30.8,
+      "temperature_min": 25.8,
+      "temperature_avg": 28.3,
+      "precipitation": 19.4,
+      "humidity": 95,
+      "wind_speed": 7.9
+    },
+    {
+      "date": "2025-04-17",
+      "temperature_max": 28.7,
+      "temperature_min": 24.1,
+      "temperature_avg": 26.4,
+      "precipitation": 23.6,
+      "humidity": 95,
+      "wind_speed": 7.3
+    },
+    {
+      "date": "2025-04-16",
+      "temperature_max": 28.5,
+      "temperature_min": 25.0,
+      "temperature_avg": 26.7,
+      "precipitation": 26.1,
+      "humidity": 95,
+      "wind_speed": 14.8
+    },
+    {
+      "date": "2025-04-15",
+      "temperature_max": 31.9,
+      "temperature_min": 26.8,
+      "temperature_avg": 29.4,
+      "precipitation": 21.2,
+      "humidity": 95,
+      "wind_speed": 5.4
+    },
+    {
+      "date": "2025-04-14",
+      "temperature_max": 28.8,
+      "temperature_min": 24.3,
+      "temperature_avg": 26.6,
+      "precipitation": 26.8,
+      "humidity": 95,
+      "wind_speed": 2.3
+    },
+    {
+      "date": "2025-04-13",
+      "temperature_max": 29.7,
+      "temperature_min": 23.3,
+      "temperature_avg": 26.5,
+      "precipitation": 18.7,
+      "humidity": 95,
+      "wind_speed": 11.3
+    },
+    {
+      "date": "2025-04-12",
+      "temperature_max": 29.3,
+      "temperature_min": 24.0,
+      "temperature_avg": 26.7,
+      "precipitation": 24.7,
+      "humidity": 95,
+      "wind_speed": 3.3
+    },
+    {
+      "date": "2025-04-11",
+      "temperature_max": 27.2,
+      "temperature_min": 22.4,
+      "temperature_avg": 24.8,
+      "precipitation": 25.3,
+      "humidity": 95,
+      "wind_speed": 3.3
+    },
+    {
+      "date": "2025-04-10",
+      "temperature_max": 30.6,
+      "temperature_min": 25.2,
+      "temperature_avg": 27.9,
+      "precipitation": 26.5,
+      "humidity": 95,
+      "wind_speed": 13.9
+    },
+    {
+      "date": "2025-04-09",
+      "temperature_max": 29.0,
+      "temperature_min": 24.3,
+      "temperature_avg": 26.7,
+      "precipitation": 18.6,
+      "humidity": 95,
+      "wind_speed": 12.4
+    },
+    {
+      "date": "2025-04-08",
+      "temperature_max": 28.5,
+      "temperature_min": 23.1,
+      "temperature_avg": 25.8,
+      "precipitation": 27.9,
+      "humidity": 95,
+      "wind_speed": 4.5
+    },
+    {
+      "date": "2025-04-07",
+      "temperature_max": 25.3,
+      "temperature_min": 20.6,
+      "temperature_avg": 23.0,
+      "precipitation": 19.1,
+      "humidity": 95,
+      "wind_speed": 13.1
+    },
+    {
+      "date": "2025-04-06",
+      "temperature_max": 28.5,
+      "temperature_min": 23.5,
+      "temperature_avg": 26.0,
+      "precipitation": 24.4,
+      "humidity": 95,
+      "wind_speed": 12.0
+    },
+    {
+      "date": "2025-04-05",
+      "temperature_max": 27.8,
+      "temperature_min": 24.0,
+      "temperature_avg": 25.9,
+      "precipitation": 24.3,
+      "humidity": 95,
+      "wind_speed": 9.2
+    },
+    {
+      "date": "2025-04-04",
+      "temperature_max": 26.8,
+      "temperature_min": 21.2,
+      "temperature_avg": 24.0,
+      "precipitation": 27.5,
+      "humidity": 95,
+      "wind_speed": 3.1
+    },
+    {
+      "date": "2025-04-03",
+      "temperature_max": 28.2,
+      "temperature_min": 23.2,
+      "temperature_avg": 25.7,
+      "precipitation": 17.9,
+      "humidity": 95,
+      "wind_speed": 11.9
+    },
+    {
+      "date": "2025-04-02",
+      "temperature_max": 28.5,
+      "temperature_min": 23.0,
+      "temperature_avg": 25.8,
+      "precipitation": 16.9,
+      "humidity": 95,
+      "wind_speed": 3.5
+    },
+    {
+      "date": "2025-04-01",
+      "temperature_max": 27.3,
+      "temperature_min": 21.1,
+      "temperature_avg": 24.2,
+      "precipitation": 16.9,
+      "humidity": 95,
+      "wind_speed": 5.5
+    },
+    {
+      "date": "2025-03-31",
+      "temperature_max": 30.1,
+      "temperature_min": 25.7,
+      "temperature_avg": 27.9,
+      "precipitation": 23.6,
+      "humidity": 95,
+      "wind_speed": 14.1
+    },
+    {
+      "date": "2025-03-30",
+      "temperature_max": 25.6,
+      "temperature_min": 20.0,
+      "temperature_avg": 22.8,
+      "precipitation": 23.7,
+      "humidity": 95,
+      "wind_speed": 5.7
+    }
+  ],
+  "Northern Region, Ghana": [
+    {
+      "date": "2025-04-28",
+      "temperature_max": 29.6,
+      "temperature_min": 24.4,
+      "temperature_avg": 27.0,
+      "precipitation": 18.0,
+      "humidity": 95,
+      "wind_speed": 3.4
+    },
+    {
+      "date": "2025-04-27",
+      "temperature_max": 31.8,
+      "temperature_min": 25.5,
+      "temperature_avg": 28.7,
+      "precipitation": 17.4,
+      "humidity": 95,
+      "wind_speed": 10.8
+    },
+    {
+      "date": "2025-04-26",
+      "temperature_max": 33.3,
+      "temperature_min": 28.0,
+      "temperature_avg": 30.6,
+      "precipitation": 21.7,
+      "humidity": 95,
+      "wind_speed": 7.5
+    },
+    {
+      "date": "2025-04-25",
+      "temperature_max": 30.6,
+      "temperature_min": 25.9,
+      "temperature_avg": 28.2,
+      "precipitation": 25.5,
+      "humidity": 95,
+      "wind_speed": 2.3
+    },
+    {
+      "date": "2025-04-24",
+      "temperature_max": 33.1,
+      "temperature_min": 27.2,
+      "temperature_avg": 30.2,
+      "precipitation": 18.4,
+      "humidity": 95,
+      "wind_speed": 9.0
+    },
+    {
+      "date": "2025-04-23",
+      "temperature_max": 31.9,
+      "temperature_min": 25.9,
+      "temperature_avg": 28.9,
+      "precipitation": 18.4,
+      "humidity": 92.4,
+      "wind_speed": 12.3
+    },
+    {
+      "date": "2025-04-22",
+      "temperature_max": 30.2,
+      "temperature_min": 25.3,
+      "temperature_avg": 27.8,
+      "precipitation": 23.1,
+      "humidity": 95,
+      "wind_speed": 13.5
+    },
+    {
+      "date": "2025-04-21",
+      "temperature_max": 27.5,
+      "temperature_min": 24.2,
+      "temperature_avg": 25.9,
+      "precipitation": 23.4,
+      "humidity": 95,
+      "wind_speed": 8.6
+    },
+    {
+      "date": "2025-04-20",
+      "temperature_max": 27.3,
+      "temperature_min": 22.6,
+      "temperature_avg": 24.9,
+      "precipitation": 19.7,
+      "humidity": 95,
+      "wind_speed": 8.0
+    },
+    {
+      "date": "2025-04-19",
+      "temperature_max": 30.8,
+      "temperature_min": 24.9,
+      "temperature_avg": 27.8,
+      "precipitation": 26.8,
+      "humidity": 95,
+      "wind_speed": 11.9
+    },
+    {
+      "date": "2025-04-18",
+      "temperature_max": 31.4,
+      "temperature_min": 26.5,
+      "temperature_avg": 29.0,
+      "precipitation": 17.9,
+      "humidity": 95,
+      "wind_speed": 9.0
+    },
+    {
+      "date": "2025-04-17",
+      "temperature_max": 28.0,
+      "temperature_min": 21.9,
+      "temperature_avg": 24.9,
+      "precipitation": 24.7,
+      "humidity": 95,
+      "wind_speed": 12.4
+    },
+    {
+      "date": "2025-04-16",
+      "temperature_max": 29.7,
+      "temperature_min": 26.3,
+      "temperature_avg": 28.0,
+      "precipitation": 28.4,
+      "humidity": 95,
+      "wind_speed": 4.8
+    },
+    {
+      "date": "2025-04-15",
+      "temperature_max": 33.3,
+      "temperature_min": 28.4,
+      "temperature_avg": 30.9,
+      "precipitation": 23.5,
+      "humidity": 95,
+      "wind_speed": 5.0
+    },
+    {
+      "date": "2025-04-14",
+      "temperature_max": 33.0,
+      "temperature_min": 28.5,
+      "temperature_avg": 30.7,
+      "precipitation": 18.2,
+      "humidity": 95,
+      "wind_speed": 5.3
+    },
+    {
+      "date": "2025-04-13",
+      "temperature_max": 32.3,
+      "temperature_min": 27.1,
+      "temperature_avg": 29.7,
+      "precipitation": 20.5,
+      "humidity": 95,
+      "wind_speed": 6.4
+    },
+    {
+      "date": "2025-04-12",
+      "temperature_max": 27.5,
+      "temperature_min": 23.8,
+      "temperature_avg": 25.7,
+      "precipitation": 19.1,
+      "humidity": 95,
+      "wind_speed": 14.7
+    },
+    {
+      "date": "2025-04-11",
+      "temperature_max": 30.5,
+      "temperature_min": 25.5,
+      "temperature_avg": 28.0,
+      "precipitation": 22.8,
+      "humidity": 95,
+      "wind_speed": 5.4
+    },
+    {
+      "date": "2025-04-10",
+      "temperature_max": 32.6,
+      "temperature_min": 27.5,
+      "temperature_avg": 30.0,
+      "precipitation": 26.1,
+      "humidity": 95,
+      "wind_speed": 10.6
+    },
+    {
+      "date": "2025-04-09",
+      "temperature_max": 29.8,
+      "temperature_min": 25.7,
+      "temperature_avg": 27.8,
+      "precipitation": 18.7,
+      "humidity": 95,
+      "wind_speed": 5.2
+    },
+    {
+      "date": "2025-04-08",
+      "temperature_max": 33.4,
+      "temperature_min": 27.8,
+      "temperature_avg": 30.6,
+      "precipitation": 24.5,
+      "humidity": 95,
+      "wind_speed": 3.9
+    },
+    {
+      "date": "2025-04-07",
+      "temperature_max": 28.7,
+      "temperature_min": 22.4,
+      "temperature_avg": 25.5,
+      "precipitation": 28.6,
+      "humidity": 95,
+      "wind_speed": 11.9
+    },
+    {
+      "date": "2025-04-06",
+      "temperature_max": 33.0,
+      "temperature_min": 26.8,
+      "temperature_avg": 29.9,
+      "precipitation": 18.9,
+      "humidity": 95,
+      "wind_speed": 4.1
+    },
+    {
+      "date": "2025-04-05",
+      "temperature_max": 30.7,
+      "temperature_min": 26.5,
+      "temperature_avg": 28.6,
+      "precipitation": 26.3,
+      "humidity": 95,
+      "wind_speed": 13.2
+    },
+    {
+      "date": "2025-04-04",
+      "temperature_max": 33.1,
+      "temperature_min": 27.8,
+      "temperature_avg": 30.4,
+      "precipitation": 22.3,
+      "humidity": 95,
+      "wind_speed": 11.6
+    },
+    {
+      "date": "2025-04-03",
+      "temperature_max": 30.3,
+      "temperature_min": 26.5,
+      "temperature_avg": 28.4,
+      "precipitation": 21.4,
+      "humidity": 95,
+      "wind_speed": 6.3
+    },
+    {
+      "date": "2025-04-02",
+      "temperature_max": 30.6,
+      "temperature_min": 25.9,
+      "temperature_avg": 28.3,
+      "precipitation": 24.3,
+      "humidity": 95,
+      "wind_speed": 12.0
+    },
+    {
+      "date": "2025-04-01",
+      "temperature_max": 32.4,
+      "temperature_min": 27.3,
+      "temperature_avg": 29.9,
+      "precipitation": 21.2,
+      "humidity": 95,
+      "wind_speed": 10.6
+    },
+    {
+      "date": "2025-03-31",
+      "temperature_max": 30.1,
+      "temperature_min": 23.7,
+      "temperature_avg": 26.9,
+      "precipitation": 19.1,
+      "humidity": 95,
+      "wind_speed": 13.5
+    },
+    {
+      "date": "2025-03-30",
+      "temperature_max": 29.0,
+      "temperature_min": 23.5,
+      "temperature_avg": 26.2,
+      "precipitation": 22.1,
+      "humidity": 95,
+      "wind_speed": 5.5
+    }
+  ],
+  "Western Region, Kenya": [
+    {
+      "date": "2025-04-28",
+      "temperature_max": 26.1,
+      "temperature_min": 21.3,
+      "temperature_avg": 23.7,
+      "precipitation": 17.3,
+      "humidity": 95,
+      "wind_speed": 7.0
+    },
+    {
+      "date": "2025-04-27",
+      "temperature_max": 29.5,
+      "temperature_min": 23.4,
+      "temperature_avg": 26.4,
+      "precipitation": 19.2,
+      "humidity": 95,
+      "wind_speed": 14.5
+    },
+    {
+      "date": "2025-04-26",
+      "temperature_max": 25.7,
+      "temperature_min": 20.8,
+      "temperature_avg": 23.2,
+      "precipitation": 20.5,
+      "humidity": 95,
+      "wind_speed": 2.9
+    },
+    {
+      "date": "2025-04-25",
+      "temperature_max": 24.5,
+      "temperature_min": 19.7,
+      "temperature_avg": 22.1,
+      "precipitation": 19.2,
+      "humidity": 95,
+      "wind_speed": 8.6
+    },
+    {
+      "date": "2025-04-24",
+      "temperature_max": 24.2,
+      "temperature_min": 20.8,
+      "temperature_avg": 22.5,
+      "precipitation": 19.0,
+      "humidity": 95,
+      "wind_speed": 12.8
+    },
+    {
+      "date": "2025-04-23",
+      "temperature_max": 25.3,
+      "temperature_min": 19.3,
+      "temperature_avg": 22.3,
+      "precipitation": 19.2,
+      "humidity": 95,
+      "wind_speed": 8.7
+    },
+    {
+      "date": "2025-04-22",
+      "temperature_max": 25.4,
+      "temperature_min": 20.6,
+      "temperature_avg": 23.0,
+      "precipitation": 16.0,
+      "humidity": 95,
+      "wind_speed": 7.2
+    },
+    {
+      "date": "2025-04-21",
+      "temperature_max": 26.3,
+      "temperature_min": 21.3,
+      "temperature_avg": 23.8,
+      "precipitation": 15.7,
+      "humidity": 95,
+      "wind_speed": 6.4
+    },
+    {
+      "date": "2025-04-20",
+      "temperature_max": 25.0,
+      "temperature_min": 19.8,
+      "temperature_avg": 22.4,
+      "precipitation": 16.4,
+      "humidity": 95,
+      "wind_speed": 12.5
+    },
+    {
+      "date": "2025-04-19",
+      "temperature_max": 23.1,
+      "temperature_min": 17.6,
+      "temperature_avg": 20.4,
+      "precipitation": 22.1,
+      "humidity": 95,
+      "wind_speed": 4.8
+    },
+    {
+      "date": "2025-04-18",
+      "temperature_max": 24.9,
+      "temperature_min": 18.6,
+      "temperature_avg": 21.7,
+      "precipitation": 19.6,
+      "humidity": 94.8,
+      "wind_speed": 6.8
+    },
+    {
+      "date": "2025-04-17",
+      "temperature_max": 25.3,
+      "temperature_min": 20.8,
+      "temperature_avg": 23.1,
+      "precipitation": 25.8,
+      "humidity": 95,
+      "wind_speed": 10.6
+    },
+    {
+      "date": "2025-04-16",
+      "temperature_max": 26.2,
+      "temperature_min": 21.3,
+      "temperature_avg": 23.7,
+      "precipitation": 18.3,
+      "humidity": 95,
+      "wind_speed": 6.1
+    },
+    {
+      "date": "2025-04-15",
+      "temperature_max": 27.8,
+      "temperature_min": 22.7,
+      "temperature_avg": 25.3,
+      "precipitation": 20.2,
+      "humidity": 95,
+      "wind_speed": 13.0
+    },
+    {
+      "date": "2025-04-14",
+      "temperature_max": 24.9,
+      "temperature_min": 18.9,
+      "temperature_avg": 21.9,
+      "precipitation": 23.9,
+      "humidity": 95,
+      "wind_speed": 5.6
+    },
+    {
+      "date": "2025-04-13",
+      "temperature_max": 27.8,
+      "temperature_min": 22.1,
+      "temperature_avg": 24.9,
+      "precipitation": 23.4,
+      "humidity": 95,
+      "wind_speed": 10.0
+    },
+    {
+      "date": "2025-04-12",
+      "temperature_max": 27.6,
+      "temperature_min": 24.5,
+      "temperature_avg": 26.0,
+      "precipitation": 27.6,
+      "humidity": 95,
+      "wind_speed": 6.3
+    },
+    {
+      "date": "2025-04-11",
+      "temperature_max": 29.7,
+      "temperature_min": 24.7,
+      "temperature_avg": 27.2,
+      "precipitation": 17.9,
+      "humidity": 95,
+      "wind_speed": 6.4
+    },
+    {
+      "date": "2025-04-10",
+      "temperature_max": 27.8,
+      "temperature_min": 22.1,
+      "temperature_avg": 24.9,
+      "precipitation": 17.0,
+      "humidity": 93.4,
+      "wind_speed": 12.7
+    },
+    {
+      "date": "2025-04-09",
+      "temperature_max": 24.7,
+      "temperature_min": 19.3,
+      "temperature_avg": 22.0,
+      "precipitation": 27.3,
+      "humidity": 95,
+      "wind_speed": 4.1
+    },
+    {
+      "date": "2025-04-08",
+      "temperature_max": 29.2,
+      "temperature_min": 24.3,
+      "temperature_avg": 26.8,
+      "precipitation": 23.9,
+      "humidity": 95,
+      "wind_speed": 8.9
+    },
+    {
+      "date": "2025-04-07",
+      "temperature_max": 26.6,
+      "temperature_min": 22.3,
+      "temperature_avg": 24.5,
+      "precipitation": 28.0,
+      "humidity": 95,
+      "wind_speed": 13.2
+    },
+    {
+      "date": "2025-04-06",
+      "temperature_max": 24.7,
+      "temperature_min": 20.7,
+      "temperature_avg": 22.7,
+      "precipitation": 26.0,
+      "humidity": 95,
+      "wind_speed": 5.3
+    },
+    {
+      "date": "2025-04-05",
+      "temperature_max": 27.2,
+      "temperature_min": 20.7,
+      "temperature_avg": 24.0,
+      "precipitation": 18.3,
+      "humidity": 93.6,
+      "wind_speed": 7.8
+    },
+    {
+      "date": "2025-04-04",
+      "temperature_max": 25.0,
+      "temperature_min": 20.3,
+      "temperature_avg": 22.6,
+      "precipitation": 22.2,
+      "humidity": 95,
+      "wind_speed": 6.2
+    },
+    {
+      "date": "2025-04-03",
+      "temperature_max": 24.8,
+      "temperature_min": 19.4,
+      "temperature_avg": 22.1,
+      "precipitation": 22.5,
+      "humidity": 95,
+      "wind_speed": 5.6
+    },
+    {
+      "date": "2025-04-02",
+      "temperature_max": 26.5,
+      "temperature_min": 20.2,
+      "temperature_avg": 23.3,
+      "precipitation": 22.3,
+      "humidity": 95,
+      "wind_speed": 13.0
+    },
+    {
+      "date": "2025-04-01",
+      "temperature_max": 27.2,
+      "temperature_min": 22.3,
+      "temperature_avg": 24.7,
+      "precipitation": 25.1,
+      "humidity": 95,
+      "wind_speed": 14.6
+    },
+    {
+      "date": "2025-03-31",
+      "temperature_max": 24.5,
+      "temperature_min": 19.7,
+      "temperature_avg": 22.1,
+      "precipitation": 16.6,
+      "humidity": 95,
+      "wind_speed": 4.9
+    },
+    {
+      "date": "2025-03-30",
+      "temperature_max": 27.0,
+      "temperature_min": 23.2,
+      "temperature_avg": 25.1,
+      "precipitation": 24.8,
+      "humidity": 95,
+      "wind_speed": 14.7
+    }
+  ],
+  "Rift Valley, Kenya": [
+    {
+      "date": "2025-04-28",
+      "temperature_max": 24.7,
+      "temperature_min": 20.0,
+      "temperature_avg": 22.3,
+      "precipitation": 21.1,
+      "humidity": 95,
+      "wind_speed": 6.2
+    },
+    {
+      "date": "2025-04-27",
+      "temperature_max": 26.9,
+      "temperature_min": 21.9,
+      "temperature_avg": 24.4,
+      "precipitation": 17.9,
+      "humidity": 95,
+      "wind_speed": 8.2
+    },
+    {
+      "date": "2025-04-26",
+      "temperature_max": 27.6,
+      "temperature_min": 22.5,
+      "temperature_avg": 25.1,
+      "precipitation": 24.7,
+      "humidity": 95,
+      "wind_speed": 6.4
+    },
+    {
+      "date": "2025-04-25",
+      "temperature_max": 25.9,
+      "temperature_min": 21.4,
+      "temperature_avg": 23.6,
+      "precipitation": 22.4,
+      "humidity": 95,
+      "wind_speed": 10.4
+    },
+    {
+      "date": "2025-04-24",
+      "temperature_max": 23.7,
+      "temperature_min": 19.3,
+      "temperature_avg": 21.5,
+      "precipitation": 25.0,
+      "humidity": 95,
+      "wind_speed": 12.1
+    },
+    {
+      "date": "2025-04-23",
+      "temperature_max": 23.2,
+      "temperature_min": 18.8,
+      "temperature_avg": 21.0,
+      "precipitation": 19.4,
+      "humidity": 95,
+      "wind_speed": 3.9
+    },
+    {
+      "date": "2025-04-22",
+      "temperature_max": 30.0,
+      "temperature_min": 24.8,
+      "temperature_avg": 27.4,
+      "precipitation": 18.1,
+      "humidity": 95,
+      "wind_speed": 8.1
+    },
+    {
+      "date": "2025-04-21",
+      "temperature_max": 25.9,
+      "temperature_min": 20.4,
+      "temperature_avg": 23.1,
+      "precipitation": 15.8,
+      "humidity": 95,
+      "wind_speed": 2.1
+    },
+    {
+      "date": "2025-04-20",
+      "temperature_max": 28.4,
+      "temperature_min": 23.7,
+      "temperature_avg": 26.1,
+      "precipitation": 16.3,
+      "humidity": 95,
+      "wind_speed": 13.7
+    },
+    {
+      "date": "2025-04-19",
+      "temperature_max": 28.7,
+      "temperature_min": 23.4,
+      "temperature_avg": 26.1,
+      "precipitation": 24.0,
+      "humidity": 95,
+      "wind_speed": 2.7
+    },
+    {
+      "date": "2025-04-18",
+      "temperature_max": 29.9,
+      "temperature_min": 24.1,
+      "temperature_avg": 27.0,
+      "precipitation": 19.1,
+      "humidity": 95,
+      "wind_speed": 13.0
+    },
+    {
+      "date": "2025-04-17",
+      "temperature_max": 25.8,
+      "temperature_min": 21.5,
+      "temperature_avg": 23.6,
+      "precipitation": 24.5,
+      "humidity": 95,
+      "wind_speed": 10.8
+    },
+    {
+      "date": "2025-04-16",
+      "temperature_max": 25.5,
+      "temperature_min": 20.9,
+      "temperature_avg": 23.2,
+      "precipitation": 22.6,
+      "humidity": 95,
+      "wind_speed": 10.7
+    },
+    {
+      "date": "2025-04-15",
+      "temperature_max": 24.0,
+      "temperature_min": 19.3,
+      "temperature_avg": 21.7,
+      "precipitation": 17.4,
+      "humidity": 95,
+      "wind_speed": 6.8
+    },
+    {
+      "date": "2025-04-14",
+      "temperature_max": 24.6,
+      "temperature_min": 20.1,
+      "temperature_avg": 22.3,
+      "precipitation": 25.5,
+      "humidity": 95,
+      "wind_speed": 12.2
+    },
+    {
+      "date": "2025-04-13",
+      "temperature_max": 27.6,
+      "temperature_min": 22.9,
+      "temperature_avg": 25.2,
+      "precipitation": 22.7,
+      "humidity": 95,
+      "wind_speed": 4.5
+    },
+    {
+      "date": "2025-04-12",
+      "temperature_max": 29.1,
+      "temperature_min": 23.5,
+      "temperature_avg": 26.3,
+      "precipitation": 15.0,
+      "humidity": 85.9,
+      "wind_speed": 2.1
+    },
+    {
+      "date": "2025-04-11",
+      "temperature_max": 25.8,
+      "temperature_min": 21.4,
+      "temperature_avg": 23.6,
+      "precipitation": 23.7,
+      "humidity": 95,
+      "wind_speed": 6.3
+    },
+    {
+      "date": "2025-04-10",
+      "temperature_max": 30.0,
+      "temperature_min": 23.4,
+      "temperature_avg": 26.7,
+      "precipitation": 19.8,
+      "humidity": 95,
+      "wind_speed": 4.6
+    },
+    {
+      "date": "2025-04-09",
+      "temperature_max": 27.4,
+      "temperature_min": 24.2,
+      "temperature_avg": 25.8,
+      "precipitation": 20.2,
+      "humidity": 95,
+      "wind_speed": 10.3
+    },
+    {
+      "date": "2025-04-08",
+      "temperature_max": 25.7,
+      "temperature_min": 19.4,
+      "temperature_avg": 22.6,
+      "precipitation": 16.2,
+      "humidity": 89.9,
+      "wind_speed": 9.1
+    },
+    {
+      "date": "2025-04-07",
+      "temperature_max": 24.9,
+      "temperature_min": 21.0,
+      "temperature_avg": 23.0,
+      "precipitation": 21.8,
+      "humidity": 95,
+      "wind_speed": 7.2
+    },
+    {
+      "date": "2025-04-06",
+      "temperature_max": 25.4,
+      "temperature_min": 21.4,
+      "temperature_avg": 23.4,
+      "precipitation": 25.5,
+      "humidity": 95,
+      "wind_speed": 5.6
+    },
+    {
+      "date": "2025-04-05",
+      "temperature_max": 22.8,
+      "temperature_min": 18.4,
+      "temperature_avg": 20.6,
+      "precipitation": 25.6,
+      "humidity": 95,
+      "wind_speed": 6.1
+    },
+    {
+      "date": "2025-04-04",
+      "temperature_max": 24.9,
+      "temperature_min": 20.3,
+      "temperature_avg": 22.6,
+      "precipitation": 17.9,
+      "humidity": 95,
+      "wind_speed": 6.4
+    },
+    {
+      "date": "2025-04-03",
+      "temperature_max": 28.4,
+      "temperature_min": 23.7,
+      "temperature_avg": 26.0,
+      "precipitation": 20.0,
+      "humidity": 95,
+      "wind_speed": 8.0
+    },
+    {
+      "date": "2025-04-02",
+      "temperature_max": 24.0,
+      "temperature_min": 19.9,
+      "temperature_avg": 22.0,
+      "precipitation": 24.3,
+      "humidity": 95,
+      "wind_speed": 2.2
+    },
+    {
+      "date": "2025-04-01",
+      "temperature_max": 25.8,
+      "temperature_min": 20.8,
+      "temperature_avg": 23.3,
+      "precipitation": 23.9,
+      "humidity": 95,
+      "wind_speed": 9.6
+    },
+    {
+      "date": "2025-03-31",
+      "temperature_max": 28.3,
+      "temperature_min": 24.3,
+      "temperature_avg": 26.3,
+      "precipitation": 26.6,
+      "humidity": 95,
+      "wind_speed": 10.1
+    },
+    {
+      "date": "2025-03-30",
+      "temperature_max": 28.2,
+      "temperature_min": 23.1,
+      "temperature_avg": 25.7,
+      "precipitation": 16.3,
+      "humidity": 90.8,
+      "wind_speed": 11.4
+    }
+  ],
+  "Central Region, Uganda": [
+    {
+      "date": "2025-04-28",
+      "temperature_max": 32.5,
+      "temperature_min": 28.1,
+      "temperature_avg": 30.3,
+      "precipitation": 27.0,
+      "humidity": 95,
+      "wind_speed": 12.0
+    },
+    {
+      "date": "2025-04-27",
+      "temperature_max": 29.8,
+      "temperature_min": 23.9,
+      "temperature_avg": 26.9,
+      "precipitation": 22.5,
+      "humidity": 95,
+      "wind_speed": 4.7
+    },
+    {
+      "date": "2025-04-26",
+      "temperature_max": 33.7,
+      "temperature_min": 28.0,
+      "temperature_avg": 30.8,
+      "precipitation": 18.4,
+      "humidity": 95,
+      "wind_speed": 10.8
+    },
+    {
+      "date": "2025-04-25",
+      "temperature_max": 27.7,
+      "temperature_min": 24.3,
+      "temperature_avg": 26.0,
+      "precipitation": 24.1,
+      "humidity": 95,
+      "wind_speed": 2.5
+    },
+    {
+      "date": "2025-04-24",
+      "temperature_max": 31.1,
+      "temperature_min": 24.5,
+      "temperature_avg": 27.8,
+      "precipitation": 27.8,
+      "humidity": 95,
+      "wind_speed": 2.8
+    },
+    {
+      "date": "2025-04-23",
+      "temperature_max": 29.9,
+      "temperature_min": 24.3,
+      "temperature_avg": 27.1,
+      "precipitation": 24.1,
+      "humidity": 95,
+      "wind_speed": 2.5
+    },
+    {
+      "date": "2025-04-22",
+      "temperature_max": 31.8,
+      "temperature_min": 28.1,
+      "temperature_avg": 30.0,
+      "precipitation": 20.4,
+      "humidity": 95,
+      "wind_speed": 5.7
+    },
+    {
+      "date": "2025-04-21",
+      "temperature_max": 33.1,
+      "temperature_min": 28.6,
+      "temperature_avg": 30.8,
+      "precipitation": 17.4,
+      "humidity": 92.0,
+      "wind_speed": 13.1
+    },
+    {
+      "date": "2025-04-20",
+      "temperature_max": 30.7,
+      "temperature_min": 25.7,
+      "temperature_avg": 28.2,
+      "precipitation": 26.4,
+      "humidity": 95,
+      "wind_speed": 11.9
+    },
+    {
+      "date": "2025-04-19",
+      "temperature_max": 28.7,
+      "temperature_min": 24.1,
+      "temperature_avg": 26.4,
+      "precipitation": 22.0,
+      "humidity": 95,
+      "wind_speed": 2.4
+    },
+    {
+      "date": "2025-04-18",
+      "temperature_max": 31.1,
+      "temperature_min": 26.3,
+      "temperature_avg": 28.7,
+      "precipitation": 20.8,
+      "humidity": 95,
+      "wind_speed": 13.1
+    },
+    {
+      "date": "2025-04-17",
+      "temperature_max": 30.3,
+      "temperature_min": 24.7,
+      "temperature_avg": 27.5,
+      "precipitation": 24.3,
+      "humidity": 95,
+      "wind_speed": 3.3
+    },
+    {
+      "date": "2025-04-16",
+      "temperature_max": 34.8,
+      "temperature_min": 29.0,
+      "temperature_avg": 31.9,
+      "precipitation": 20.1,
+      "humidity": 95,
+      "wind_speed": 13.7
+    },
+    {
+      "date": "2025-04-15",
+      "temperature_max": 31.7,
+      "temperature_min": 26.2,
+      "temperature_avg": 29.0,
+      "precipitation": 21.5,
+      "humidity": 95,
+      "wind_speed": 12.5
+    },
+    {
+      "date": "2025-04-14",
+      "temperature_max": 30.2,
+      "temperature_min": 24.1,
+      "temperature_avg": 27.2,
+      "precipitation": 19.2,
+      "humidity": 95,
+      "wind_speed": 4.5
+    },
+    {
+      "date": "2025-04-13",
+      "temperature_max": 33.2,
+      "temperature_min": 27.9,
+      "temperature_avg": 30.5,
+      "precipitation": 26.3,
+      "humidity": 95,
+      "wind_speed": 3.5
+    },
+    {
+      "date": "2025-04-12",
+      "temperature_max": 34.1,
+      "temperature_min": 28.3,
+      "temperature_avg": 31.2,
+      "precipitation": 21.1,
+      "humidity": 95,
+      "wind_speed": 14.3
+    },
+    {
+      "date": "2025-04-11",
+      "temperature_max": 30.5,
+      "temperature_min": 25.4,
+      "temperature_avg": 28.0,
+      "precipitation": 22.0,
+      "humidity": 95,
+      "wind_speed": 4.2
+    },
+    {
+      "date": "2025-04-10",
+      "temperature_max": 28.8,
+      "temperature_min": 25.4,
+      "temperature_avg": 27.1,
+      "precipitation": 17.0,
+      "humidity": 95,
+      "wind_speed": 5.1
+    },
+    {
+      "date": "2025-04-09",
+      "temperature_max": 30.7,
+      "temperature_min": 25.4,
+      "temperature_avg": 28.1,
+      "precipitation": 20.5,
+      "humidity": 95,
+      "wind_speed": 9.9
+    },
+    {
+      "date": "2025-04-08",
+      "temperature_max": 31.5,
+      "temperature_min": 27.2,
+      "temperature_avg": 29.4,
+      "precipitation": 17.1,
+      "humidity": 95,
+      "wind_speed": 7.8
+    },
+    {
+      "date": "2025-04-07",
+      "temperature_max": 27.7,
+      "temperature_min": 24.2,
+      "temperature_avg": 25.9,
+      "precipitation": 22.2,
+      "humidity": 95,
+      "wind_speed": 4.5
+    },
+    {
+      "date": "2025-04-06",
+      "temperature_max": 28.2,
+      "temperature_min": 22.7,
+      "temperature_avg": 25.4,
+      "precipitation": 19.5,
+      "humidity": 95,
+      "wind_speed": 11.1
+    },
+    {
+      "date": "2025-04-05",
+      "temperature_max": 28.0,
+      "temperature_min": 24.4,
+      "temperature_avg": 26.2,
+      "precipitation": 17.3,
+      "humidity": 95,
+      "wind_speed": 2.6
+    },
+    {
+      "date": "2025-04-04",
+      "temperature_max": 34.0,
+      "temperature_min": 29.7,
+      "temperature_avg": 31.8,
+      "precipitation": 25.3,
+      "humidity": 95,
+      "wind_speed": 6.0
+    },
+    {
+      "date": "2025-04-03",
+      "temperature_max": 29.1,
+      "temperature_min": 23.2,
+      "temperature_avg": 26.2,
+      "precipitation": 26.9,
+      "humidity": 95,
+      "wind_speed": 3.1
+    },
+    {
+      "date": "2025-04-02",
+      "temperature_max": 32.8,
+      "temperature_min": 26.6,
+      "temperature_avg": 29.7,
+      "precipitation": 20.7,
+      "humidity": 95,
+      "wind_speed": 14.9
+    },
+    {
+      "date": "2025-04-01",
+      "temperature_max": 30.8,
+      "temperature_min": 24.8,
+      "temperature_avg": 27.8,
+      "precipitation": 21.1,
+      "humidity": 95,
+      "wind_speed": 11.1
+    },
+    {
+      "date": "2025-03-31",
+      "temperature_max": 28.2,
+      "temperature_min": 24.7,
+      "temperature_avg": 26.4,
+      "precipitation": 28.1,
+      "humidity": 95,
+      "wind_speed": 10.6
+    },
+    {
+      "date": "2025-03-30",
+      "temperature_max": 32.5,
+      "temperature_min": 28.4,
+      "temperature_avg": 30.5,
+      "precipitation": 23.6,
+      "humidity": 95,
+      "wind_speed": 6.6
+    }
+  ]
+}

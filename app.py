@@ -11,7 +11,7 @@ from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('app')
 
 # Database setup
 class Base(DeclarativeBase):
@@ -24,6 +24,14 @@ db = SQLAlchemy(model_class=Base)
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
 app.logger.debug("Starting Flask application...")
+
+# Import visualization routes
+from data_visualization_routes import visualization
+from mobile_app_routes import mobile_app
+
+# Register blueprints
+app.register_blueprint(visualization)
+app.register_blueprint(mobile_app, url_prefix='/mobile')
 
 # Configure secret key
 app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key")
@@ -168,4 +176,4 @@ if __name__ == '__main__':
         except Exception as e:
             app.logger.error(f"Error creating database tables: {str(e)}")
     
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)

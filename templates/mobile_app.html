@@ -1,0 +1,519 @@
+{% extends "base.html" %}
+
+{% block title %}AgriFinance Mobile App{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-app.css') }}">
+<style>
+    /* Override body styles to ensure mobile app displays correctly */
+    body { 
+        background-color: #f5f5f5;
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+    }
+    
+    /* Make navbar fixed only for mobile app page */
+    .mobile-app-page .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+    
+    /* Add margin to account for fixed navbar */
+    .mobile-app-page .container {
+        margin-top: 4rem;
+    }
+    
+    /* Container for the mobile app preview */
+    .mobile-app-preview-container {
+        background-color: #222;
+        padding: 2rem 0;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Make mobile preview look like a real phone */
+    .mobile-device-frame {
+        background-color: #111;
+        border-radius: 2rem;
+        padding: 0.75rem;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        width: 375px;
+        max-width: 100%;
+        position: relative;
+    }
+    
+    /* Phone notch */
+    .mobile-device-frame:before {
+        content: '';
+        position: absolute;
+        top: 0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 25px;
+        background-color: #111;
+        border-radius: 0 0 1rem 1rem;
+        z-index: 10;
+    }
+    
+    /* Image placeholders - show while loading */
+    .img-placeholder {
+        background-color: #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 0.75rem;
+    }
+    
+    /* Ensure all touch targets are large enough */
+    .app-action-button, .nav-item, .app-card-action {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mobile-app-page">
+    <div class="container py-4">
+        <h2 class="mb-4">Farmer Mobile App Demo</h2>
+        <p class="lead mb-4">This demonstrates how the AgriFinance platform would look on a farmer's mobile device.</p>
+        
+        <div class="mobile-app-preview-container">
+            <div class="mobile-device-frame">
+                <div class="mobile-app-container">
+    <!-- App Header -->
+    <div class="app-header">
+        <div class="farmer-profile">
+            <div class="farmer-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="farmer-info">
+                <h6>Hello, John</h6>
+                <span class="farmer-location">Eastern Region, Ghana</span>
+            </div>
+        </div>
+        <div class="app-actions">
+            <button class="app-action-button">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">2</span>
+            </button>
+            <button class="app-action-button">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main App Content -->
+    <div class="app-content">
+        <!-- Weather Card - Primary Farmer Information -->
+        <div class="app-card weather-card animate-fade-in">
+            <div class="app-card-header">
+                <h3 class="app-card-title">
+                    <i class="fas fa-cloud-sun app-card-icon"></i>
+                    Today's Weather
+                </h3>
+                <span class="app-card-action">View Forecast</span>
+            </div>
+            <div class="current-weather">
+                <div class="weather-temp">
+                    28<span class="weather-unit">°C</span>
+                </div>
+                <div class="weather-condition">
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <div class="weather-desc">Partly Cloudy</div>
+                </div>
+            </div>
+            <div class="farming-recommendation">
+                <div class="recommendation-icon">
+                    <i class="fas fa-tractor"></i>
+                </div>
+                <div>Good day for harvesting maize in Eastern fields</div>
+            </div>
+            <div class="forecast-days">
+                <div class="forecast-day">
+                    <div class="forecast-date">Today</div>
+                    <div class="forecast-icon"><i class="fas fa-cloud-sun"></i></div>
+                    <div class="forecast-temp">28°</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="forecast-date">Tue</div>
+                    <div class="forecast-icon"><i class="fas fa-cloud-showers-heavy"></i></div>
+                    <div class="forecast-temp">26°</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="forecast-date">Wed</div>
+                    <div class="forecast-icon"><i class="fas fa-cloud-rain"></i></div>
+                    <div class="forecast-temp">25°</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="forecast-date">Thu</div>
+                    <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                    <div class="forecast-temp">29°</div>
+                </div>
+                <div class="forecast-day">
+                    <div class="forecast-date">Fri</div>
+                    <div class="forecast-icon"><i class="fas fa-sun"></i></div>
+                    <div class="forecast-temp">30°</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Crop Health Card - Using Satellite Imagery -->
+        <div class="app-card crop-health-card animate-fade-in delay-1">
+            <div class="crop-image-container">
+                <div class="crop-image" style="background-color: #1e8449; display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <i class="fas fa-leaf fa-3x" style="color: white;"></i>
+                </div>
+                <div class="health-overlay"></div>
+            </div>
+            <div class="app-card-header">
+                <h3 class="app-card-title">
+                    <i class="fas fa-seedling app-card-icon"></i>
+                    Crop Health
+                </h3>
+                <span class="app-card-action">View All Fields</span>
+            </div>
+            <div class="health-indicator">
+                <div class="health-meter">
+                    <div class="health-value animate-grow-bar" style="--final-width: 75%"></div>
+                </div>
+                <div class="health-status">Good (75%)</div>
+            </div>
+            <p>Your maize is growing well overall, but there are a few areas that need attention.</p>
+            <div class="health-issues">
+                <div class="health-issue">
+                    <div class="issue-icon">
+                        <i class="fas fa-exclamation"></i>
+                    </div>
+                    <div class="issue-details">
+                        <h4 class="issue-name">Water stress detected</h4>
+                        <div class="issue-location">Northern section (2 acres)</div>
+                    </div>
+                    <div class="issue-action">View Details</div>
+                </div>
+                <div class="health-issue">
+                    <div class="issue-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="issue-details">
+                        <h4 class="issue-name">Possible pest activity</h4>
+                        <div class="issue-location">Eastern edge (0.5 acres)</div>
+                    </div>
+                    <div class="issue-action">View Details</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Market Prices Card -->
+        <div class="app-card market-card animate-fade-in delay-2">
+            <div class="app-card-header">
+                <h3 class="app-card-title">
+                    <i class="fas fa-chart-line app-card-icon"></i>
+                    Market Prices
+                </h3>
+                <span class="app-card-action">View All</span>
+            </div>
+            <div class="price-trend">
+                <div class="price-chart">
+                    <!-- Simplified price chart visualization -->
+                    <div class="price-point" style="bottom: 10px; left: 10%"></div>
+                    <div class="price-line" style="bottom: 10px; left: 10%; width: 15%"></div>
+                    <div class="price-point" style="bottom: 15px; left: 25%"></div>
+                    <div class="price-line" style="bottom: 15px; left: 25%; width: 15%"></div>
+                    <div class="price-point" style="bottom: 20px; left: 40%"></div>
+                    <div class="price-line" style="bottom: 20px; left: 40%; width: 15%"></div>
+                    <div class="price-point" style="bottom: 30px; left: 55%"></div>
+                    <div class="price-line" style="bottom: 30px; left: 55%; width: 15%"></div>
+                    <div class="price-point" style="bottom: 25px; left: 70%"></div>
+                    <div class="price-line" style="bottom: 25px; left: 70%; width: 15%"></div>
+                    <div class="price-point" style="bottom: 35px; left: 85%"></div>
+                </div>
+                <div class="price-value">
+                    <div class="current-price">GH₵ 850</div>
+                    <div class="price-change up">
+                        <i class="fas fa-arrow-up"></i> GH₵ 25
+                    </div>
+                </div>
+            </div>
+            <div class="crop-prices">
+                <div class="crop-price-item">
+                    <div class="crop-name">
+                        <div class="crop-icon" style="background-color: #f39c12; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-seedling" style="color: white;"></i>
+                        </div>
+                        <div>Maize</div>
+                    </div>
+                    <div class="crop-price">
+                        GH₵ 850/ton
+                        <span class="price-indicator up"><i class="fas fa-arrow-up"></i></span>
+                    </div>
+                </div>
+                <div class="crop-price-item">
+                    <div class="crop-name">
+                        <div class="crop-icon" style="background-color: #3498db; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-wheat-awn" style="color: white;"></i>
+                        </div>
+                        <div>Rice</div>
+                    </div>
+                    <div class="crop-price">
+                        GH₵ 1,200/ton
+                        <span class="price-indicator stable"><i class="fas fa-equals"></i></span>
+                    </div>
+                </div>
+                <div class="crop-price-item">
+                    <div class="crop-name">
+                        <div class="crop-icon" style="background-color: #27ae60; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-carrot" style="color: white;"></i>
+                        </div>
+                        <div>Cassava</div>
+                    </div>
+                    <div class="crop-price">
+                        GH₵ 650/ton
+                        <span class="price-indicator down"><i class="fas fa-arrow-down"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Credit Score Card -->
+        <div class="app-card app-credit-score-card animate-fade-in delay-3">
+            <div class="score-header">
+                <h3 class="app-card-title">Your AgriCredit Score</h3>
+                <span class="score-trend up">
+                    <i class="fas fa-arrow-up"></i> +5
+                </span>
+            </div>
+            <div class="score-circle animate-pulse">
+                <div class="score-value">685</div>
+                <div class="score-label">Good</div>
+            </div>
+            <div class="score-advice">
+                <div class="advice-item">
+                    <div class="advice-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="advice-content">
+                        <h6>Complete Your Farm Profile</h6>
+                        <p>Add your irrigation details to improve your score</p>
+                    </div>
+                </div>
+                <div class="advice-item">
+                    <div class="advice-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="advice-content">
+                        <h6>Make Your Next Payment Early</h6>
+                        <p>Early payments can boost your score by up to 10 points</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loan Status Card -->
+        <div class="app-card app-loan-card animate-fade-in delay-4">
+            <div class="app-card-header">
+                <h3 class="app-card-title">
+                    <i class="fas fa-hand-holding-usd app-card-icon"></i>
+                    Active Loan
+                </h3>
+                <div class="loan-badge">Active</div>
+            </div>
+            <div class="loan-status">
+                <div>
+                    <div class="loan-amount">GH₵ 5,000</div>
+                    <div class="loan-label">Seasonal Planting Loan</div>
+                </div>
+                <div>
+                    <div class="loan-amount">GH₵ 3,250</div>
+                    <div class="loan-label">Remaining Balance</div>
+                </div>
+            </div>
+            <div class="loan-progress">
+                <div class="progress-label">
+                    <span>Repayment Progress</span>
+                    <span>65%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-value animate-grow-bar" style="--final-width: 65%"></div>
+                </div>
+            </div>
+            <div class="payment-details">
+                <div class="payment-item">
+                    <div class="payment-label">Next Payment Due</div>
+                    <div class="payment-value">May 15, 2025</div>
+                </div>
+                <div class="payment-item">
+                    <div class="payment-label">Amount Due</div>
+                    <div class="payment-value">GH₵ 750</div>
+                </div>
+                <div class="payment-item">
+                    <div class="payment-label">Loan Term</div>
+                    <div class="payment-value">12 months</div>
+                </div>
+                <div class="payment-item">
+                    <div class="payment-label">Interest Rate</div>
+                    <div class="payment-value">8.5% p.a.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity Section -->
+        <div class="activity-section animate-fade-in delay-5">
+            <div class="section-header">
+                <h3 class="section-title">Recent Activity</h3>
+                <span class="see-all">See All</span>
+            </div>
+            <div class="activity-timeline">
+                <div class="activity-item">
+                    <div class="activity-marker"></div>
+                    <div class="activity-content">
+                        <h4 class="activity-title">Weather Alert: Rain Expected</h4>
+                        <div class="activity-time">Today, 9:30 AM</div>
+                        <p class="activity-description">Heavy rain expected in your region in the next 24 hours. Consider delaying pesticide application.</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-marker"></div>
+                    <div class="activity-content">
+                        <h4 class="activity-title">Loan Payment Successful</h4>
+                        <div class="activity-time">Yesterday, 2:15 PM</div>
+                        <p class="activity-description">Your monthly loan payment of GH₵ 750 was successfully processed.</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-marker"></div>
+                    <div class="activity-content">
+                        <h4 class="activity-title">Crop Health Alert</h4>
+                        <div class="activity-time">April 26, 2025</div>
+                        <p class="activity-description">Possible water stress detected in your northern maize field. Consider irrigating within 48 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <div class="nav-label">Home</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-seedling"></i></div>
+            <div class="nav-label">Crops</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-hand-holding-usd"></i></div>
+            <div class="nav-label">Finance</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+            <div class="nav-label">Weather</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-user"></i></div>
+            <div class="nav-label">Profile</div>
+        </a>
+    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">About This Demo</h5>
+            </div>
+            <div class="card-body">
+                <p>This farmer-centric mobile app design focuses on practical, actionable information with an intuitive interface. Key features include:</p>
+                <ul>
+                    <li><strong>Weather Intelligence:</strong> Daily forecasts with specific farming recommendations</li>
+                    <li><strong>Crop Monitoring:</strong> Satellite-derived health insights with simple visualizations</li>
+                    <li><strong>Market Prices:</strong> Visual trends and selling recommendations</li>
+                    <li><strong>Financial Tools:</strong> User-friendly loan management and credit building</li>
+                </ul>
+                <p>The interface prioritizes visual communication and progressive disclosure to accommodate varying levels of literacy and technical expertise.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add animation classes progressively
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to animate elements as they enter viewport
+        function animateElementsOnScroll() {
+            const elements = document.querySelectorAll('.app-card, .activity-section');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                
+                // If element is in viewport
+                if(position.top < window.innerHeight && position.bottom >= 0) {
+                    if (!element.classList.contains('animate-fade-in')) {
+                        element.classList.add('animate-fade-in');
+                    }
+                }
+            });
+        }
+        
+        // Initial check
+        animateElementsOnScroll();
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', animateElementsOnScroll);
+        
+        // Simulate real-time data updates for demonstration
+        setInterval(function() {
+            // Update weather icon with subtle animation
+            const weatherIcon = document.querySelector('.weather-icon i');
+            if (weatherIcon) {
+                weatherIcon.classList.add('animate-pulse');
+                setTimeout(() => {
+                    weatherIcon.classList.remove('animate-pulse');
+                }, 2000);
+            }
+            
+            // Update health meter randomly
+            const healthMeter = document.querySelector('.health-value');
+            if (healthMeter) {
+                const currentWidth = parseInt(getComputedStyle(healthMeter).width);
+                const containerWidth = parseInt(getComputedStyle(healthMeter.parentNode).width);
+                const currentPercent = Math.round((currentWidth / containerWidth) * 100);
+                
+                // Random small fluctuation (-2% to +2%)
+                const newPercent = Math.max(0, Math.min(100, currentPercent + (Math.random() * 4 - 2)));
+                
+                healthMeter.style.width = `${newPercent}%`;
+                
+                // Update health status text
+                const healthStatus = document.querySelector('.health-status');
+                if (healthStatus) {
+                    let statusText = 'Poor';
+                    if (newPercent > 25) statusText = 'Fair';
+                    if (newPercent > 50) statusText = 'Good';
+                    if (newPercent > 75) statusText = 'Excellent';
+                    
+                    healthStatus.textContent = `${statusText} (${Math.round(newPercent)}%)`;
+                }
+            }
+        }, 30000); // Update every 30 seconds
+    });
+</script>
+{% endblock %}

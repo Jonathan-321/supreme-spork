@@ -1,0 +1,1652 @@
+[
+  {
+    "farmer_id": "F10000",
+    "score": 300,
+    "generation_date": "2025-03-11",
+    "valid_until": "2025-10-09",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.98,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.78,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.75,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.55,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.97,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10001",
+    "score": 378,
+    "generation_date": "2025-02-07",
+    "valid_until": "2025-09-10",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.92,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.69,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.6,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.74,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.91,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10002",
+    "score": 507,
+    "generation_date": "2025-03-16",
+    "valid_until": "2025-10-15",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.73,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.91,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.95,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.64,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.49,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10003",
+    "score": 336,
+    "generation_date": "2025-03-13",
+    "valid_until": "2025-09-14",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.93,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.55,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.97,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.64,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.87,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10004",
+    "score": 340,
+    "generation_date": "2025-03-17",
+    "valid_until": "2025-09-06",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.33,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.31,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.44,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.86,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.74,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10005",
+    "score": 384,
+    "generation_date": "2025-04-24",
+    "valid_until": "2025-09-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.88,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.34,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.47,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.29,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.77,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10006",
+    "score": 300,
+    "generation_date": "2025-02-07",
+    "valid_until": "2025-08-07",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.46,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.89,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.6,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.75,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.95,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10007",
+    "score": 300,
+    "generation_date": "2025-04-19",
+    "valid_until": "2025-08-24",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.67,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.41,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.52,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.68,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.9,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10008",
+    "score": 366,
+    "generation_date": "2025-04-13",
+    "valid_until": "2025-08-21",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.62,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.32,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.76,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.45,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.76,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10009",
+    "score": 394,
+    "generation_date": "2025-03-04",
+    "valid_until": "2025-07-31",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.52,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.7,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.95,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.96,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.8,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10010",
+    "score": 446,
+    "generation_date": "2025-04-12",
+    "valid_until": "2025-09-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.59,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.36,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.57,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.93,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.86,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10011",
+    "score": 300,
+    "generation_date": "2025-04-01",
+    "valid_until": "2025-08-25",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.9,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.75,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.53,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.22,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.62,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10012",
+    "score": 444,
+    "generation_date": "2025-03-01",
+    "valid_until": "2025-07-31",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.42,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.8,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.66,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.58,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.72,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10013",
+    "score": 598,
+    "generation_date": "2025-03-02",
+    "valid_until": "2025-09-19",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.81,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.95,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.84,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.8,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.55,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10014",
+    "score": 300,
+    "generation_date": "2025-04-21",
+    "valid_until": "2025-07-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.34,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.82,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.84,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.63,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.43,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10015",
+    "score": 343,
+    "generation_date": "2025-03-18",
+    "valid_until": "2025-10-08",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.58,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.9,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.65,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.61,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.45,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10016",
+    "score": 480,
+    "generation_date": "2025-03-16",
+    "valid_until": "2025-10-03",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 1.0,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.81,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.95,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.55,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.98,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10017",
+    "score": 300,
+    "generation_date": "2025-02-27",
+    "valid_until": "2025-09-08",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.98,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.57,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.79,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.67,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.68,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10018",
+    "score": 300,
+    "generation_date": "2025-04-17",
+    "valid_until": "2025-09-22",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.54,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.33,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.96,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.92,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.65,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10019",
+    "score": 300,
+    "generation_date": "2025-04-02",
+    "valid_until": "2025-10-10",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.82,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.3,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.42,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.92,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.48,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10020",
+    "score": 300,
+    "generation_date": "2025-02-08",
+    "valid_until": "2025-08-18",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.8,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.44,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.97,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.61,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.52,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10021",
+    "score": 300,
+    "generation_date": "2025-03-13",
+    "valid_until": "2025-08-17",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.52,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.57,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.76,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.74,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.91,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10022",
+    "score": 300,
+    "generation_date": "2025-04-28",
+    "valid_until": "2025-09-03",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.65,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.75,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.85,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.98,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.38,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10023",
+    "score": 557,
+    "generation_date": "2025-04-25",
+    "valid_until": "2025-08-06",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.92,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.57,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.72,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.62,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.94,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10024",
+    "score": 397,
+    "generation_date": "2025-03-01",
+    "valid_until": "2025-08-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.55,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.46,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.46,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.61,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.56,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10025",
+    "score": 518,
+    "generation_date": "2025-03-09",
+    "valid_until": "2025-09-02",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.84,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.34,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.43,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.75,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.95,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10026",
+    "score": 703,
+    "generation_date": "2025-02-07",
+    "valid_until": "2025-09-02",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.94,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.86,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.49,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.55,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.91,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10027",
+    "score": 459,
+    "generation_date": "2025-04-09",
+    "valid_until": "2025-07-28",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.65,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.55,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.7,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.53,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.58,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10028",
+    "score": 380,
+    "generation_date": "2025-02-07",
+    "valid_until": "2025-10-13",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.33,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.44,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.44,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.54,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.99,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10029",
+    "score": 300,
+    "generation_date": "2025-02-15",
+    "valid_until": "2025-07-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.68,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.82,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.48,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.35,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.79,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10030",
+    "score": 300,
+    "generation_date": "2025-03-04",
+    "valid_until": "2025-09-14",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.98,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.58,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.78,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.64,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.39,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10031",
+    "score": 439,
+    "generation_date": "2025-04-21",
+    "valid_until": "2025-09-01",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.39,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.98,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.77,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.5,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.73,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10032",
+    "score": 370,
+    "generation_date": "2025-02-13",
+    "valid_until": "2025-09-17",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.51,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.35,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.71,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.78,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.47,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10033",
+    "score": 382,
+    "generation_date": "2025-03-21",
+    "valid_until": "2025-08-18",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.99,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.98,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.94,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.24,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.49,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10034",
+    "score": 499,
+    "generation_date": "2025-03-03",
+    "valid_until": "2025-08-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.86,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.65,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.87,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.91,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.53,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10035",
+    "score": 300,
+    "generation_date": "2025-01-30",
+    "valid_until": "2025-08-14",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.83,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.71,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.78,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.41,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.62,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10036",
+    "score": 372,
+    "generation_date": "2025-03-22",
+    "valid_until": "2025-10-13",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.57,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.65,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.85,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.87,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.41,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10037",
+    "score": 466,
+    "generation_date": "2025-03-17",
+    "valid_until": "2025-09-07",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.95,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.32,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.41,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.79,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.78,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10038",
+    "score": 300,
+    "generation_date": "2025-04-07",
+    "valid_until": "2025-07-29",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.98,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.97,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.92,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.79,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.88,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10039",
+    "score": 504,
+    "generation_date": "2025-02-16",
+    "valid_until": "2025-10-16",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.9,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.83,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.73,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.4,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.32,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10040",
+    "score": 380,
+    "generation_date": "2025-03-23",
+    "valid_until": "2025-09-12",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.8,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.67,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.7,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.91,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.38,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10041",
+    "score": 300,
+    "generation_date": "2025-02-28",
+    "valid_until": "2025-09-27",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.36,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.57,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.68,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.66,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.41,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10042",
+    "score": 499,
+    "generation_date": "2025-04-09",
+    "valid_until": "2025-08-27",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.86,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.85,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.72,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.76,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.35,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10043",
+    "score": 443,
+    "generation_date": "2025-04-23",
+    "valid_until": "2025-10-12",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.76,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.7,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.85,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.23,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.51,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10044",
+    "score": 354,
+    "generation_date": "2025-04-20",
+    "valid_until": "2025-10-10",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.38,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.34,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.87,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.86,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.43,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10045",
+    "score": 313,
+    "generation_date": "2025-04-20",
+    "valid_until": "2025-08-05",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.41,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.68,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.62,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.67,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.55,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10046",
+    "score": 300,
+    "generation_date": "2025-02-24",
+    "valid_until": "2025-08-30",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.94,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.3,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.98,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.21,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.31,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10047",
+    "score": 365,
+    "generation_date": "2025-03-06",
+    "valid_until": "2025-08-02",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.31,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.43,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.94,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.25,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.82,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10048",
+    "score": 481,
+    "generation_date": "2025-02-19",
+    "valid_until": "2025-10-12",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.98,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.39,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.65,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.7,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.67,
+        "weight": 0.3
+      }
+    ]
+  },
+  {
+    "farmer_id": "F10049",
+    "score": 493,
+    "generation_date": "2025-04-07",
+    "valid_until": "2025-10-05",
+    "components": [
+      {
+        "name": "Repayment History",
+        "value": 0.69,
+        "weight": 0.3
+      },
+      {
+        "name": "Farm Productivity",
+        "value": 0.32,
+        "weight": 0.2
+      },
+      {
+        "name": "Market Conditions",
+        "value": 0.78,
+        "weight": 0.1
+      },
+      {
+        "name": "Relationship Length",
+        "value": 0.42,
+        "weight": 0.1
+      },
+      {
+        "name": "Climate Risk",
+        "value": 0.98,
+        "weight": 0.3
+      }
+    ]
+  }
+]

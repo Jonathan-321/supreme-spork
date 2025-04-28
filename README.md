@@ -40,4 +40,3 @@ python app.py
 - `/credit`: Credit scoring and loan management
 - `/templates`: Frontend HTML templates
 - `/static`: CSS, JavaScript, and static assets
-

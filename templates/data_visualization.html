@@ -1,0 +1,537 @@
+{% extends 'base.html' %}
+
+{% block title %}Data Visualization Dashboard | AgriFinance{% endblock %}
+
+{% block extra_css %}
+<style>
+  .dashboard-card {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .dashboard-card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #3a3a3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dashboard-card-body {
+    padding: 20px;
+  }
+  
+  .chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+  
+  .small-chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+  }
+  
+  .filter-bar {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .metric-card {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .metric-label {
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+  
+  .metric-trend {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  
+  .trend-up {
+    background-color: rgba(25, 135, 84, 0.2);
+    color: #20c997;
+  }
+  
+  .trend-down {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #ea868f;
+  }
+  
+  .region-selector {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .region-item {
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .region-item:hover {
+    background-color: #3a3a3a;
+  }
+  
+  .region-item.active {
+    background-color: #0d6efd;
+    color: white;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="mb-0">Data Visualization Dashboard</h2>
+  <div>
+    <button class="btn btn-outline-light" id="refreshDataBtn">
+      <i class="fas fa-sync-alt me-2"></i>Refresh Data
+    </button>
+    <button class="btn btn-primary ms-2" id="exportDataBtn">
+      <i class="fas fa-download me-2"></i>Export
+    </button>
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar mb-4">
+  <div class="row align-items-center">
+    <div class="col-md-3">
+      <label for="dataTypeSelect" class="form-label">Data Type</label>
+      <select class="form-select" id="dataTypeSelect">
+        <option value="weather">Weather Data</option>
+        <option value="ndvi">NDVI Analysis</option>
+        <option value="credit">Credit Scores</option>
+        <option value="loans">Loan Performance</option>
+        <option value="climate">Climate Risk</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="timeRangeSelect" class="form-label">Time Range</label>
+      <select class="form-select" id="timeRangeSelect">
+        <option value="7d">Last 7 days</option>
+        <option value="30d" selected>Last 30 days</option>
+        <option value="90d">Last 90 days</option>
+        <option value="1y">Last year</option>
+        <option value="all">All time</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="compareToggle" class="form-label">Compare</label>
+      <div class="form-check form-switch mt-2">
+        <input class="form-check-input" type="checkbox" id="compareToggle">
+        <label class="form-check-label" for="compareToggle">Enable comparison</label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Quick Actions</label>
+      <div class="btn-group w-100">
+        <button class="btn btn-sm btn-outline-light" id="downloadCsvBtn">CSV</button>
+        <button class="btn btn-sm btn-outline-light" id="downloadPdfBtn">PDF</button>
+        <button class="btn btn-sm btn-outline-light" id="shareBtn">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Dashboard Content -->
+<div class="row">
+  <!-- Left Sidebar - Regions -->
+  <div class="col-md-3">
+    <div class="dashboard-card">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">Regions</h5>
+        <button class="btn btn-sm btn-outline-light" id="selectAllRegions">All</button>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="region-selector" id="regionSelector">
+          <!-- Regions will be populated dynamically -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Key Metrics -->
+    <div class="dashboard-card">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">Key Metrics</h5>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="metric-card">
+          <div class="metric-label">Average Temperature</div>
+          <div class="metric-value" id="avgTempMetric">27.4°C</div>
+          <div class="metric-trend trend-up">+1.2°C</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-label">Total Rainfall</div>
+          <div class="metric-value" id="totalRainfallMetric">142mm</div>
+          <div class="metric-trend trend-up">+12%</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-label">Average NDVI</div>
+          <div class="metric-value" id="avgNdviMetric">0.68</div>
+          <div class="metric-trend trend-down">-0.03</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Content Area -->
+  <div class="col-md-9">
+    <!-- Weather Data Section -->
+    <div class="dashboard-card" id="weatherSection">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">Weather Trends</h5>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-outline-light active" data-chart-type="temperature">Temperature</button>
+          <button class="btn btn-sm btn-outline-light" data-chart-type="precipitation">Precipitation</button>
+          <button class="btn btn-sm btn-outline-light" data-chart-type="combined">Combined</button>
+        </div>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="chart-container">
+          <canvas id="weatherChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- NDVI Analysis Section -->
+    <div class="dashboard-card" id="ndviSection" style="display: none;">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">NDVI Analysis</h5>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-outline-light active" data-ndvi-view="trend">Trend</button>
+          <button class="btn btn-sm btn-outline-light" data-ndvi-view="comparison">Farm Comparison</button>
+          <button class="btn btn-sm btn-outline-light" data-ndvi-view="map">Spatial View</button>
+        </div>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="chart-container">
+          <canvas id="ndviChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Credit Score Section -->
+    <div class="dashboard-card" id="creditSection" style="display: none;">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">Credit Score Analysis</h5>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-outline-light active" data-credit-view="components">Components</button>
+          <button class="btn btn-sm btn-outline-light" data-credit-view="history">Score History</button>
+          <button class="btn btn-sm btn-outline-light" data-credit-view="distribution">Distribution</button>
+        </div>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="chart-container">
+          <canvas id="creditScoreChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Loan Performance Section -->
+    <div class="dashboard-card" id="loansSection" style="display: none;">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">Loan Performance</h5>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-outline-light active" data-loan-view="status">Status Distribution</button>
+          <button class="btn btn-sm btn-outline-light" data-loan-view="amount">Amount by Crop</button>
+          <button class="btn btn-sm btn-outline-light" data-loan-view="repayment">Repayment Trends</button>
+        </div>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="chart-container">
+          <canvas id="loanChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Climate Risk Section -->
+    <div class="dashboard-card" id="climateSection" style="display: none;">
+      <div class="dashboard-card-header">
+        <h5 class="mb-0">Climate Risk Assessment</h5>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-outline-light active" data-climate-view="heatmap">Risk Heatmap</button>
+          <button class="btn btn-sm btn-outline-light" data-climate-view="timeline">Risk Timeline</button>
+          <button class="btn btn-sm btn-outline-light" data-climate-view="impact">Financial Impact</button>
+        </div>
+      </div>
+      <div class="dashboard-card-body">
+        <div class="chart-container">
+          <canvas id="climateRiskChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional Insights Section -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h5 class="mb-0">Regional Comparison</h5>
+          </div>
+          <div class="dashboard-card-body">
+            <div class="small-chart-container">
+              <canvas id="regionComparisonChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <h5 class="mb-0">Correlation Analysis</h5>
+          </div>
+          <div class="dashboard-card-body">
+            <div class="small-chart-container">
+              <canvas id="correlationChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<!-- Chart.js Matrix plugin for heatmaps -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.1/dist/chartjs-chart-matrix.min.js"></script>
+<!-- Chart.js Annotation plugin -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+<!-- Our enhanced visualizations -->
+<script src="{{ url_for('static', filename='js/enhanced_visualizations.js') }}"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load the demo data
+    loadDemoData();
+    
+    // Set up event listeners
+    setupEventListeners();
+  });
+  
+  // Load demo data from our scraped data files
+  function loadDemoData() {
+    // Fetch weather data
+    fetch('/api/demo-data/weather')
+      .then(response => response.json())
+      .then(data => {
+        populateRegions(Object.keys(data));
+        displayWeatherData(data);
+      })
+      .catch(error => console.error('Error loading weather data:', error));
+      
+    // For demo purposes, we'll simulate the API calls
+    simulateDemoData();
+  }
+  
+  // Populate the region selector
+  function populateRegions(regions) {
+    const regionSelector = document.getElementById('regionSelector');
+    regionSelector.innerHTML = '';
+    
+    regions.forEach((region, index) => {
+      const regionItem = document.createElement('div');
+      regionItem.className = 'region-item' + (index === 0 ? ' active' : '');
+      regionItem.textContent = region;
+      regionItem.dataset.region = region;
+      regionItem.addEventListener('click', function() {
+        document.querySelectorAll('.region-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        this.classList.add('active');
+        updateCharts(this.dataset.region);
+      });
+      
+      regionSelector.appendChild(regionItem);
+    });
+  }
+  
+  // Display weather data
+  function displayWeatherData(data) {
+    const activeRegion = document.querySelector('.region-item.active').dataset.region;
+    const regionData = data[activeRegion] || [];
+    
+    if (regionData.length === 0) {
+      console.error('No data available for region:', activeRegion);
+      return;
+    }
+    
+    // Extract dates, temperatures and precipitation
+    const dates = regionData.map(item => item.date);
+    const temperatures = regionData.map(item => item.temperature_avg);
+    const precipitation = regionData.map(item => item.precipitation);
+    
+    // Create weather chart
+    createWeatherChart('weatherChart', dates, temperatures, precipitation);
+    
+    // Update metrics
+    updateWeatherMetrics(regionData);
+  }
+  
+  // Update weather metrics
+  function updateWeatherMetrics(data) {
+    // Calculate average temperature
+    const avgTemp = data.reduce((sum, item) => sum + item.temperature_avg, 0) / data.length;
+    document.getElementById('avgTempMetric').textContent = avgTemp.toFixed(1) + '°C';
+    
+    // Calculate total rainfall
+    const totalRainfall = data.reduce((sum, item) => sum + item.precipitation, 0);
+    document.getElementById('totalRainfallMetric').textContent = totalRainfall.toFixed(0) + 'mm';
+  }
+  
+  // Simulate demo data for other sections
+  function simulateDemoData() {
+    // Simulate NDVI data
+    const ndviDates = [];
+    const ndviValues = [];
+    
+    const today = new Date();
+    for (let i = 29; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      ndviDates.push(date.toISOString().split('T')[0]);
+      
+      // Generate realistic NDVI values with slight upward trend and seasonal pattern
+      const baseValue = 0.65;
+      const trend = i * 0.001;
+      const seasonal = Math.sin(i / 30 * Math.PI) * 0.05;
+      const random = (Math.random() - 0.5) * 0.03;
+      
+      ndviValues.push(Math.min(1, Math.max(0, baseValue + trend + seasonal + random)));
+    }
+    
+    // Simulate credit score components
+    const creditLabels = [
+      'Repayment History', 
+      'Farm Productivity', 
+      'Market Conditions', 
+      'Relationship Length', 
+      'Climate Risk'
+    ];
+    
+    const creditValues = [0.82, 0.75, 0.63, 0.91, 0.68];
+    const creditWeights = [0.3, 0.2, 0.1, 0.1, 0.3];
+    
+    // Simulate loan status data
+    const loanStatusData = {
+      'PENDING': 5,
+      'APPROVED': 12,
+      'DISBURSED': 18,
+      'REPAYING': 42,
+      'COMPLETED': 15,
+      'DEFAULTED': 3,
+      'REJECTED': 5
+    };
+    
+    // Create charts when data type is selected
+    document.getElementById('dataTypeSelect').addEventListener('change', function() {
+      const dataType = this.value;
+      
+      // Hide all sections
+      document.querySelectorAll('#weatherSection, #ndviSection, #creditSection, #loansSection, #climateSection').forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      // Show selected section
+      if (dataType === 'weather') {
+        document.getElementById('weatherSection').style.display = 'block';
+      } else if (dataType === 'ndvi') {
+        document.getElementById('ndviSection').style.display = 'block';
+        createNDVIChart('ndviChart', ndviDates, ndviValues);
+        document.getElementById('avgNdviMetric').textContent = (ndviValues.reduce((a, b) => a + b, 0) / ndviValues.length).toFixed(2);
+      } else if (dataType === 'credit') {
+        document.getElementById('creditSection').style.display = 'block';
+        createCreditScoreRadarChart('creditScoreChart', creditLabels, creditValues, creditWeights);
+      } else if (dataType === 'loans') {
+        document.getElementById('loansSection').style.display = 'block';
+        createLoanStatusChart('loanChart', loanStatusData);
+      } else if (dataType === 'climate') {
+        document.getElementById('climateSection').style.display = 'block';
+        // Climate risk chart would be created here
+      }
+    });
+  }
+  
+  // Set up event listeners
+  function setupEventListeners() {
+    // Data type selector
+    document.getElementById('dataTypeSelect').addEventListener('change', function() {
+      // Implementation in simulateDemoData function
+    });
+    
+    // Time range selector
+    document.getElementById('timeRangeSelect').addEventListener('change', function() {
+      // Reload data with new time range
+      loadDemoData();
+    });
+    
+    // Refresh data button
+    document.getElementById('refreshDataBtn').addEventListener('click', function() {
+      this.disabled = true;
+      this.innerHTML = '<i class="fas fa-sync-alt fa-spin me-2"></i>Refreshing...';
+      
+      // Simulate refresh
+      setTimeout(() => {
+        loadDemoData();
+        this.disabled = false;
+        this.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Refresh Data';
+      }, 1000);
+    });
+    
+    // Export data button
+    document.getElementById('exportDataBtn').addEventListener('click', function() {
+      alert('Data export functionality would be implemented here.');
+    });
+    
+    // Weather chart type buttons
+    document.querySelectorAll('[data-chart-type]').forEach(button => {
+      button.addEventListener('click', function() {
+        document.querySelectorAll('[data-chart-type]').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Update chart based on selected type
+        // This would reload the chart with the selected view
+      });
+    });
+  }
+  
+  // Update charts when region changes
+  function updateCharts(region) {
+    // This would reload all charts with data for the selected region
+    console.log('Updating charts for region:', region);
+    
+    // For demo, we'll just reload the whole data
+    loadDemoData();
+  }
+</script>
+{% endblock %}

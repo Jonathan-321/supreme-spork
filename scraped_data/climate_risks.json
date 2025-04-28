@@ -1,0 +1,203 @@
+{
+  "Eastern Region, Ghana": [
+    {
+      "risk_type": "Pest Outbreak",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-04-23",
+      "valid_until": "2025-09-20",
+      "probability": 0.72,
+      "potential_impact": "Quality degradation affecting market prices. Potential spread to neighboring farms.",
+      "mitigation_measures": "Use resistant crop varieties. Monitor fields regularly for early detection. Implement integrated pest management strategies. Maintain beneficial insect habitats."
+    },
+    {
+      "risk_type": "Desertification",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-03-19",
+      "valid_until": "2025-12-14",
+      "probability": 0.4,
+      "potential_impact": "Progressive land degradation reducing usable farm area. Potential long-term loss of agricultural viability.",
+      "mitigation_measures": "Implement agroforestry systems. Construct windbreaks to reduce wind erosion. Establish perennial vegetation cover. Reduce grazing intensity and improve management."
+    },
+    {
+      "risk_type": "Erratic Rainfall",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-03-09",
+      "valid_until": "2026-02-02",
+      "probability": 0.78,
+      "potential_impact": "Yield variability of \u00b128%. Increased risk of either drought or flooding conditions.",
+      "mitigation_measures": "Use soil moisture conservation techniques. Diversify crop varieties with different water requirements."
+    }
+  ],
+  "Ashanti Region, Ghana": [
+    {
+      "risk_type": "Pest Outbreak",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-03-10",
+      "valid_until": "2025-11-05",
+      "probability": 0.55,
+      "potential_impact": "Increased pesticide costs of $274 per hectare. Crop damage of 24% if left untreated. Quality degradation affecting market prices.",
+      "mitigation_measures": "Maintain beneficial insect habitats. Use resistant crop varieties. Monitor fields regularly for early detection. Practice crop rotation to break pest cycles."
+    },
+    {
+      "risk_type": "Soil Erosion",
+      "risk_level": "LOW",
+      "assessment_date": "2025-04-16",
+      "valid_until": "2025-11-12",
+      "probability": 0.74,
+      "potential_impact": "Long-term productivity decline if not addressed. Topsoil loss of 5 tons per hectare annually.",
+      "mitigation_measures": "Maintain vegetative cover or cover crops. Practice minimum tillage techniques. Plant windbreaks and buffer strips."
+    },
+    {
+      "risk_type": "Desertification",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-04-13",
+      "valid_until": "2026-04-08",
+      "probability": 0.34,
+      "potential_impact": "Increased wind erosion and dust problems. Progressive land degradation reducing usable farm area. Potential long-term loss of agricultural viability.",
+      "mitigation_measures": "Establish perennial vegetation cover. Reduce grazing intensity and improve management."
+    }
+  ],
+  "Northern Region, Ghana": [
+    {
+      "risk_type": "Flooding",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-04-23",
+      "valid_until": "2026-01-18",
+      "probability": 0.2,
+      "potential_impact": "Delayed planting or harvesting operations by 28 days. Soil nutrient leaching requiring additional fertilizer applications. Infrastructure damage to irrigation systems and farm roads.",
+      "mitigation_measures": "Construct flood protection barriers. Plant flood-tolerant crop varieties."
+    },
+    {
+      "risk_type": "Soil Erosion",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-03-16",
+      "valid_until": "2025-08-13",
+      "probability": 0.36,
+      "potential_impact": "Topsoil loss of 19 tons per hectare annually. Decreased water retention capacity.",
+      "mitigation_measures": "Plant windbreaks and buffer strips. Implement contour farming practices. Construct terraces on sloped land. Maintain vegetative cover or cover crops."
+    },
+    {
+      "risk_type": "Extreme Heat",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-03-30",
+      "valid_until": "2025-12-25",
+      "probability": 0.19,
+      "potential_impact": "Heat stress reducing crop yields by 57%. Increased water requirements for irrigation.",
+      "mitigation_measures": "Increase irrigation frequency during heat waves. Adjust planting times to avoid extreme heat periods."
+    }
+  ],
+  "Western Region, Kenya": [
+    {
+      "risk_type": "Drought",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-04-03",
+      "valid_until": "2025-11-29",
+      "probability": 0.8,
+      "potential_impact": "Water stress affecting plant growth and development. Reduced crop yields by 39%.",
+      "mitigation_measures": "Practice mulching to conserve soil moisture. Install efficient irrigation systems. Develop water harvesting structures."
+    },
+    {
+      "risk_type": "Extreme Heat",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-04-28",
+      "valid_until": "2025-07-27",
+      "probability": 0.66,
+      "potential_impact": "Increased water requirements for irrigation. Heat stress reducing crop yields by 27%. Potential crop failure for heat-sensitive varieties.",
+      "mitigation_measures": "Apply mulch to reduce soil temperature. Use shade cloth or netting during peak heat periods. Increase irrigation frequency during heat waves. Adjust planting times to avoid extreme heat periods."
+    },
+    {
+      "risk_type": "Soil Erosion",
+      "risk_level": "MINIMAL",
+      "assessment_date": "2025-04-01",
+      "valid_until": "2026-01-26",
+      "probability": 0.17,
+      "potential_impact": "Topsoil loss of 3 tons per hectare annually. Long-term productivity decline if not addressed. Reduced soil fertility requiring additional inputs.",
+      "mitigation_measures": "Implement contour farming practices. Construct terraces on sloped land."
+    }
+  ],
+  "Rift Valley, Kenya": [
+    {
+      "risk_type": "Soil Erosion",
+      "risk_level": "LOW",
+      "assessment_date": "2025-04-06",
+      "valid_until": "2025-12-02",
+      "probability": 0.18,
+      "potential_impact": "Reduced soil fertility requiring additional inputs. Topsoil loss of 3 tons per hectare annually. Long-term productivity decline if not addressed.",
+      "mitigation_measures": "Practice minimum tillage techniques. Construct terraces on sloped land."
+    },
+    {
+      "risk_type": "Pest Outbreak",
+      "risk_level": "LOW",
+      "assessment_date": "2025-03-27",
+      "valid_until": "2026-02-20",
+      "probability": 0.77,
+      "potential_impact": "Crop damage of 16% if left untreated. Potential spread to neighboring farms. Quality degradation affecting market prices.",
+      "mitigation_measures": "Implement integrated pest management strategies. Monitor fields regularly for early detection."
+    },
+    {
+      "risk_type": "Desertification",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-03-28",
+      "valid_until": "2025-12-23",
+      "probability": 0.85,
+      "potential_impact": "Potential long-term loss of agricultural viability. Declining soil organic matter and fertility. Increased wind erosion and dust problems.",
+      "mitigation_measures": "Apply organic matter to improve soil structure. Implement agroforestry systems."
+    },
+    {
+      "risk_type": "Flooding",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-03-23",
+      "valid_until": "2026-01-17",
+      "probability": 0.5,
+      "potential_impact": "Soil nutrient leaching requiring additional fertilizer applications. Infrastructure damage to irrigation systems and farm roads. Delayed planting or harvesting operations by 19 days.",
+      "mitigation_measures": "Develop early warning systems for flood events. Improve drainage systems. Construct flood protection barriers. Create raised planting beds."
+    }
+  ],
+  "Central Region, Uganda": [
+    {
+      "risk_type": "Extreme Heat",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-04-16",
+      "valid_until": "2026-02-10",
+      "probability": 0.73,
+      "potential_impact": "Potential crop failure for heat-sensitive varieties. Heat stress reducing crop yields by 30%.",
+      "mitigation_measures": "Use shade cloth or netting during peak heat periods. Apply mulch to reduce soil temperature. Increase irrigation frequency during heat waves. Implement heat-tolerant crop varieties."
+    },
+    {
+      "risk_type": "Erratic Rainfall",
+      "risk_level": "HIGH",
+      "assessment_date": "2025-04-10",
+      "valid_until": "2026-03-06",
+      "probability": 0.45,
+      "potential_impact": "Challenges in timing planting and harvesting operations. Unpredictable growing conditions affecting planning. Yield variability of \u00b151%.",
+      "mitigation_measures": "Diversify crop varieties with different water requirements. Utilize seasonal weather forecasts for planning. Install supplemental irrigation systems. Implement water harvesting and storage systems."
+    },
+    {
+      "risk_type": "Desertification",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-04-04",
+      "valid_until": "2025-08-02",
+      "probability": 0.29,
+      "potential_impact": "Potential long-term loss of agricultural viability. Progressive land degradation reducing usable farm area.",
+      "mitigation_measures": "Apply organic matter to improve soil structure. Implement agroforestry systems. Reduce grazing intensity and improve management."
+    },
+    {
+      "risk_type": "Soil Erosion",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-03-22",
+      "valid_until": "2025-08-19",
+      "probability": 0.71,
+      "potential_impact": "Topsoil loss of 8 tons per hectare annually. Decreased water retention capacity.",
+      "mitigation_measures": "Maintain vegetative cover or cover crops. Plant windbreaks and buffer strips. Implement contour farming practices. Practice minimum tillage techniques."
+    },
+    {
+      "risk_type": "Drought",
+      "risk_level": "MEDIUM",
+      "assessment_date": "2025-03-29",
+      "valid_until": "2025-09-25",
+      "probability": 0.12,
+      "potential_impact": "Increased irrigation costs of approximately $257 per hectare. Potential total loss for susceptible crops. Reduced crop yields by 30%.",
+      "mitigation_measures": "Install efficient irrigation systems. Develop water harvesting structures. Practice mulching to conserve soil moisture. Adjust planting calendar to avoid peak dry seasons."
+    }
+  ]
+}

@@ -1,0 +1,1021 @@
+/* 
+ * AgriFinance Mobile Application CSS
+ * A farmer-centric design system focused on accessibility,
+ * visual communication, and practical utility
+ */
+
+:root {
+    /* Primary Color Palette - Earth tones with clear action colors */
+    --color-primary: #1e8449;        /* Deep green - growth and prosperity */
+    --color-secondary: #f39c12;      /* Amber - harvests and caution */
+    --color-accent: #3498db;         /* Sky blue - water and climate */
+    --color-alert: #c0392b;          /* Vermilion - urgent attention */
+    --color-background: #fdf6e3;     /* Soft cream - easy on eyes in sunlight */
+    
+    /* UI Element Colors */
+    --color-text-dark: #2c3e50;      /* Dark blue-gray for text */
+    --color-text-light: #ecf0f1;     /* Light gray for text on dark backgrounds */
+    --color-border: #bdc3c7;         /* Light gray for borders */
+    --color-card-bg: #ffffff;        /* White for card backgrounds */
+    --color-shadow: rgba(0,0,0,0.1); /* Shadow color */
+    
+    /* Status Colors */
+    --color-success: #27ae60;        /* Green for positive status */
+    --color-warning: #f1c40f;        /* Yellow for warnings */
+    --color-danger: #e74c3c;         /* Red for errors/danger */
+    --color-info: #2980b9;           /* Blue for information */
+    --color-neutral: #95a5a6;        /* Gray for neutral/inactive */
+
+    /* Typography */
+    --font-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    --font-heading-size: 1.5rem;
+    --font-body-size: 1rem;
+    --font-small-size: 0.875rem;
+    --line-height: 1.5;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-radius-circle: 50%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Z-index layers */
+    --z-index-base: 1;
+    --z-index-dropdown: 10;
+    --z-index-sticky: 20;
+    --z-index-fixed: 30;
+    --z-index-modal: 40;
+    --z-index-popover: 50;
+    --z-index-toast: 60;
+}
+
+/* Base Styles */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    font-size: var(--font-body-size);
+    line-height: var(--line-height);
+    color: var(--color-text-dark);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mobile App Container */
+.mobile-app-container {
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--color-background);
+    min-height: 600px;
+    height: 80vh;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Mobile App Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-card-bg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-sticky);
+}
+
+.farmer-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.farmer-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: var(--border-radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.farmer-info h6 {
+    margin: 0;
+    font-size: var(--font-small-size);
+    font-weight: 600;
+}
+
+.farmer-location {
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+}
+
+.app-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.app-action-button {
+    background: none;
+    border: none;
+    color: var(--color-text-dark);
+    font-size: 1.25rem;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--border-radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+    margin: 0 0.125rem;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+}
+
+.app-action-button:hover, .app-action-button:active {
+    background-color: var(--color-border);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--color-alert);
+    color: var(--color-text-light);
+    font-size: 0.625rem;
+    width: 18px;
+    height: 18px;
+    border-radius: var(--border-radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card Components */
+.app-card {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    overflow: hidden;
+}
+
+.app-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.app-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.app-card-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: var(--border-radius-circle);
+    font-size: 0.875rem;
+}
+
+.app-card-action {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* Weather Card */
+.weather-card {
+    background: linear-gradient(to right, var(--color-accent), #48c9b0);
+    color: var(--color-text-light);
+}
+
+.weather-card .app-card-title {
+    color: var(--color-text-light);
+}
+
+.weather-card .app-card-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.weather-card .app-card-action {
+    color: var(--color-text-light);
+}
+
+.current-weather {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.weather-temp {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: flex-start;
+}
+
+.weather-unit {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-top: 0.5rem;
+}
+
+.weather-condition {
+    text-align: center;
+}
+
+.weather-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.weather-desc {
+    font-size: 0.875rem;
+}
+
+.farming-recommendation {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.recommendation-icon {
+    font-size: 1.25rem;
+}
+
+.forecast-days {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-md);
+}
+
+.forecast-day {
+    text-align: center;
+    flex: 1;
+}
+
+.forecast-date {
+    font-size: 0.75rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.forecast-icon {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.forecast-temp {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* Crop Health Card */
+.crop-health-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.crop-image-container {
+    height: 120px;
+    position: relative;
+    margin: -1rem -1rem 1rem -1rem;
+    overflow: hidden;
+}
+
+.crop-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.health-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 50%, var(--color-card-bg) 100%);
+}
+
+.health-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.health-meter {
+    flex: 1;
+    height: 8px;
+    background-color: var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    position: relative;
+}
+
+.health-value {
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-lg);
+    width: 75%; /* This would be dynamic based on actual health */
+}
+
+.health-status {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.health-issues {
+    margin-top: var(--spacing-md);
+}
+
+.health-issue {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.health-issue:last-child {
+    border-bottom: none;
+}
+
+.issue-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-warning);
+    color: var(--color-text-dark);
+    border-radius: var(--border-radius-circle);
+    font-size: 0.75rem;
+}
+
+.issue-details {
+    flex: 1;
+}
+
+.issue-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.issue-location {
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+}
+
+.issue-action {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+/* Market Prices Card */
+.market-card .price-trend {
+    display: flex;
+    margin-bottom: var(--spacing-md);
+}
+
+.price-chart {
+    flex: 1;
+    height: 60px;
+    position: relative;
+}
+
+.price-point {
+    height: 8px;
+    width: 8px;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-circle);
+    position: absolute;
+}
+
+.price-line {
+    height: 2px;
+    background-color: var(--color-primary);
+    position: absolute;
+}
+
+.price-value {
+    text-align: right;
+}
+
+.current-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.price-change {
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    justify-content: flex-end;
+}
+
+.price-change.up {
+    color: var(--color-success);
+}
+
+.price-change.down {
+    color: var(--color-danger);
+}
+
+.crop-prices {
+    margin-top: var(--spacing-md);
+}
+
+.crop-price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.crop-price-item:last-child {
+    border-bottom: none;
+}
+
+.crop-name {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.crop-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: var(--border-radius-circle);
+}
+
+.crop-price {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.price-indicator {
+    font-size: 0.75rem;
+}
+
+.price-indicator.up {
+    color: var(--color-success);
+}
+
+.price-indicator.down {
+    color: var(--color-danger);
+}
+
+.price-indicator.stable {
+    color: var(--color-neutral);
+}
+
+/* Credit Score Card */
+.app-credit-score-card {
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+}
+
+.score-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--border-radius-circle);
+    border: 10px solid var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-card-bg);
+    box-shadow: var(--shadow-md);
+    margin: 0 auto var(--spacing-md);
+}
+
+.score-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary);
+}
+
+.score-label {
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+}
+
+.score-trend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+}
+
+.score-trend.up {
+    color: var(--color-success);
+}
+
+.score-trend.down {
+    color: var(--color-danger);
+}
+
+.score-advice {
+    text-align: left;
+    margin-top: var(--spacing-lg);
+}
+
+.advice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.advice-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-info);
+    color: var(--color-text-light);
+    border-radius: var(--border-radius-circle);
+    flex-shrink: 0;
+}
+
+.advice-content {
+    flex: 1;
+}
+
+.advice-content h6 {
+    margin: 0 0 var(--spacing-xs);
+    font-size: 0.875rem;
+}
+
+.advice-content p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+}
+
+/* Loan Status Card */
+.app-loan-card {
+    position: relative;
+}
+
+.loan-status {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+}
+
+.loan-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    line-height: 1;
+}
+
+.loan-label {
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+}
+
+.loan-badge {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: var(--border-radius-lg);
+    font-size: 0.75rem;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.loan-badge.pending {
+    background-color: var(--color-warning);
+}
+
+.loan-badge.paid {
+    background-color: var(--color-success);
+}
+
+.loan-badge.overdue {
+    background-color: var(--color-alert);
+}
+
+.loan-progress {
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.75rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.progress-value {
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-lg);
+    width: 65%; /* Would be dynamic based on actual repayment progress */
+}
+
+.payment-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.payment-item {
+    background-color: var(--color-background);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    flex: 1 0 45%;
+}
+
+.payment-label {
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+    margin-bottom: var(--spacing-xs);
+}
+
+.payment-value {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Activity Section */
+.activity-section {
+    margin-bottom: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.see-all {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+}
+
+.activity-timeline {
+    position: relative;
+    padding-left: var(--spacing-xl);
+}
+
+.activity-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 9px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-border);
+}
+
+.activity-item {
+    position: relative;
+    margin-bottom: var(--spacing-md);
+}
+
+.activity-marker {
+    position: absolute;
+    left: -20px;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    background-color: var(--color-primary);
+    border: 3px solid var(--color-card-bg);
+    border-radius: var(--border-radius-circle);
+}
+
+.activity-content {
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.activity-title {
+    font-weight: 600;
+    margin: 0 0 var(--spacing-xs);
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: var(--color-neutral);
+    margin-bottom: var(--spacing-sm);
+}
+
+.activity-description {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-card-bg);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--spacing-sm) 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: var(--z-index-fixed);
+    width: 100%;
+    margin: 0 auto;
+    border-top: 1px solid var(--color-border);
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    min-height: 60px;
+    color: var(--color-neutral);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+}
+
+.nav-item.active {
+    color: var(--color-primary);
+}
+
+.nav-item:active {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.nav-icon {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Main Content Area (accounting for bottom nav) */
+.app-content {
+    padding: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-xxl) + 3rem); /* Extra space for bottom nav */
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes growBar {
+    from { width: 0; }
+    to { width: var(--final-width, 100%); }
+}
+
+.animate-fade-in {
+    animation: fadeIn var(--transition-normal) forwards;
+}
+
+.animate-slide-up {
+    animation: slideInUp var(--transition-normal) forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+.animate-grow-bar {
+    animation: growBar 1s ease-out forwards;
+}
+
+/* Animation Delays */
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
+}
+
+.delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 320px) {
+    :root {
+        --font-heading-size: 1.25rem;
+        --font-body-size: 0.875rem;
+        --font-small-size: 0.75rem;
+    }
+    
+    .app-content {
+        padding: var(--spacing-sm);
+        padding-bottom: calc(var(--spacing-xl) + 3rem);
+    }
+}
+
+/* Utilities */
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: var(--spacing-xs) !important; }
+.mb-2 { margin-bottom: var(--spacing-sm) !important; }
+.mb-3 { margin-bottom: var(--spacing-md) !important; }
+.mb-4 { margin-bottom: var(--spacing-lg) !important; }
+.mb-5 { margin-bottom: var(--spacing-xl) !important; }
+
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: var(--spacing-xs) !important; }
+.mt-2 { margin-top: var(--spacing-sm) !important; }
+.mt-3 { margin-top: var(--spacing-md) !important; }
+.mt-4 { margin-top: var(--spacing-lg) !important; }
+.mt-5 { margin-top: var(--spacing-xl) !important; }
+
+.w-100 { width: 100% !important; }
+.h-100 { height: 100% !important; }
+
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+.d-flex { display: flex !important; }
+.align-center { align-items: center !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-center { justify-content: center !important; }
+.flex-column { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-1 { flex: 1 !important; }
+.gap-1 { gap: var(--spacing-xs) !important; }
+.gap-2 { gap: var(--spacing-sm) !important; }
+.gap-3 { gap: var(--spacing-md) !important; }
+
+.rounded { border-radius: var(--border-radius-md) !important; }
+.rounded-lg { border-radius: var(--border-radius-lg) !important; }
+.rounded-circle { border-radius: var(--border-radius-circle) !important; }
+
+.text-primary { color: var(--color-primary) !important; }
+.text-secondary { color: var(--color-secondary) !important; }
+.text-success { color: var(--color-success) !important; }
+.text-danger { color: var(--color-alert) !important; }
+.text-warning { color: var(--color-warning) !important; }
+.text-info { color: var(--color-info) !important; }
+.text-neutral { color: var(--color-neutral) !important; }
+
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-secondary { background-color: var(--color-secondary) !important; }
+.bg-success { background-color: var(--color-success) !important; }
+.bg-danger { background-color: var(--color-alert) !important; }
+.bg-warning { background-color: var(--color-warning) !important; }
+.bg-info { background-color: var(--color-info) !important; }
+.bg-neutral { background-color: var(--color-neutral) !important; }
